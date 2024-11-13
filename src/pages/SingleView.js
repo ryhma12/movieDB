@@ -4,6 +4,7 @@ import ProductSlide from "../components/ProductSlide";
 import SingleViewNav from "../components/SingleViewNav";
 import ReviewSection from "../components/ReviewSection";
 import CastSection from "../components/CastSection";
+import ShowtimesSection from "../components/ShowtimesSection";
 import closeIcon from "../assets/close.svg";
 
 const SingleView = ({ setSingleView, singleView }) => {
@@ -31,6 +32,7 @@ const SingleView = ({ setSingleView, singleView }) => {
         <div className="review--section__container">
           {page === "Reviews" && <ReviewSection />}
           {page === "Cast" && <CastSection />}
+          {page === "Showtimes" && <ShowtimesSection />}
         </div>
       </div>
     </div>

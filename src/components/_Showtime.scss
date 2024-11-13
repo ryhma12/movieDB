@@ -1,0 +1,17 @@
+.Showtime {
+    display: flex;
+    gap: $space2;
+    .time {
+        color: $color6;
+    }
+
+    .place {
+        color: $color5;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 2px solid #1a1a1a;
+        margin-bottom: $space2;
+        padding-bottom: $space2;
+    }
+}
