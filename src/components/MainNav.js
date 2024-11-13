@@ -5,7 +5,6 @@ import Alternatives from "./Alternatives";
 const MainNav = ({ setSingleView }) => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
-  const key = "dabc269bb40e53985b7ee5c3fd6568a4";
 
   const handleSearch = async (e) => {
     setText(e.target.value);
@@ -13,7 +12,7 @@ const MainNav = ({ setSingleView }) => {
     if (!txt) return setData([]);
 
     const res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${txt}&api_key=${key}&include_adult=false&language=en-US&page=1`
+      `https://api.themoviedb.org/3/search/movie?query=${txt}&api_key=${process.env.REACT_APP_API_KEY}&include_adult=false&language=en-US&page=1`
     );
     const data = await res.json();
 
