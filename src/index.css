@@ -354,6 +354,33 @@
   align-self: center;
 }
 
+.ShowtimesSection {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+.ShowtimesSection ul {
+  justify-content: flex-start;
+  list-style: none;
+}
+
+.Showtime {
+  display: flex;
+  gap: 2.4rem;
+}
+.Showtime .time {
+  color: #4f87d4;
+}
+.Showtime .place {
+  color: #ffffff;
+}
+.Showtime:not(:last-child) {
+  border-bottom: 2px solid #1a1a1a;
+  margin-bottom: 2.4rem;
+  padding-bottom: 2.4rem;
+}
+
 * {
   padding: 0;
   margin: 0;

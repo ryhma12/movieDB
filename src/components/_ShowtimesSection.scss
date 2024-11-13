@@ -1,0 +1,11 @@
+.ShowtimesSection {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    gap: $space2;
+
+    ul {
+        justify-content: flex-start;
+        list-style: none;
+    }
+}
