@@ -1,0 +1,39 @@
+.BestMatch {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  cursor: pointer;
+  &.maxWidth {
+    width: 60% !important;
+    .match--container {
+      .image--container {
+        height: 100%;
+        width: 30%;
+        overflow: hidden;
+        img {
+          object-fit: cover;
+          height: 100%;
+          width: 90%;
+        }
+      }
+      .movie--text {
+        width: 70%;
+      }
+    }
+  }
+  .match--container {
+    height: 100%;
+    .match {
+      height: 90%;
+      display: flex;
+      gap: 1.2rem;
+      .movie--poster {
+      }
+      .movie--text {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+    }
+  }
+}

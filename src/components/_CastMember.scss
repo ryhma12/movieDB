@@ -1,0 +1,22 @@
+.CastMember {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  .RoundPhoto {
+    width: 15%;
+  }
+  .text--container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    color: white;
+    h2 {
+      font-weight: 600;
+      font-size: 2.4rem;
+    }
+    span {
+      font-weight: 400;
+      font-size: 1.6rem;
+    }
+  }
+}

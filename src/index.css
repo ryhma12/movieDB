@@ -1,0 +1,370 @@
+.App {
+  background-color: #1f1f1f;
+  height: 100vh;
+  width: 100%;
+}
+.App .App--content__container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.SingleView {
+  width: 80%;
+  height: 90%;
+  background-color: #000000;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.SingleView .inner--container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+}
+.SingleView .inner--container .close--icon {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  cursor: pointer;
+}
+.SingleView .inner--container .review--section__container {
+  width: 100%;
+  padding: 4.8rem;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ProductSlide {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #121212;
+}
+.ProductSlide .ProductCard {
+  width: 35%;
+  height: 100%;
+}
+.ProductSlide .text--container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.8rem;
+  color: white;
+  width: 65%;
+  padding: 7.2rem 4.8rem;
+}
+.ProductSlide .text--container h2 {
+  font-size: 4.8rem;
+}
+.ProductSlide .text--container p {
+  font-size: 2.4rem;
+}
+.ProductSlide .text--container .average--rating__container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #aaaaaa;
+  margin-top: 2.4rem;
+}
+.ProductSlide .text--container .average--rating__container img {
+  height: 24px !important;
+}
+.ProductSlide .text--container .info--container {
+  display: flex;
+  gap: 2.4rem;
+  margin-top: 2.4rem;
+}
+.ProductSlide .text--container .info--container span {
+  color: #aaaaaa;
+}
+
+.ProductCard {
+  position: relative;
+}
+.ProductCard img {
+  width: 100%;
+  height: 100%;
+}
+.ProductCard .product--card__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(170, 170, 170, 0.5);
+  padding: 1.2rem;
+}
+.SingleViewNav {
+  width: 100%;
+  height: 8%;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  display: flex;
+}
+.SingleViewNav .nav--btn__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100%;
+  cursor: pointer;
+  caret-color: transparent;
+  text-align: center;
+  position: relative;
+}
+.SingleViewNav .nav--btn__container.active {
+  background-color: #aaaaaa;
+  color: #1a1a1a;
+}
+.SingleViewNav .nav--btn__container.active .active--underline {
+  background-color: #4f87d4;
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  bottom: 0;
+}
+.SingleViewNav .nav--btn__container::before {
+  content: "";
+  background-color: #4f87d4;
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  bottom: 0;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-in-out;
+}
+.SingleViewNav .nav--btn__container:hover::before {
+  transform: scaleX(1);
+}
+
+.ReviewSection {
+  height: 100%;
+  width: 80%;
+}
+.ReviewSection .write--a__review {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 2.4rem;
+}
+.ReviewSection .write--a__review .RoundPhoto {
+  width: 5%;
+}
+.ReviewSection .write--a__review .RoundPhoto img {
+  border-radius: 1000rem;
+  width: 100%;
+  height: 100%;
+}
+.ReviewSection .write--a__review input {
+  font-size: 2.4rem;
+  width: 100%;
+  border-radius: 5rem;
+  padding: 0 1.2rem;
+}
+.ReviewSection .reviews--container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.Review {
+  width: 100%;
+  display: flex;
+  background-color: #333;
+  color: #ffffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: 3rem 1.2rem;
+}
+.Review .rating {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Review .review--content__container {
+  display: flex;
+  flex-direction: column;
+}
+.Review .review--content__container .review--text {
+  padding: 0 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.Review .review--content__container .review--text h2 {
+  font-size: 2.4rem;
+}
+.Review .review--content__container .person--container {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0 2.4rem;
+  margin-top: 1.2rem;
+}
+.Review .review--content__container .person--container .RoundPhoto {
+  width: 5%;
+}
+.Review .review--content__container .person--container span {
+  font-size: 2.4rem;
+}
+
+.CastSection {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  grid-template-rows: auto;
+  gap: 4.8rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.RoundPhoto {
+  width: 5%;
+}
+.RoundPhoto img {
+  border-radius: 1000rem;
+  width: 100%;
+  height: 100%;
+}
+
+.CastMember {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+.CastMember .RoundPhoto {
+  width: 15%;
+}
+.CastMember .text--container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  color: white;
+}
+.CastMember .text--container h2 {
+  font-weight: 600;
+  font-size: 2.4rem;
+}
+.CastMember .text--container span {
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
+.MainNav {
+  height: 8vh;
+  width: 100%;
+  background-color: #121212;
+  color: #ffffff;
+  position: relative;
+}
+.MainNav .search--results__container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  gap: 4.8rem;
+  top: 100%;
+  background-color: #333;
+  width: 100%;
+  height: 60vh;
+  padding: 4.8rem;
+}
+.MainNav .search--results__container.hidden {
+  display: none;
+}
+.MainNav .search--results__container .BestMatch {
+  width: 30%;
+}
+.MainNav .search--results__container .Alternatives {
+  width: 30%;
+}
+
+.BestMatch {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  cursor: pointer;
+}
+.BestMatch.maxWidth {
+  width: 60% !important;
+}
+.BestMatch.maxWidth .match--container .image--container {
+  height: 100%;
+  width: 30%;
+  overflow: hidden;
+}
+.BestMatch.maxWidth .match--container .image--container img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+  width: 90%;
+}
+.BestMatch.maxWidth .match--container .movie--text {
+  width: 70%;
+}
+.BestMatch .match--container {
+  height: 100%;
+}
+.BestMatch .match--container .match {
+  height: 90%;
+  display: flex;
+  gap: 1.2rem;
+}
+.BestMatch .match--container .match .movie--text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.Alternatives {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  height: 100%;
+}
+.Alternatives .match--container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+.Alternatives .match--container .alternative {
+  height: 10%;
+  display: flex;
+  gap: 1.2rem;
+  cursor: pointer;
+}
+.Alternatives .match--container .alternative .movie--text {
+  font-size: 1.2rem;
+  align-self: center;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.8rem;
+  font-family: "Roboto", sans-serif;
+}/*# sourceMappingURL=index.css.map */

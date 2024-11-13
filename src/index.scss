@@ -1,0 +1,27 @@
+@import "./Variables";
+@import "./App";
+@import "./pages/SingleView.scss";
+@import "./components/ProductSlide";
+@import "./components/ProductCard";
+@import "./components/SingleViewNav";
+@import "./components/ReviewSection";
+@import "./components/Review";
+@import "./components/CastSection";
+@import "./components/RoundPhoto";
+@import "./components/CastMember";
+@import "./components/MainNav";
+@import "./components/BestMatch";
+@import "./components/Alternatives";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.8rem;
+  font-family: "Roboto", sans-serif;
+}

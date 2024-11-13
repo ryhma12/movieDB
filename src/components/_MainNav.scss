@@ -1,0 +1,28 @@
+.MainNav {
+  height: 8vh;
+  width: 100%;
+  background-color: $color2;
+  color: $color5;
+  position: relative;
+
+  .search--results__container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    gap: 4.8rem;
+    top: 100%;
+    background-color: $color9;
+    width: 100%;
+    height: 60vh;
+    padding: 4.8rem;
+    &.hidden {
+      display: none;
+    }
+    .BestMatch {
+      width: 30%;
+    }
+    .Alternatives {
+      width: 30%;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.Alternatives {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  height: 100%;
+  .match--container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    .alternative {
+      height: 10%;
+      display: flex;
+      gap: 1.2rem;
+      cursor: pointer;
+
+      .movie--text {
+        font-size: 1.2rem;
+        align-self: center;
+      }
+    }
+  }
+}

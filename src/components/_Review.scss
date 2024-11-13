@@ -1,0 +1,41 @@
+.Review {
+  width: 100%;
+  display: flex;
+  background-color: $color9;
+  color: $color5;
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: 3rem 1.2rem;
+  .rating {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .review--content__container {
+    display: flex;
+    flex-direction: column;
+    .review--text {
+      padding: 0 2.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      h2 {
+        font-size: 2.4rem;
+      }
+    }
+    .person--container {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 0 2.4rem;
+      margin-top: 1.2rem;
+      .RoundPhoto {
+        width: 5%;
+      }
+      span {
+        font-size: 2.4rem;
+      }
+    }
+  }
+}
