@@ -1,0 +1,30 @@
+.SingleView {
+  width: 80%;
+  height: 90%;
+  background-color: $color3;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  .inner--container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    .close--icon {
+      position: absolute;
+      right: 5%;
+      top: 5%;
+      cursor: pointer;
+    }
+    .review--section__container {
+      width: 100%;
+      padding: 4.8rem;
+      height: fit-content;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
