@@ -1,12 +1,12 @@
 import RoundPhoto from "./RoundPhoto";
 
-const CastMember = () => {
+const CastMember = ({ member }) => {
   return (
     <div className="CastMember">
-      <RoundPhoto />
+      <RoundPhoto path={member.profile_path} />
       <div className="text--container">
-        <h2>Joku Tyyppi</h2>
-        <span>Jonakin toisena tyyppinä</span>
+        <h2>{member.name}</h2>
+        <span>{member.character}</span>
       </div>
     </div>
   );
