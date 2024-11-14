@@ -1,8 +1,23 @@
+import { useEffect, useState } from "react";
+
 import Review from "./Review";
 import RoundPhoto from "./RoundPhoto";
 
-import photo from "../assets/headshot.png";
-const ReviewSection = () => {
+const ReviewSection = ({ item }) => {
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const handleSearch = async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${item.id}/reviews?language=en-US&page=1&api_key=${process.env.REACT_APP_API_KEY}`
+      );
+      const data = await res.json();
+
+      setReviews(data.results);
+    };
+    handleSearch();
+  }, []);
+
   return (
     <div className="ReviewSection">
       <div className="write--a__review">
@@ -10,9 +25,8 @@ const ReviewSection = () => {
         <input type="text" placeholder="Write a review" />
       </div>
       <div className="reviews--container">
-        <Review />
-        <Review />
-        <Review />
+        {reviews.length > 0 &&
+          reviews.map((review) => <Review key={review.id} review={review} />)}
       </div>
     </div>
   );
