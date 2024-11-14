@@ -1,7 +1,8 @@
 import ProductCard from "./ProductCard";
 import star from "../assets/star.svg";
 
-const ProductSlide = ({ item }) => {
+const ProductSlide = ({ item, directors }) => {
+  console.log(directors);
   return (
     <div className="ProductSlide">
       <ProductCard item={item} />
@@ -9,8 +10,9 @@ const ProductSlide = ({ item }) => {
         <h2>{item.original_title}</h2>
         <p>{item.overview}</p>
         <div className="info--container">
-          <span>Matti Meikäläinen</span>
-          <span>En ees tiiä</span>
+          {directors.length > 0
+            ? directors.map((director) => <span>{director.name}</span>)
+            : ""}
         </div>
         <div className="average--rating__container">
           <span>Rating: {item.vote_average.toFixed(1)} / 10</span>

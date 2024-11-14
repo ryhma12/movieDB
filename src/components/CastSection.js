@@ -1,16 +1,11 @@
 import CastMember from "./CastMember";
 
-const CastSection = () => {
+const CastSection = ({ cast }) => {
+  console.log(cast);
   return (
     <div className="CastSection">
-      <CastMember />
-      <CastMember />
-      <CastMember />
-      <CastMember />
-      <CastMember />
-      <CastMember />
-      <CastMember />
-      <CastMember />
+      {cast &&
+        cast.map((member) => <CastMember key={member.id} member={member} />)}
     </div>
   );
 };

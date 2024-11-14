@@ -1,15 +1,17 @@
 import React from "react";
 
 const Alternatives = ({ data, handleSingleView }) => {
-  console.log(data);
-
   return (
     <div className="Alternatives">
       <h2>Other similar titles</h2>
       <div className="match--container">
         {data &&
           data.map((el) => (
-            <div className="alternative" onClick={() => handleSingleView(el)}>
+            <div
+              key={el.id}
+              className="alternative"
+              onClick={() => handleSingleView(el)}
+            >
               <img
                 src={`https://image.tmdb.org/t/p/w500${el.poster_path}`}
                 alt={`${el.original_title} Poster`}
