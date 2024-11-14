@@ -21,7 +21,6 @@ const MainNav = ({ setSingleView }) => {
     );
 
     setData(newArr);
-    console.log(data);
   };
 
   const handleSingleView = (item) => {

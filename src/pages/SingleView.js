@@ -30,7 +30,7 @@ const SingleView = ({ setSingleView, singleView }) => {
         <ProductSlide item={singleView} />
         <SingleViewNav handleNav={handleNav} />
         <div className="review--section__container">
-          {page === "Reviews" && <ReviewSection />}
+          {page === "Reviews" && <ReviewSection item={singleView}/>}
           {page === "Cast" && <CastSection />}
           {page === "Showtimes" && <ShowtimesSection />}
         </div>

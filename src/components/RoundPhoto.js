@@ -1,9 +1,12 @@
 import photo from "../assets/headshot.png";
 
-const RoundPhoto = () => {
+const RoundPhoto = ({ path }) => {
   return (
     <div className="RoundPhoto">
-      <img src={photo} alt="woman" />
+      <img
+        src={path ? `https://image.tmdb.org/t/p/w185${path}` : photo}
+        alt="woman"
+      />
     </div>
   );
 };
