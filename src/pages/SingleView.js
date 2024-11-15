@@ -7,7 +7,7 @@ import CastSection from "../components/CastSection";
 import ShowtimesSection from "../components/ShowtimesSection";
 import closeIcon from "../assets/close.svg";
 
-const SingleView = ({ setSingleView, singleView }) => {
+const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [page, setPage] = useState("Reviews");
   const [directors, setDirectors] = useState([]);
   const [cast, setCast] = useState([]);
@@ -17,13 +17,13 @@ const SingleView = ({ setSingleView, singleView }) => {
   };
 
   const handleClose = () => {
-    setSingleView(false);
+    setSelectedMovie(false);
   };
 
   useEffect(() => {
     const handleSearch = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${singleView.id}/credits?language=en-US&api_key=${process.env.REACT_APP_API_KEY}`
+        `https://api.themoviedb.org/3/movie/${selectedMovie.id}/credits?language=en-US&api_key=${process.env.REACT_APP_API_KEY}`
       );
       const data = await res.json();
 
@@ -49,10 +49,10 @@ const SingleView = ({ setSingleView, singleView }) => {
           alt="smth"
           onClick={handleClose}
         />
-        <ProductSlide item={singleView} directors={directors} />
+        <ProductSlide item={selectedMovie} directors={directors} />
         <SingleViewNav handleNav={handleNav} />
         <div className="review--section__container">
-          {page === "Reviews" && <ReviewSection item={singleView} />}
+          {page === "Reviews" && <ReviewSection item={selectedMovie} />}
           {page === "Cast" && <CastSection cast={cast} />}
           {page === "Showtimes" && <ShowtimesSection item={singleView}/>}
         </div>
