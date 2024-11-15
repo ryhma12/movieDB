@@ -1,8 +1,9 @@
 import Showtime from "./Showtime";
 import { useEffect, useState } from "react"
 import { XMLParser } from "fast-xml-parser";
+import SingleView from "../pages/SingleView";
 
-const ShowtimesSection = () => {
+const ShowtimesSection = ({item}) => {
   const [showtimesData, setShowtimesData] = useState([])
 
   const xmlToJsonObj = async (xml) => {
@@ -22,9 +23,7 @@ const ShowtimesSection = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(
-          "https://www.finnkino.fi/xml/Schedule/"
-        );
+        
         const parsedData = await xmlToJsonObj(res);
         const shows = parsedData.Schedule.Shows.Show;
         setShowtimesData(shows);
@@ -37,7 +36,8 @@ const ShowtimesSection = () => {
   return (
     <div className="ShowtimesSection">
       <ul>
-        {showtimesData.filter((show) => show.Title === "Gladiator II").map((show) => (
+        
+        {showtimesData.filter((show) => show.Title === item.original_title).map((show) => (
           <Showtime key={show.ID} data={{ time: show.dttmShowStart, place: show.Theatre }} />
         ))}
       </ul>

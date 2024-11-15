@@ -54,7 +54,7 @@ const SingleView = ({ setSingleView, singleView }) => {
         <div className="review--section__container">
           {page === "Reviews" && <ReviewSection item={singleView} />}
           {page === "Cast" && <CastSection cast={cast} />}
-          {page === "Showtimes" && <ShowtimesSection />}
+          {page === "Showtimes" && <ShowtimesSection item={singleView}/>}
         </div>
       </div>
     </div>
