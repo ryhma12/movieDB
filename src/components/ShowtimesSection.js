@@ -1,9 +1,8 @@
 import Showtime from "./Showtime";
 import { useEffect, useState } from "react"
 import { XMLParser } from "fast-xml-parser";
-import SingleView from "../pages/SingleView";
 
-const ShowtimesSection = ({item}) => {
+const ShowtimesSection = ({showtime, item}) => {
   const [showtimesData, setShowtimesData] = useState([])
 
   const xmlToJsonObj = async (xml) => {
@@ -23,15 +22,14 @@ const ShowtimesSection = ({item}) => {
   useEffect(() => {
     (async () => {
       try {
-        
-        const parsedData = await xmlToJsonObj(res);
+        const parsedData = await xmlToJsonObj(showtime);
         const shows = parsedData.Schedule.Shows.Show;
         setShowtimesData(shows);
       } catch (error) {
         console.log(error);
       };
     })();
-  }, []);
+  }, [showtime]);
 
   return (
     <div className="ShowtimesSection">

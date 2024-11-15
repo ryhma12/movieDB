@@ -11,6 +11,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [page, setPage] = useState("Reviews");
   const [directors, setDirectors] = useState([]);
   const [cast, setCast] = useState([]);
+  const [showtime, setShowtime] = useState([]);
 
   const handleNav = (page) => {
     setPage(page);
@@ -37,6 +38,13 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
       setCast(data.cast);
       setDirectors(uniqueById);
     };
+    const handleSearchShowtimes = async () => {
+      const res = await fetch(
+          `https://www.finnkino.fi/xml/Schedule?Title=${selectedMovie.original_title}&nrOfDays=31`
+        );
+      setShowtime(res);
+    };
+    handleSearchShowtimes();
     handleSearch();
   }, []);
 
@@ -54,7 +62,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
         <div className="review--section__container">
           {page === "Reviews" && <ReviewSection item={selectedMovie} />}
           {page === "Cast" && <CastSection cast={cast} />}
-          {page === "Showtimes" && <ShowtimesSection item={singleView}/>}
+          {page === "Showtimes" && <ShowtimesSection showtime={showtime} item={selectedMovie}/>}
         </div>
       </div>
     </div>
