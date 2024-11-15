@@ -3,14 +3,14 @@ import SingleView from "./pages/SingleView";
 import MainNav from "./components/MainNav";
 
 function App() {
-  const [singleView, setSingleView] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(false);
 
   return (
     <div className="App">
-      <MainNav setSingleView={setSingleView} />
+      <MainNav setSelectedMovie={setSelectedMovie} />
       <div className="App--content__container">
-        {singleView && (
-          <SingleView singleView={singleView} setSingleView={setSingleView} />
+        {selectedMovie && (
+          <SingleView selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />
         )}
       </div>
     </div>

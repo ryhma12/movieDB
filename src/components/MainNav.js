@@ -2,7 +2,7 @@ import { useState } from "react";
 import BestMatch from "./BestMatch";
 import Alternatives from "./Alternatives";
 
-const MainNav = ({ setSingleView }) => {
+const MainNav = ({ setSelectedMovie }) => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
 
@@ -16,6 +16,7 @@ const MainNav = ({ setSingleView }) => {
     );
     const data = await res.json();
 
+    console.log(res, data)
     const newArr = data.results.filter(
       (item) => item.original_language === "en"
     );
@@ -24,7 +25,7 @@ const MainNav = ({ setSingleView }) => {
   };
 
   const handleSingleView = (item) => {
-    setSingleView(item);
+    setSelectedMovie(item);
   };
 
   return (
