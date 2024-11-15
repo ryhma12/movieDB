@@ -1,12 +1,17 @@
 .Showtime {
     display: flex;
+    justify-content: space-between;
     gap: $space2;
+    color: $color5;
+
     .time {
         color: $color6;
     }
-
-    .place {
-        color: $color5;
+    
+    .lang {
+        display: flex;
+        margin-left: auto;
+        gap: $space2;
     }
 
     &:not(:last-child) {

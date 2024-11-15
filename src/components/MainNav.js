@@ -16,7 +16,7 @@ const MainNav = ({ setSelectedMovie }) => {
     );
     const data = await res.json();
 
-    console.log(res, data)
+    // console.log(res, data)
     const newArr = data.results.filter(
       (item) => item.original_language === "en"
     );
