@@ -14,7 +14,7 @@ const Showtime = ({ data: {time, place, spokenLang, subLang1, subLang2} }) => {
       <p className="time">{formattedDate}</p>
       <p className="place">{place}</p>
       <div className="lang">
-        <p >{"Language 1: " + spokenLang}</p>
+        <p >{"Language: " + spokenLang}</p>
         <p >{"Sub 1: " + subLang1}</p>
         <p >{"Sub 2: " + subLang2}</p>
       </div>
