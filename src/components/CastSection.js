@@ -1,7 +1,6 @@
 import CastMember from "./CastMember";
 
 const CastSection = ({ cast }) => {
-  console.log(cast);
   return (
     <div className="CastSection">
       {cast &&
