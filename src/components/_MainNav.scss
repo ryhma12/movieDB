@@ -1,10 +1,106 @@
 .MainNav {
-  height: 8vh;
+  height: 6vh;
   width: 100%;
   background-color: $color2;
   color: $color5;
   position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 3;
+  ul {
+    margin: auto;
+    width: 68%;
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    gap: 1.2rem;
+    .nav__logo--container {
+      cursor: pointer;
+    }
+    .menu__btn {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      font-size: 1.8rem;
+      color: $color5;
+    }
+    .nav__btn {
+      border-radius: 1.2rem;
+      padding: 0.6rem 2.4rem;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      &.search--btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        border: none;
 
+        img {
+          transition: transform 0.2s ease-in-out;
+        }
+        &:hover {
+          background-color: transparent;
+          img {
+            transform: scale(1.1);
+          }
+        }
+      }
+      &:hover {
+        background-color: $color7;
+      }
+    }
+
+    .nav__searchbar {
+      display: flex;
+      background-color: $color5;
+      width: 70%;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      input {
+        width: 100%;
+        border: none;
+        border-right: 1px solid $color2;
+        font-size: 2rem;
+        padding: 0 1.2rem;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .login--buttons {
+      display: flex;
+      width: 20%;
+      gap: 1.2rem;
+      button {
+        padding: 0.6rem 1.8rem;
+        width: 50%;
+        border-radius: 2.4rem;
+        font-size: 1.8rem;
+        border: none;
+        cursor: pointer;
+        &.sign--up {
+          background-color: $color6;
+          color: $color5;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            background-color: $color5;
+            color: $color6;
+            border: 1px solid $color6;
+          }
+        }
+        &.login {
+          background-color: $color5;
+          color: $color6;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            background-color: $color6;
+            color: $color5;
+            border: 1px solid $color5;
+          }
+        }
+      }
+    }
+  }
   .search--results__container {
     display: flex;
     justify-content: center;
@@ -13,7 +109,7 @@
     top: 100%;
     background-color: $color9;
     width: 100%;
-    height: 60vh;
+    height: 80vh;
     padding: 4.8rem;
     &.hidden {
       display: none;

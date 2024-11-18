@@ -5,8 +5,10 @@
   border-radius: 1rem;
   overflow: hidden;
   position: absolute;
+  left: 50%;
   top: 50%;
-  transform: translateY(-50%);
+  z-index: 5;
+  transform: translate(-50%, -50%);
   .inner--container {
     overflow-y: auto;
     overflow-x: hidden;
