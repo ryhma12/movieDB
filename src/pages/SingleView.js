@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import ProductSlide from "../components/ProductSlide";
 import SingleViewNav from "../components/SingleViewNav";
@@ -13,13 +13,18 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [directors, setDirectors] = useState([]);
   const [cast, setCast] = useState([]);
   const [showtimeData, setShowtimeData] = useState([]);
+  const singleViewRef = useRef(null);
 
   const handleNav = (page) => {
     setPage(page);
   };
 
-  const handleClose = () => {
-    setSelectedMovie(false);
+  const handleClose = (e, btnClick) => {
+    if (btnClick) setSelectedMovie(false);
+
+    if (singleViewRef.current && !singleViewRef.current.contains(e.target)) {
+      setSelectedMovie(false);
+    }
   };
 
   useEffect(() => {
@@ -42,7 +47,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
           setDirectors(uniqueById);
         } catch (error) {
           throw error;
-        };
+        }
       };
       const handleSearchShows = async () => {
         try {
@@ -58,31 +63,41 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
           setShowtimeData(shows);
         } catch (error) {
           throw error;
-        };
+        }
       };
 
       handleSearch();
       handleSearchShows();
+      document.addEventListener("mousedown", handleClose);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClose);
+      };
     } catch (error) {
       console.error(error);
     }
   }, [selectedMovie]);
 
   return (
-    <div className="SingleView">
+    <div className="SingleView" ref={singleViewRef}>
       <div className="inner--container">
         <img
           className="close--icon"
           src={closeIcon}
-          alt="smth"
-          onClick={handleClose}
+          alt="close--icon"
+          onClick={(e) => handleClose(e, true)}
         />
         <ProductSlide item={selectedMovie} directors={directors} />
         <SingleViewNav handleNav={handleNav} />
         <div className="review--section__container">
           {page === "Reviews" && <ReviewSection item={selectedMovie} />}
           {page === "Cast" && <CastSection cast={cast} />}
-          {page === "Showtimes" && <ShowtimesSection showtimeData={showtimeData} movie={selectedMovie} />}
+          {page === "Showtimes" && (
+            <ShowtimesSection
+              showtimeData={showtimeData}
+              movie={selectedMovie}
+            />
+          )}
         </div>
       </div>
     </div>
