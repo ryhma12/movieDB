@@ -526,6 +526,9 @@
   justify-content: center;
   align-items: center;
 }
+.loading .content {
+  width: 100%;
+}
 .loading .spinner {
   width: 5rem;
   height: 5rem;
