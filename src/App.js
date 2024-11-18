@@ -5,6 +5,7 @@ import SingleView from "./pages/SingleView";
 import MainNav from "./components/MainNav";
 import PlaceHolderOne from "./pages/PlaceHolderOne";
 import PlaceHolderTwo from "./pages/PlaceHolderTwo";
+import TintLayer from "./components/TintLayer";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(false);
@@ -12,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        {selectedMovie && <TintLayer />}
         <MainNav setSelectedMovie={setSelectedMovie} />
         <Routes>
           <Route path="/placeholderone" element={<PlaceHolderOne />} />

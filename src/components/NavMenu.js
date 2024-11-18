@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 const NavMenu = ({ menuOpen, setMenuOpen }) => {
-  console.log(menuOpen);
   const navigate = useNavigate();
 
   const handleNav = (e) => {
