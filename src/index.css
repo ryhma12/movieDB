@@ -3,14 +3,6 @@
   height: 100vh;
   width: 100%;
 }
-.App .App--content__container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
 .SingleView {
   width: 80%;
@@ -19,8 +11,10 @@
   border-radius: 1rem;
   overflow: hidden;
   position: absolute;
+  left: 50%;
   top: 50%;
-  transform: translateY(-50%);
+  z-index: 5;
+  transform: translate(-50%, -50%);
 }
 .SingleView .inner--container {
   overflow-y: auto;
@@ -282,11 +276,106 @@
 }
 
 .MainNav {
-  height: 8vh;
+  height: 6vh;
   width: 100%;
   background-color: #121212;
   color: #ffffff;
   position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+.MainNav ul {
+  margin: auto;
+  width: 68%;
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  gap: 1.2rem;
+}
+.MainNav ul .nav__logo--container {
+  cursor: pointer;
+}
+.MainNav ul .menu__btn {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+.MainNav ul .nav__btn {
+  border-radius: 1.2rem;
+  padding: 0.6rem 2.4rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.MainNav ul .nav__btn.search--btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: none;
+}
+.MainNav ul .nav__btn.search--btn img {
+  transition: transform 0.2s ease-in-out;
+}
+.MainNav ul .nav__btn.search--btn:hover {
+  background-color: transparent;
+}
+.MainNav ul .nav__btn.search--btn:hover img {
+  transform: scale(1.1);
+}
+.MainNav ul .nav__btn:hover {
+  background-color: #1f1f1f;
+}
+.MainNav ul .nav__searchbar {
+  display: flex;
+  background-color: #ffffff;
+  width: 70%;
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+.MainNav ul .nav__searchbar input {
+  width: 100%;
+  border: none;
+  border-right: 1px solid #121212;
+  font-size: 2rem;
+  padding: 0 1.2rem;
+}
+.MainNav ul .nav__searchbar input:focus {
+  outline: none;
+}
+.MainNav ul .login--buttons {
+  display: flex;
+  width: 20%;
+  gap: 1.2rem;
+}
+.MainNav ul .login--buttons button {
+  padding: 0.6rem 1.8rem;
+  width: 50%;
+  border-radius: 2.4rem;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer;
+}
+.MainNav ul .login--buttons button.sign--up {
+  background-color: #4f87d4;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.MainNav ul .login--buttons button.sign--up:hover {
+  background-color: #ffffff;
+  color: #4f87d4;
+  border: 1px solid #4f87d4;
+}
+.MainNav ul .login--buttons button.login {
+  background-color: #ffffff;
+  color: #4f87d4;
+  transition: all 0.2s ease-in-out;
+}
+.MainNav ul .login--buttons button.login:hover {
+  background-color: #4f87d4;
+  color: #ffffff;
+  border: 1px solid #ffffff;
 }
 .MainNav .search--results__container {
   display: flex;
@@ -296,7 +385,7 @@
   top: 100%;
   background-color: #333;
   width: 100%;
-  height: 60vh;
+  height: 80vh;
   padding: 4.8rem;
 }
 .MainNav .search--results__container.hidden {
@@ -400,6 +489,28 @@
   border-bottom: 2px solid #1a1a1a;
   margin-bottom: 2.4rem;
   padding-bottom: 2.4rem;
+}
+
+.NavMenu {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  gap: 4.8rem;
+  top: 0;
+  background-color: #333;
+  width: 100%;
+  height: 100vh;
+  padding: 4.8rem;
+  transform: translateY(-100%);
+  z-index: 4;
+  transition: transform 0.5s ease-in-out;
+}
+.NavMenu.open {
+  transform: translateY(0);
+}
+.NavMenu .menu--section {
+  cursor: pointer;
+  caret-color: transparent;
 }
 
 * {
