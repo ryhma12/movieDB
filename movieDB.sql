@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS public."user"
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
     "CreationDate" date NOT NULL,
     "Email" character varying NOT NULL,
-    PRIMARY KEY ("accID")
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.review
@@ -25,37 +25,7 @@ CREATE TABLE IF NOT EXISTS public.review
 CREATE TABLE IF NOT EXISTS public."group"
 (
     "groupName" character varying(32) NOT NULL,
-    admin character varying(255) NOT NULL,
-    "groupId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
-    PRIMARY KEY ("groupId")
-);
-
-CREATE TABLE IF NOT EXISTS public.user_group
-(
-    "USER_id" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
-    "Group_groupId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
-    verification boolean NOT NULL DEFAULT 0
-);
-
-CREATE TABLE IF NOT EXISTS public.list
-(
-    name character varying(32) NOT NULL,
-    "listId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
-    PRIMARY KEY ("listId")
-);
-
-CREATE TABLE IF NOT EXISTS public.user_list
-(
-    user_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
-    "list_listId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 )
-);
-
-CREATE TABLE IF NOT EXISTS public."moviesOfTheList"
-(
-    "movieId" integer NOT NULL,
-    date date NOT NULL,
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
-    "listId" integer NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -69,6 +39,25 @@ CREATE TABLE IF NOT EXISTS public.chat
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS public."Favourites"
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
+    "movieId" integer NOT NULL,
+    date date NOT NULL,
+    "movieName" character varying(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public."Role"
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
+    "groupId" integer NOT NULL,
+    "userId" integer NOT NULL,
+    admin boolean NOT NULL DEFAULT '0',
+    "user" boolean NOT NULL DEFAULT '0',
+    PRIMARY KEY (id)
+);
+
 ALTER TABLE IF EXISTS public.review
     ADD FOREIGN KEY (id)
     REFERENCES public."user" (id) MATCH SIMPLE
@@ -77,49 +66,33 @@ ALTER TABLE IF EXISTS public.review
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public.user_group
-    ADD FOREIGN KEY ("USER_id")
-    REFERENCES public."user" (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.user_group
-    ADD FOREIGN KEY ("Group_groupId")
-    REFERENCES public."group" ("groupId") MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.user_list
-    ADD FOREIGN KEY (user_id)
-    REFERENCES public."user" (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.user_list
-    ADD FOREIGN KEY ("list_listId")
-    REFERENCES public.list ("listId") MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public."moviesOfTheList"
-    ADD FOREIGN KEY ("listId")
-    REFERENCES public.list ("listId") MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
 ALTER TABLE IF EXISTS public.chat
     ADD FOREIGN KEY ("groupId")
-    REFERENCES public."group" ("groupId") MATCH SIMPLE
+    REFERENCES public."group" (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public."Favourites"
+    ADD FOREIGN KEY (id)
+    REFERENCES public."user" (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public."Role"
+    ADD FOREIGN KEY ("groupId")
+    REFERENCES public."group" (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public."Role"
+    ADD FOREIGN KEY ("userId")
+    REFERENCES public."user" (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
