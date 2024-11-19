@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import useFetch from "../hooks/useFetch";
 
 import ProductSlide from "../components/ProductSlide";
 import SingleViewNav from "../components/SingleViewNav";
@@ -14,6 +15,17 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [cast, setCast] = useState([]);
   const [showtimeData, setShowtimeData] = useState([]);
   const singleViewRef = useRef(null);
+  const { data: creditsData, error: creditsError } = useFetch(
+    `https://api.themoviedb.org/3/movie/${selectedMovie.id}/credits?language=en-US&api_key=${process.env.REACT_APP_API_KEY}`
+  );
+  const {
+    data: showtimesData,
+    error: showtimesError,
+    isLoading: showtimesIsLoading,
+  } = useFetch(
+    `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31`,
+    "finnkino"
+  );
 
   const handleNav = (page) => {
     setPage(page);
@@ -21,62 +33,40 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
 
   const handleClose = (e, btnClick) => {
     if (btnClick) setSelectedMovie(false);
-
     if (singleViewRef.current && !singleViewRef.current.contains(e.target)) {
       setSelectedMovie(false);
     }
   };
 
   useEffect(() => {
-    try {
-      const handleSearch = async () => {
-        try {
-          const res = await fetch(
-            `https://api.themoviedb.org/3/movie/${selectedMovie.id}/credits?language=en-US&api_key=${process.env.REACT_APP_API_KEY}`
-          );
-          const data = await res.json();
+    if (creditsData && !creditsError && creditsData.length !== 0) {
+      const filterDirectors = creditsData.crew.filter(
+        (item) => item.known_for_department.toLowerCase() === "directing"
+      );
+      const uniqueById = [
+        ...new Map(filterDirectors.map((item) => [item.id, item])).values(),
+      ];
 
-          const filterDirectors = data.crew.filter(
-            (item) => item.known_for_department.toLowerCase() === "directing"
-          );
-          const uniqueById = [
-            ...new Map(filterDirectors.map((item) => [item.id, item])).values(),
-          ];
-
-          setCast(data.cast);
-          setDirectors(uniqueById);
-        } catch (error) {
-          throw error;
-        }
-      };
-      const handleSearchShows = async () => {
-        try {
-          const res = await fetch(
-            `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31`
-          );
-          const xmlText = await res.text();
-
-          const parser = new XMLParser();
-          const jObj = parser.parse(xmlText);
-          const shows = jObj.Schedule.Shows.Show;
-
-          setShowtimeData(shows);
-        } catch (error) {
-          throw error;
-        }
-      };
-
-      handleSearch();
-      handleSearchShows();
-      document.addEventListener("mousedown", handleClose);
-
-      return () => {
-        document.removeEventListener("mousedown", handleClose);
-      };
-    } catch (error) {
-      console.error(error);
+      setCast(creditsData.cast);
+      setDirectors(uniqueById);
     }
-  }, [selectedMovie]);
+    if (showtimesData && !showtimesError && showtimesData.length !== 0) {
+      try {
+        const parser = new XMLParser();
+        const jObj = parser.parse(showtimesData);
+        const shows = jObj.Schedule?.Shows?.Show || [];
+
+        setShowtimeData(shows);
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    document.addEventListener("mousedown", handleClose);
+    return () => {
+      document.removeEventListener("mousedown", handleClose);
+    };
+  }, [creditsData, creditsError, showtimesData, showtimesError]);
 
   return (
     <div className="SingleView" ref={singleViewRef}>
@@ -96,6 +86,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
             <ShowtimesSection
               showtimeData={showtimeData}
               movie={selectedMovie}
+              isLoading={showtimesIsLoading}
             />
           )}
         </div>
