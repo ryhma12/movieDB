@@ -1,5 +1,7 @@
 .ProductCard {
-  position: relative;
+  &.interactive {
+    cursor: pointer;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -8,11 +10,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: absolute;
-    bottom: 0;
+
     width: 100%;
     background-color: rgba($color: $color4, $alpha: 0.5);
     padding: 1.2rem;
+
     h2 {
     }
     span {
