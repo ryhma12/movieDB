@@ -27,8 +27,6 @@ function App() {
 
           <Route path="/Showtimes" element={<Showtimes />} />
 
-          <Route path="/placeholdertwo" element={<PlaceHolderTwo />} />
-
           <Route
             path="/browse"
             element={<BrowseMovies setSelectedMovie={setSelectedMovie} />}

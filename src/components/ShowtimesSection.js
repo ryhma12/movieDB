@@ -7,7 +7,7 @@ const ShowtimesSection = ({ showtimes, isLoading, isParsing }) => {
       {isLoading || isParsing ? (
         <Loading />
       ) : (
-        <ul>
+      <ul>
           {showtimes.length > 0
             ? (showtimes.map((show) => (
               <Showtime
@@ -21,8 +21,7 @@ const ShowtimesSection = ({ showtimes, isLoading, isParsing }) => {
                 }}
               />
             )))
-            : (<li className="empty">No showtimes found</li>
-            )}
+            : <li className="empty">No showtimes found</li>}
         </ul>
       )}
     </div>
