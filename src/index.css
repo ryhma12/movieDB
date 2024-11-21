@@ -470,6 +470,9 @@
   justify-content: flex-start;
   list-style: none;
 }
+.ShowtimesSection .empty {
+  color: #ffffff;
+}
 
 .Showtime {
   display: flex;
@@ -560,6 +563,11 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.shows {
+  display: flex;
+  flex-direction: column;
 }
 
 * {

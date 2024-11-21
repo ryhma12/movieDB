@@ -10,7 +10,7 @@ const NavMenu = ({ menuOpen, setMenuOpen }) => {
     if (location === "pc1") {
       navigate("/placeholderone");
     } else {
-      navigate("/placeholdertwo");
+      navigate("/showtimes");
     }
   };
 
