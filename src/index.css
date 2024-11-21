@@ -468,6 +468,9 @@
   justify-content: flex-start;
   list-style: none;
 }
+.ShowtimesSection .empty {
+  color: #ffffff;
+}
 
 .Showtime {
   display: flex;
@@ -561,6 +564,9 @@
   }
 }
 
+.shows {
+  display: flex;
+  flex-direction: column;
 .BrowseMovies {
   margin-top: 2.4rem;
   display: flex;
