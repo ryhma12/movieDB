@@ -4,13 +4,15 @@ import star from "../assets/star.svg";
 const ProductSlide = ({ item, directors }) => {
   return (
     <div className="ProductSlide">
-      <ProductCard item={item} />
+      <ProductCard item={item} interActive={false} />
       <div className="text--container">
         <h2>{item.original_title}</h2>
         <p>{item.overview}</p>
         <div className="info--container">
           {directors.length > 0
-            ? directors.map((director) => <span key={director.id}>{director.name}</span>)
+            ? directors.map((director) => (
+                <span key={director.id}>{director.name}</span>
+              ))
             : ""}
         </div>
         <div className="average--rating__container">

@@ -1,0 +1,34 @@
+.MovieGenrePreview {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  .genre--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color5;
+    border-bottom: 1px solid rgba($color: $color5, $alpha: 0.5);
+    h2 {
+      font-size: 2.8rem;
+      padding-bottom: 1.8rem;
+    }
+    span {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+      &:hover {
+        color: $color6;
+      }
+    }
+  }
+  .movies--container {
+    display: flex;
+    gap: 1.8rem;
+
+    .ProductCard {
+      width: 17%;
+    }
+  }
+}
