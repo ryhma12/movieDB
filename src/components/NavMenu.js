@@ -21,7 +21,7 @@ const NavMenu = ({ menuOpen, setMenuOpen }) => {
       </div>
       <div
         className="menu--section"
-        data-location="placeholdertwo"
+        data-location="showtimes"
         onClick={(e) => handleNav(e)}
       >
         Testi navi

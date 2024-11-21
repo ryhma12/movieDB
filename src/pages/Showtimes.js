@@ -1,11 +1,11 @@
 import ShowtimesSection from "../components/ShowtimesSection";
 import useXmlParse from "../hooks/useXmlParse";
 import useFetch from "../hooks/useFetch";
-import { useState, useEffect } from "react";
 import Showtime from "../components/Showtime";
+import Loading from "../components/Loading"
 
 const Showtimes = () => {
-  const [shows, setShows] = useState([]);
+
   const {
     data: showtimeFetchData,
     error: showtimeFetchError,
@@ -21,24 +21,29 @@ const Showtimes = () => {
     isParsing: showtimeIsParsing,
   } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
 
-  useEffect(() => {
-    setShows(showtimeParseData);
-  }, [showtimeParseData])
-
   return (
-    <div className="shows">
-      {(shows.map((show) => (
-        <Showtime
-          key={show.ID}
-          data={{
-            time: show.dttmShowStart,
-            place: show.Theatre,
-            spokenLang: show.SpokenLanguage?.ISOTwoLetterCode || null,
-            subLang1: show.SubtitleLanguage1?.ISOTwoLetterCode || null,
-            subLang2: show.SubtitleLanguage2?.ISOTwoLetterCode || null,
-          }}
-        />
-      )))}
+    <div className="ShowtimesSection">
+      {showtimeIsLoading || showtimeIsParsing ? (
+        <Loading />
+      ) : (
+        <ul>
+          {showtimeParseData
+            ? (showtimeParseData.map((show) => (
+              <Showtime
+                key={show.ID}
+                data={{
+                  movie: show.OriginalTitle,
+                  time: show.dttmShowStart,
+                  place: show.Theatre,
+                  spokenLang: show.SpokenLanguage?.ISOTwoLetterCode || null,
+                  subLang1: show.SubtitleLanguage1?.ISOTwoLetterCode || null,
+                  subLang2: show.SubtitleLanguage2?.ISOTwoLetterCode || null,
+                }}
+              />
+            )))
+            : <div className="empty">No showtimes found</div>}
+        </ul>
+      )}
     </div>
   );
 };

@@ -460,12 +460,13 @@
 
 .ShowtimesSection {
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   gap: 2.4rem;
 }
 .ShowtimesSection ul {
   justify-content: flex-start;
+  width: 80%;
   list-style: none;
 }
 .ShowtimesSection .empty {
@@ -474,12 +475,14 @@
 
 .Showtime {
   display: flex;
-  justify-content: space-between;
   gap: 2.4rem;
   color: #ffffff;
 }
 .Showtime .time {
   color: #4f87d4;
+}
+.Showtime .movie {
+  color: #e4bc0e;
 }
 .Showtime .lang {
   display: flex;
@@ -564,9 +567,16 @@
   }
 }
 
-.shows {
+.ShowtimesSection {
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding-top: 5rem;
+}
+.ShowtimesSection .empty {
+  color: white;
+}
+
 .BrowseMovies {
   margin-top: 2.4rem;
   display: flex;
