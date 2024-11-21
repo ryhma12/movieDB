@@ -7,28 +7,31 @@ const NavMenu = ({ menuOpen, setMenuOpen }) => {
     setMenuOpen(false);
     const location = e.target.dataset.location;
 
-    if (location === "pc1") {
-      navigate("/placeholderone");
-    } else {
-      navigate("/showtimes");
-    }
+    navigate(`/${location}`);
   };
 
   return (
     <div className={menuOpen ? "NavMenu open" : "NavMenu"}>
       <div
         className="menu--section"
-        data-location="pc1"
+        data-location="placeholderone"
         onClick={(e) => handleNav(e)}
       >
         Testi navi
       </div>
       <div
         className="menu--section"
-        data-location="pc2"
+        data-location="placeholdertwo"
         onClick={(e) => handleNav(e)}
       >
         Testi navi
+      </div>
+      <div
+        className="menu--section"
+        data-location="browse"
+        onClick={(e) => handleNav(e)}
+      >
+        Browse Movies
       </div>
     </div>
   );

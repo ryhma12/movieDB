@@ -35,7 +35,7 @@ const MainNav = ({ setSelectedMovie }) => {
 
   const handleSingleView = (item) => {
     setSelectedMovie(item);
-    navigate("/moviepreview");
+    //   navigate("/moviepreview");
   };
 
   return (

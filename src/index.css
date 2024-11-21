@@ -1,6 +1,6 @@
 .App {
   background-color: #1f1f1f;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -84,8 +84,8 @@
   color: #aaaaaa;
 }
 
-.ProductCard {
-  position: relative;
+.ProductCard.interactive {
+  cursor: pointer;
 }
 .ProductCard img {
   width: 100%;
@@ -95,8 +95,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
   width: 100%;
   background-color: rgba(170, 170, 170, 0.5);
   padding: 1.2rem;
@@ -506,6 +504,7 @@
   padding: 4.8rem;
   transform: translateY(-100%);
   z-index: 4;
+  color: #ffffff;
   transition: transform 0.5s ease-in-out;
 }
 .NavMenu.open {
@@ -568,6 +567,52 @@
 .shows {
   display: flex;
   flex-direction: column;
+.BrowseMovies {
+  margin-top: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  justify-self: center;
+}
+.BrowseMovies .container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.MovieGenrePreview {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+.MovieGenrePreview .genre--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.MovieGenrePreview .genre--header h2 {
+  font-size: 2.8rem;
+  padding-bottom: 1.8rem;
+}
+.MovieGenrePreview .genre--header span {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+.MovieGenrePreview .genre--header span:hover {
+  color: #4f87d4;
+}
+.MovieGenrePreview .movies--container {
+  display: flex;
+  gap: 1.8rem;
+}
+.MovieGenrePreview .movies--container .ProductCard {
+  width: 17%;
 }
 
 * {
