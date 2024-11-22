@@ -16,7 +16,19 @@
     transform: translateY(0);
   }
   .menu--section {
-    cursor: pointer;
-    caret-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    h2 {
+      width: 100%;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba($color: $color5, $alpha: 0.5);
+    }
+    span {
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: rgba($color: $color5, $alpha: 0.9);
+      caret-color: transparent;
+    }
   }
 }

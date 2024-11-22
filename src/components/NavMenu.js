@@ -26,12 +26,11 @@ const NavMenu = ({ menuOpen, setMenuOpen }) => {
       >
         Testi navi
       </div>
-      <div
-        className="menu--section"
-        data-location="browse"
-        onClick={(e) => handleNav(e)}
-      >
-        Browse Movies
+      <div className="menu--section">
+        <h2>Movies</h2>
+        <span data-location="browse" onClick={(e) => handleNav(e)}>
+          Browse Genres
+        </span>
       </div>
     </div>
   );
