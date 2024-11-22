@@ -17,11 +17,11 @@
 @import "./components/NavMenu";
 @import "./components/TintLayer";
 @import "./components/Loading";
-
 @import "./pages/Showtimes";
-
 @import "./pages/BrowseMovies";
 @import "./components/MovieGenrePreview";
+@import "./components/Filter";
+@import "./components/Dropdown";
 
 * {
   padding: 0;
