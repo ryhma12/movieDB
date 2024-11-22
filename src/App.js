@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SingleView from "./pages/SingleView";
 import MainNav from "./components/MainNav";
 import PlaceHolderOne from "./pages/PlaceHolderOne";
-import PlaceHolderTwo from "./pages/PlaceHolderTwo";
+import Showtimes from "./pages/Showtimes";
 import TintLayer from "./components/TintLayer";
 import BrowseMovies from "./pages/BrowseMovies";
 import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
@@ -26,7 +26,9 @@ function App() {
         <MainNav setSelectedMovie={setSelectedMovie} />
         <Routes>
           <Route path="/placeholderone" element={<PlaceHolderOne />} />
-          <Route path="/placeholdertwo" element={<PlaceHolderTwo />} />
+
+          <Route path="/Showtimes" element={<Showtimes />} />
+
           <Route
             path="/browse"
             element={

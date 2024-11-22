@@ -1,13 +1,16 @@
 .Showtime {
     display: flex;
-    justify-content: space-between;
     gap: $space2;
     color: $color5;
 
     .time {
         color: $color6;
     }
-    
+
+    .movie {
+        color:$color10
+    }
+
     .lang {
         display: flex;
         margin-left: auto;
