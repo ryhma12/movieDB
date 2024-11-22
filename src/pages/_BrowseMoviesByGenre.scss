@@ -1,0 +1,53 @@
+.BrowseMoviesByGenre {
+  display: flex;
+
+  width: 100%;
+  .Filter {
+    width: 20%;
+  }
+  .content--container {
+    width: 80%;
+    padding: 2.8rem;
+    .header {
+      color: $color5;
+      border-bottom: 1px solid rgba($color: $color5, $alpha: 0.5);
+      margin-bottom: 1.8rem;
+      .header--content {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.2rem;
+        h2 {
+        }
+        .Dropdown {
+          width: 20%;
+        }
+      }
+    }
+    .movies--container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem;
+    }
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1.8rem;
+      gap: 1.2rem;
+      .btn {
+        padding: 1.2rem;
+        border-radius: 100000rem;
+        width: 4.2rem;
+        height: 4.2rem;
+        border: 1px solid $color5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      span {
+        color: $color5;
+      }
+    }
+  }
+}

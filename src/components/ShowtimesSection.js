@@ -2,7 +2,6 @@ import Loading from "./Loading";
 import Showtime from "./Showtime";
 
 const ShowtimesSection = ({ showtimeData, movie, isLoading }) => {
-  console.log(isLoading);
   return (
     <div className="ShowtimesSection">
       {/* täs esim sit voijaa ottaa se isLoading */}
