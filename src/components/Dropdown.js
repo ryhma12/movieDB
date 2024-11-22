@@ -1,15 +1,11 @@
 import chevLeft from "../assets/chevLeft.svg";
 
-const Dropdown = ({ options, setSort, dropdownName }) => {
+const Dropdown = ({ options, handleSort, dropdownName }) => {
   const handleDropDown = () => {
     const content = document.querySelector(".dropdown--content");
     const arrow = document.querySelector(".dropdown--arrow");
     content.classList.toggle("active");
     arrow.classList.toggle("active");
-  };
-
-  const handleSort = (index) => {
-    //setSort(options[index]);
   };
 
   return (

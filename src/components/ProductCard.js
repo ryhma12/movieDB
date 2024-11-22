@@ -6,7 +6,7 @@ const ProductCard = ({ item, interActive, setSelectedMovie }) => {
   return (
     <div
       className={interActive ? "ProductCard interactive" : "ProductCard"}
-      onClick={interActive ? handleNav : ""}
+      onClick={interActive ? handleNav : undefined}
     >
       <img
         src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}

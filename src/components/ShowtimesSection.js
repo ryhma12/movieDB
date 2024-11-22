@@ -1,7 +1,9 @@
 import Loading from "./Loading";
 import Showtime from "./Showtime";
 
+
 const ShowtimesSection = ({ showtimes, isLoading, isParsing }) => {
+
   return (
     <div className="ShowtimesSection">
       {isLoading || isParsing ? (

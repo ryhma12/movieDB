@@ -625,6 +625,114 @@
   width: 17%;
 }
 
+.BrowseMoviesByGenre {
+  display: flex;
+  width: 100%;
+}
+.BrowseMoviesByGenre .Filter {
+  width: 20%;
+}
+.BrowseMoviesByGenre .content--container {
+  width: 80%;
+  padding: 2.8rem;
+}
+.BrowseMoviesByGenre .content--container .header {
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 1.8rem;
+}
+.BrowseMoviesByGenre .content--container .header .header--content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+.BrowseMoviesByGenre .content--container .header .header--content .Dropdown {
+  width: 20%;
+}
+.BrowseMoviesByGenre .content--container .movies--container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.8rem;
+}
+.BrowseMoviesByGenre .content--container .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.8rem;
+  gap: 1.2rem;
+}
+.BrowseMoviesByGenre .content--container .pagination .btn {
+  padding: 1.2rem;
+  border-radius: 100000rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.BrowseMoviesByGenre .content--container .pagination span {
+  color: #ffffff;
+}
+
+.Filter {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.Dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  border: 1px solid #ffffff;
+  padding: 0.6rem 1.2rem;
+  caret-color: transparent;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.Dropdown img {
+  transform: rotate(-90deg) scale(1.5);
+  transition: transform 0.2s ease-in-out;
+}
+.Dropdown img.active {
+  transform: rotate(90deg) scale(1.5);
+}
+.Dropdown .dropdown--content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  max-height: 0;
+  transform: translateY(0) scaleY(0);
+  transform-origin: bottom;
+  color: #121212;
+  transition: transform 0.2s ease-in-out, max-height 0.2s ease-in-out;
+}
+.Dropdown .dropdown--content .dropdown--item {
+  padding: 1.2rem;
+  border-bottom: 1px solid #121212;
+  transition: all 0.2s ease-in-out;
+}
+.Dropdown .dropdown--content .dropdown--item span {
+  font-size: 1.8rem;
+}
+.Dropdown .dropdown--content .dropdown--item:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.Dropdown .dropdown--content.active {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  transform: translateY(100%) scaleY(1);
+  background-color: #ffffff;
+}
+
 * {
   padding: 0;
   margin: 0;
