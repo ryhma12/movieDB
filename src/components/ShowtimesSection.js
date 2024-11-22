@@ -1,21 +1,15 @@
 import Loading from "./Loading";
 import Showtime from "./Showtime";
 
-const ShowtimesSection = ({ showtimeData, movie, isLoading }) => {
-  console.log(isLoading);
+const ShowtimesSection = ({ showtimes, isLoading, isParsing }) => {
   return (
     <div className="ShowtimesSection">
-      {/* täs esim sit voijaa ottaa se isLoading */}
-      {/* ja renderöidä {isLoading ? <div spinner></div> : <ul>} eli loading komponenttii ei tarvi enää muuta ku tuon yhen eikä tarvi propsejakaan */}
-      {/* on myös parempi käyttää sitä ku se on aina tosi että onko ladannu riippumatta siitä mikä tulos on */}
-      {/* pikasesti vilkasten nii tää nykynen jos ei ookkaa tuloksia ja arrayn length on totuudessa 0 nii spinneri jää vaan pyörimää? */}
-      {isLoading ? (
+      {isLoading || isParsing ? (
         <Loading />
       ) : (
-        <ul>
-          {showtimeData
-            .filter((show) => show.Title === movie.original_title)
-            .map((show) => (
+      <ul>
+          {showtimes.length > 0
+            ? (showtimes.map((show) => (
               <Showtime
                 key={show.ID}
                 data={{
@@ -26,7 +20,8 @@ const ShowtimesSection = ({ showtimeData, movie, isLoading }) => {
                   subLang2: show.SubtitleLanguage2.ISOTwoLetterCode,
                 }}
               />
-            ))}
+            )))
+            : <li className="empty">No showtimes found</li>}
         </ul>
       )}
     </div>
