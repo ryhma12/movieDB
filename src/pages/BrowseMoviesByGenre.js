@@ -66,8 +66,9 @@ const BrowseMoviesByGenre = ({ selectedGenre, setSelectedMovie }) => {
         <div className="movies--container">
           {!isLoading &&
             data.results &&
-            data.results.map((el) => (
+            data.results.map((el, index) => (
               <ProductCard
+                key={index}
                 item={el}
                 interActive={true}
                 setSelectedMovie={setSelectedMovie}

@@ -36,8 +36,9 @@ const MovieGenrePreview = ({
           !isLoading &&
           data.results
             .slice(0, 6)
-            .map((movie) => (
+            .map((movie, index) => (
               <ProductCard
+                key={index}
                 item={movie}
                 interActive={true}
                 setSelectedMovie={setSelectedMovie}

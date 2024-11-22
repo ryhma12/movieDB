@@ -514,7 +514,19 @@
   transform: translateY(0);
 }
 .NavMenu .menu--section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.NavMenu .menu--section h2 {
+  width: 100%;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.NavMenu .menu--section span {
+  font-size: 1.6rem;
   cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
   caret-color: transparent;
 }
 
@@ -625,57 +637,6 @@
   width: 17%;
 }
 
-.BrowseMoviesByGenre {
-  display: flex;
-  width: 100%;
-}
-.BrowseMoviesByGenre .Filter {
-  width: 20%;
-}
-.BrowseMoviesByGenre .content--container {
-  width: 80%;
-  padding: 2.8rem;
-}
-.BrowseMoviesByGenre .content--container .header {
-  color: #ffffff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  margin-bottom: 1.8rem;
-}
-.BrowseMoviesByGenre .content--container .header .header--content {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.2rem;
-}
-.BrowseMoviesByGenre .content--container .header .header--content .Dropdown {
-  width: 20%;
-}
-.BrowseMoviesByGenre .content--container .movies--container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.8rem;
-}
-.BrowseMoviesByGenre .content--container .pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1.8rem;
-  gap: 1.2rem;
-}
-.BrowseMoviesByGenre .content--container .pagination .btn {
-  padding: 1.2rem;
-  border-radius: 100000rem;
-  width: 4.2rem;
-  height: 4.2rem;
-  border: 1px solid #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.BrowseMoviesByGenre .content--container .pagination span {
-  color: #ffffff;
-}
-
 .Filter {
   background-color: #000000;
   color: #ffffff;
@@ -731,6 +692,57 @@
   max-height: fit-content;
   transform: translateY(100%) scaleY(1);
   background-color: #ffffff;
+}
+
+.BrowseMoviesByGenre {
+  display: flex;
+  width: 100%;
+}
+.BrowseMoviesByGenre .Filter {
+  width: 20%;
+}
+.BrowseMoviesByGenre .content--container {
+  width: 80%;
+  padding: 2.8rem;
+}
+.BrowseMoviesByGenre .content--container .header {
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 1.8rem;
+}
+.BrowseMoviesByGenre .content--container .header .header--content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+.BrowseMoviesByGenre .content--container .header .header--content .Dropdown {
+  width: 20%;
+}
+.BrowseMoviesByGenre .content--container .movies--container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.8rem;
+}
+.BrowseMoviesByGenre .content--container .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.8rem;
+  gap: 1.2rem;
+}
+.BrowseMoviesByGenre .content--container .pagination .btn {
+  padding: 1.2rem;
+  border-radius: 100000rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.BrowseMoviesByGenre .content--container .pagination span {
+  color: #ffffff;
 }
 
 * {

@@ -26,9 +26,7 @@ function App() {
         <MainNav setSelectedMovie={setSelectedMovie} />
         <Routes>
           <Route path="/placeholderone" element={<PlaceHolderOne />} />
-
           <Route path="/Showtimes" element={<Showtimes />} />
-
           <Route
             path="/browse"
             element={

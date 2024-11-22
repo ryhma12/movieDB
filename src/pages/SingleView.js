@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import useFetch from "../hooks/useFetch";
 import useXmlParse from "../hooks/useXmlParse";
 import ProductSlide from "../components/ProductSlide";
@@ -32,20 +32,23 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     error: showtimeParseError,
     isParsing: showtimeIsParsing,
   } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
-  
+
   const handleNav = (page) => {
     setPage(page);
   };
 
-  const handleClose = (e, btnClick) => {
-    if (btnClick) setSelectedMovie(false);
-    if (singleViewRef.current && !singleViewRef.current.contains(e.target)) {
-      setSelectedMovie(false);
-    }
-  };
+  const handleClose = useCallback(
+    (e, btnClick) => {
+      if (btnClick) setSelectedMovie(false);
+      if (singleViewRef.current && !singleViewRef.current.contains(e.target)) {
+        setSelectedMovie(false);
+      }
+    },
+    [setSelectedMovie]
+  );
 
   useEffect(() => {
-    if (creditsData && !creditsError && creditsData.length !== 0) {
+    if (creditsData && !creditsError) {
       const filterDirectors = creditsData.crew.filter(
         (item) => item.known_for_department.toLowerCase() === "directing"
       );
@@ -61,16 +64,24 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     return () => {
       document.removeEventListener("mousedown", handleClose);
     };
-  }, [creditsData, creditsError]);
+  }, [creditsData, creditsError, handleClose]);
 
   useEffect(() => {
-    if(showtimeFetchData && !showtimeFetchError){
-      if(showtimeParseData && !showtimeParseError){
-        const filter = showtimeParseData.filter((show) => show.OriginalTitle === selectedMovie.original_title);
+    if (showtimeFetchData && !showtimeFetchError) {
+      if (showtimeParseData && !showtimeParseError) {
+        const filter = showtimeParseData.filter(
+          (show) => show.OriginalTitle === selectedMovie.original_title
+        );
         setShowtimes(filter);
-      };
-    };
-  }, [showtimeFetchData, showtimeFetchError, showtimeParseData, showtimeParseError, selectedMovie.original_title]);
+      }
+    }
+  }, [
+    showtimeFetchData,
+    showtimeFetchError,
+    showtimeParseData,
+    showtimeParseError,
+    selectedMovie.original_title,
+  ]);
 
   return (
     <div className="SingleView" ref={singleViewRef}>

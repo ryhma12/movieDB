@@ -14,6 +14,7 @@ const BrowseMovies = ({ setSelectedMovie, setSelectedGenre }) => {
         <div className="container">
           {data.genres.map((genre) => (
             <MovieGenrePreview
+              key={genre.id}
               genre={genre}
               genreName={genre.name}
               setSelectedMovie={setSelectedMovie}
