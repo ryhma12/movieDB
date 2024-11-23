@@ -1,17 +1,15 @@
-import Loading from "./Loading";
+import Loading from "./utility/Loading";
 import Showtime from "./Showtime";
 
-
 const ShowtimesSection = ({ showtimes, isLoading, isParsing }) => {
-
   return (
     <div className="ShowtimesSection">
       {isLoading || isParsing ? (
         <Loading />
       ) : (
-      <ul>
-          {showtimes.length > 0
-            ? (showtimes.map((show) => (
+        <ul>
+          {showtimes.length > 0 ? (
+            showtimes.map((show) => (
               <Showtime
                 key={show.ID}
                 data={{
@@ -22,8 +20,10 @@ const ShowtimesSection = ({ showtimes, isLoading, isParsing }) => {
                   subLang2: show.SubtitleLanguage2.ISOTwoLetterCode,
                 }}
               />
-            )))
-            : <li className="empty">No showtimes found</li>}
+            ))
+          ) : (
+            <li className="empty">No showtimes found</li>
+          )}
         </ul>
       )}
     </div>

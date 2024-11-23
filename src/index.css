@@ -10,7 +10,7 @@
   background-color: #000000;
   border-radius: 1rem;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   z-index: 5;
@@ -641,6 +641,53 @@
   background-color: #000000;
   color: #ffffff;
 }
+.Filter .title--container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Filter .title--container svg {
+  cursor: pointer;
+  border: 1px solid #ffffff;
+  border-radius: 10000rem;
+  padding: 0.4rem;
+  transition: all 0.2s ease-in-out;
+}
+.Filter .title--container svg:hover {
+  transform: rotate(180deg);
+  background-color: #ffffff;
+  fill: #000;
+}
+.Filter .container {
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.Filter .container .submit--filter__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1.2rem 0;
+}
+.Filter .container .submit--filter__container button {
+  padding: 1.2rem 1.8rem;
+  font-size: 1.8rem;
+  color: #121212;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.Filter .container .submit--filter__container button.clear {
+  background-color: #aa4a44;
+}
+.Filter .container .submit--filter__container button:hover {
+  background-color: #4f87d4;
+  transform: translateY(1px);
+  border-radius: 0;
+}
 
 .Dropdown {
   display: flex;
@@ -743,6 +790,81 @@
 }
 .BrowseMoviesByGenre .content--container .pagination span {
   color: #ffffff;
+}
+
+.RangeSlider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.RangeSlider h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+.RangeSlider .fields--container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 2rem;
+}
+.RangeSlider .fields--container .separator {
+  height: 1px;
+  width: 20%;
+  background-color: #ffffff;
+}
+.RangeSlider .fields--container input {
+  background-color: #ffffff;
+  border-radius: 0.2rem;
+  border: none;
+  color: #121212;
+  width: 25%;
+  text-align: center;
+  transition: all 0.2s;
+  font-size: 1.8rem;
+}
+.RangeSlider .fields--container input:focus {
+  outline: none;
+}
+.RangeSlider .slider--container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.RangeSlider .slider--container .slider {
+  background-color: #aaaaaa;
+  width: 100%;
+  height: 5px;
+  position: absolute;
+}
+.RangeSlider .slider--container .slider .progress {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  height: 100%;
+  background: #000000;
+}
+.RangeSlider .slider--container input {
+  position: absolute;
+  padding: 0;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.RangeSlider .slider--container input[type=range]::-webkit-slider-thumb {
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  background-color: #ffffff;
 }
 
 * {

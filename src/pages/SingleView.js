@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import useFetch from "../hooks/useFetch";
 import useXmlParse from "../hooks/useXmlParse";
 import ProductSlide from "../components/ProductSlide";
-import SingleViewNav from "../components/SingleViewNav";
+import SingleViewNav from "../components/navigation/SingleViewNav";
 import ReviewSection from "../components/ReviewSection";
 import CastSection from "../components/CastSection";
 import ShowtimesSection from "../components/ShowtimesSection";
@@ -48,7 +48,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   );
 
   useEffect(() => {
-    if (creditsData && !creditsError) {
+    if (creditsData && !creditsError && creditsData.length !== 0) {
       const filterDirectors = creditsData.crew.filter(
         (item) => item.known_for_department.toLowerCase() === "directing"
       );

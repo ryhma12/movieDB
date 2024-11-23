@@ -1,5 +1,5 @@
 import useFetch from "../hooks/useFetch";
-import Loading from "../components/Loading";
+import Loading from "../components/utility/Loading";
 import MovieGenrePreview from "../components/MovieGenrePreview";
 
 const BrowseMovies = ({ setSelectedMovie, setSelectedGenre }) => {

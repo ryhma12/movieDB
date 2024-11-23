@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
-import Loading from "./Loading";
+import Loading from "./utility/Loading";
 import ProductCard from "./ProductCard";
 import arrowSVG from "../assets/arrfor.svg";
 

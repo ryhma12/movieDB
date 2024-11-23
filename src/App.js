@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import SingleView from "./pages/SingleView";
-import MainNav from "./components/MainNav";
+import MainNav from "./components/navigation/MainNav";
 import PlaceHolderOne from "./pages/PlaceHolderOne";
 import Showtimes from "./pages/Showtimes";
-import TintLayer from "./components/TintLayer";
+import TintLayer from "./components/utility/TintLayer";
 import BrowseMovies from "./pages/BrowseMovies";
 import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(false);
+
+  useEffect(() => {
+    if (selectedMovie) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedMovie]);
 
   return (
     <div className="App">
