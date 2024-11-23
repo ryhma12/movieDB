@@ -2,10 +2,9 @@ import ShowtimesSection from "../components/ShowtimesSection";
 import useXmlParse from "../hooks/useXmlParse";
 import useFetch from "../hooks/useFetch";
 import Showtime from "../components/Showtime";
-import Loading from "../components/Loading"
+import Loading from "../components/utility/Loading";
 
 const Showtimes = () => {
-
   const {
     data: showtimeFetchData,
     error: showtimeFetchError,
@@ -27,8 +26,8 @@ const Showtimes = () => {
         <Loading />
       ) : (
         <ul>
-          {showtimeParseData
-            ? (showtimeParseData.map((show) => (
+          {showtimeParseData ? (
+            showtimeParseData.map((show) => (
               <Showtime
                 key={show.ID}
                 data={{
@@ -40,8 +39,10 @@ const Showtimes = () => {
                   subLang2: show.SubtitleLanguage2?.ISOTwoLetterCode || null,
                 }}
               />
-            )))
-            : <div className="empty">No showtimes found</div>}
+            ))
+          ) : (
+            <div className="empty">No showtimes found</div>
+          )}
         </ul>
       )}
     </div>

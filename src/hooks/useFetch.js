@@ -36,7 +36,7 @@ const useFetch = (url, apiName) => {
       }
     };
     fetchFromAPI();
-  }, [url]);
+  }, [url, apiName]);
 
   return { data, error, isLoading };
 };

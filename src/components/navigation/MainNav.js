@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import BestMatch from "./BestMatch";
-import Alternatives from "./Alternatives";
+import BestMatch from "../BestMatch";
+import Alternatives from "../Alternatives";
 import NavMenu from "./NavMenu";
 
-import hamburger from "../assets/hamburger.svg";
-import Logo from "../assets/Logo.png";
-import searchSVG from "../assets/search.svg";
+import hamburger from "../../assets/hamburger.svg";
+import Logo from "../../assets/Logo.png";
+import searchSVG from "../../assets/search.svg";
 
 const MainNav = ({ setSelectedMovie }) => {
   const [text, setText] = useState("");
