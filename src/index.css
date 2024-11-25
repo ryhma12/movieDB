@@ -846,7 +846,7 @@
   left: 0%;
   right: 0%;
   height: 100%;
-  background: #000000;
+  background-color: #4f87d4;
 }
 .RangeSlider .slider--container input {
   position: absolute;
