@@ -15,6 +15,9 @@
         display: flex;
         margin-left: auto;
         gap: $space2;
+        p:empty {
+            display: none;
+        }
     }
 
     &:not(:last-child) {
