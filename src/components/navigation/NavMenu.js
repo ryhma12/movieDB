@@ -24,7 +24,7 @@ const NavMenu = ({ menuOpen, setMenuOpen }) => {
         data-location="showtimes"
         onClick={(e) => handleNav(e)}
       >
-        Testi navi
+        <h2>Showtimes</h2>
       </div>
       <div className="menu--section">
         <h2>Movies</h2>
