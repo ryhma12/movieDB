@@ -9,11 +9,10 @@ import hamburger from "../../assets/hamburger.svg";
 import Logo from "../../assets/Logo.png";
 import searchSVG from "../../assets/search.svg";
 
-const MainNav = ({ setSelectedMovie }) => {
+const MainNav = ({ setSelectedMovie, setShowLogin }) => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleSearch = async (e) => {
     setText(e.target.value);
@@ -35,7 +34,6 @@ const MainNav = ({ setSelectedMovie }) => {
 
   const handleSingleView = (item) => {
     setSelectedMovie(item);
-    //   navigate("/moviepreview");
   };
 
   return (
@@ -62,8 +60,18 @@ const MainNav = ({ setSelectedMovie }) => {
             </div>
           </li>
           <li className="login--buttons">
-            <button className="login">Login</button>
-            <button className="sign--up">Sign up</button>
+            <button
+              className="login"
+              onClick={() => setShowLogin({ open: true, form: "login" })}
+            >
+              Login
+            </button>
+            <button
+              className="sign--up"
+              onClick={() => setShowLogin({ open: true, form: "register" })}
+            >
+              Sign up
+            </button>
           </li>
         </ul>
 
