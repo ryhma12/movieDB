@@ -12,19 +12,16 @@ const NavMenu = ({ menuOpen, setMenuOpen }) => {
 
   return (
     <div className={menuOpen ? "NavMenu open" : "NavMenu"}>
-      <div
-        className="menu--section"
-        data-location="placeholderone"
-        onClick={(e) => handleNav(e)}
-      >
-        Testi navi
+      <div className="menu--section">
+        <span data-location="placeholderone" onClick={(e) => handleNav(e)}>
+          Testi navi
+        </span>
       </div>
-      <div
-        className="menu--section"
-        data-location="showtimes"
-        onClick={(e) => handleNav(e)}
-      >
+      <div className="menu--section">
         <h2>Showtimes</h2>
+        <span data-location="showtimes" onClick={(e) => handleNav(e)}>
+          Finnkino
+        </span>
       </div>
       <div className="menu--section">
         <h2>Movies</h2>

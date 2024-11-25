@@ -598,7 +598,6 @@
   display: flex;
   width: 100%;
   align-items: center;
-  padding-top: 5rem;
 }
 .showtimes .ShowtimesSection .empty {
   color: white;
@@ -606,6 +605,7 @@
 .showtimes .Dropdown {
   color: white;
   width: 80%;
+  margin: 2.4rem;
 }
 
 .BrowseMovies {

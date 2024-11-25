@@ -6,7 +6,6 @@
         display: flex;
         width: 100%;
         align-items: center;
-        padding-top: 5rem;
 
         .empty {
             color: white;
@@ -15,5 +14,6 @@
     .Dropdown {
         color: white;
         width: 80%;
+        margin: $space2;
     }
 }
