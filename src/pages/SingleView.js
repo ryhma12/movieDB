@@ -7,6 +7,7 @@ import ReviewSection from "../components/ReviewSection";
 import CastSection from "../components/CastSection";
 import ShowtimesSection from "../components/ShowtimesSection";
 import closeIcon from "../assets/close.svg";
+import Dropdown from "../components/Dropdown";
 
 const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [page, setPage] = useState("Reviews");
@@ -14,6 +15,22 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [cast, setCast] = useState([]);
   const [showtimes, setShowtimes] = useState([]);
   const singleViewRef = useRef(null);
+  const [selectedArea, setSelectedArea] = useState([]);
+  const [selectedAreaName, setSelectedAreaName] = useState("");
+
+  const handleTheatreArea = (index) => {
+    if (theatreAreaFetchData &&
+      !theatreAreaFetchError &&
+      theatreAreaParseData &&
+      !theatreAreaParseError) {
+      const currentArea = theatreAreaParseData[index + 1];
+      if (currentArea) {
+        setSelectedArea(currentArea.ID);
+        setSelectedAreaName(currentArea.Name);
+      };
+    };
+  };
+
   const { data: creditsData, error: creditsError } = useFetch(
     `https://api.themoviedb.org/3/movie/${selectedMovie.id}/credits?language=en-US&api_key=${process.env.REACT_APP_API_KEY}`
   );
@@ -23,7 +40,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     error: showtimeFetchError,
     isLoading: showtimeIsLoading,
   } = useFetch(
-    `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31`,
+    `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31&area=${selectedArea}`,
     "finnkino"
   );
 
@@ -32,6 +49,21 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     error: showtimeParseError,
     isParsing: showtimeIsParsing,
   } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
+
+  const {
+    data: theatreAreaFetchData,
+    error: theatreAreaFetchError,
+    isLoading: theatreAreaIsLoading,
+  } = useFetch(
+    `https://www.finnkino.fi/xml/TheatreAreas/`,
+    "finnkino"
+  );
+
+  const {
+    data: theatreAreaParseData = [],
+    error: theatreAreaParseError,
+    isParsing: theatreAreaIsParsing,
+  } = useXmlParse(theatreAreaFetchData, "TheatreAreas.TheatreArea");
 
   const handleNav = (page) => {
     setPage(page);
@@ -101,11 +133,19 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
           {page === "Reviews" && <ReviewSection item={selectedMovie} />}
           {page === "Cast" && <CastSection cast={cast} />}
           {page === "Showtimes" && (
-            <ShowtimesSection
-              showtimes={showtimes}
-              isLoading={showtimeIsLoading}
-              isParsing={showtimeIsParsing}
-            />
+            <div className="Showtimes">
+              <Dropdown 
+                className="Dropdown"
+                options={theatreAreaParseData.slice(1).map((area) => (area.Name))}
+                handleSort={handleTheatreArea}
+                dropdownName={selectedAreaName ? `${selectedAreaName}` : "Filter by area"}
+              />
+              <ShowtimesSection
+                showtimes={showtimes}
+                isLoading={showtimeIsLoading}
+                isParsing={showtimeIsParsing}
+              />
+            </div>
           )}
         </div>
       </div>

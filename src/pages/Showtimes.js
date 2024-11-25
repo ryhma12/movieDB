@@ -15,7 +15,7 @@ const Showtimes = () => {
   );
 
   const {
-    data: showtimeParseData = [],
+    data: showtimeParseData,
     error: showtimeParseError,
     isParsing: showtimeIsParsing,
   } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
