@@ -27,6 +27,36 @@ router.post('/register',(req,res,next)=>{
 })
 
 
+router.post('/login',(req,res,next)=>{
+    const invalid_message = 'Invalid credentials'
+    try{
+        pool.query('select * from "user" where "Email"=$1 AND "Password"=$2',[req.body.Email, req.body.Password],
+            (error,result)=>{
+                if (error) return next(error)
+                if (result.length === 0) return next(new Error(invalid_message))
+                        compare(req.body.Password, result.rows[0].Password,(error,match)=>{
+                        if (error) return next(error)
+                        if(!match) return next(new Error(invalid_message))   
+                        const user = result.rows[0]
+                        return res.status(200).json(
+                            {
+                                "id":user.id,
+                                "Email": user.Email,
+                            }
+                            )
+                        })
+            })
+    } catch (error){
+        return res.status(500).json({error: error.message})
+    }
+})
+
+
+
+
+
+
+
 export default router
 
 /*

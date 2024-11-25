@@ -24,9 +24,6 @@ const CreationDate= currentDate
     })
 })
 
-
-
-
 describe('POST register',()=>{
     const Name='BBBBBB'
     const Password = 'BBBBBB'
@@ -44,4 +41,22 @@ expect(response.status).to.equal(201,data.error)
 expect(data).to.be.an('object')
 expect(data).to.include.all.keys("Name","CreationDate","Email")
 })
+})
+
+describe('POST login',()=>{
+    const Email = 'BBBBBB'
+    const Password = 'BBBBBB'
+    it ('should login with valid credentials', async()=> {
+        const response = await fetch(base_url + 'user/login',{
+            method: 'post',
+            headers: {
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({"Email":Email,"Password":Password})
+        })
+        const data = await response.json()
+        expect(response.status).to.equal(200,data.error)
+        expect(data).to.be.an('object')
+        expect(data).to.include.all.keys("id","Email")
+    })
 })
