@@ -67,13 +67,16 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   }, [creditsData, creditsError, handleClose]);
 
   useEffect(() => {
-    if (showtimeFetchData && !showtimeFetchError) {
-      if (showtimeParseData && !showtimeParseError) {
-        const filter = showtimeParseData.filter(
-          (show) => show.OriginalTitle === selectedMovie.original_title
-        );
-        setShowtimes(filter);
-      }
+    if (
+      showtimeFetchData &&
+      !showtimeFetchError &&
+      showtimeParseData &&
+      !showtimeParseError
+    ) {
+      const filter = showtimeParseData.filter(
+        (show) => show.OriginalTitle === selectedMovie.original_title
+      );
+      setShowtimes(filter);
     }
   }, [
     showtimeFetchData,
