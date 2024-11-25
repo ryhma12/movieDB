@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import useFetch from "../hooks/useFetch";
 import useXmlParse from "../hooks/useXmlParse";
 import ProductSlide from "../components/ProductSlide";
