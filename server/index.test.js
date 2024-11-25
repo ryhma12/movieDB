@@ -25,9 +25,9 @@ const CreationDate= currentDate
 })
 
 describe('POST register',()=>{
-    const Name='BBBBBB'
-    const Password = 'BBBBBB'
-    const Email='BBBB@BBBB'
+    const Name='taun'
+    const Password = 'uu'
+    const Email='tau@uu'
     it('should register with valid Name,Password,CreationDate and Email',async()=>{
         const response = await fetch(base_url+'user/register',{
             method: 'post',
@@ -44,8 +44,8 @@ expect(data).to.include.all.keys("Name","CreationDate","Email")
 })
 
 describe('POST login',()=>{
-    const Email = 'BBBBBB'
-    const Password = 'BBBBBB'
+    const Email = 'testi@testi'
+    const Password = 'salsana'
     it ('should login with valid credentials', async()=> {
         const response = await fetch(base_url + 'user/login',{
             method: 'post',
