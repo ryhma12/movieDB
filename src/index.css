@@ -10,7 +10,7 @@
   background-color: #000000;
   border-radius: 1rem;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   z-index: 5;
@@ -460,23 +460,29 @@
 
 .ShowtimesSection {
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   gap: 2.4rem;
 }
 .ShowtimesSection ul {
   justify-content: flex-start;
+  width: 80%;
   list-style: none;
+}
+.ShowtimesSection .empty {
+  color: #ffffff;
 }
 
 .Showtime {
   display: flex;
-  justify-content: space-between;
   gap: 2.4rem;
   color: #ffffff;
 }
 .Showtime .time {
   color: #4f87d4;
+}
+.Showtime .movie {
+  color: #e4bc0e;
 }
 .Showtime .lang {
   display: flex;
@@ -508,7 +514,19 @@
   transform: translateY(0);
 }
 .NavMenu .menu--section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.NavMenu .menu--section h2 {
+  width: 100%;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.NavMenu .menu--section span {
+  font-size: 1.6rem;
   cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
   caret-color: transparent;
 }
 
@@ -561,6 +579,16 @@
   }
 }
 
+.ShowtimesSection {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-top: 5rem;
+}
+.ShowtimesSection .empty {
+  color: white;
+}
+
 .BrowseMovies {
   margin-top: 2.4rem;
   display: flex;
@@ -607,6 +635,236 @@
 }
 .MovieGenrePreview .movies--container .ProductCard {
   width: 17%;
+}
+
+.Filter {
+  background-color: #000000;
+  color: #ffffff;
+}
+.Filter .title--container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Filter .title--container svg {
+  cursor: pointer;
+  border: 1px solid #ffffff;
+  border-radius: 10000rem;
+  padding: 0.4rem;
+  transition: all 0.2s ease-in-out;
+}
+.Filter .title--container svg:hover {
+  transform: rotate(180deg);
+  background-color: #ffffff;
+  fill: #000;
+}
+.Filter .container {
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.Filter .container .submit--filter__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1.2rem 0;
+}
+.Filter .container .submit--filter__container button {
+  padding: 1.2rem 1.8rem;
+  font-size: 1.8rem;
+  color: #121212;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.Filter .container .submit--filter__container button.clear {
+  background-color: #aa4a44;
+}
+.Filter .container .submit--filter__container button:hover {
+  background-color: #4f87d4;
+  transform: translateY(1px);
+  border-radius: 0;
+}
+
+.Dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  border: 1px solid #ffffff;
+  padding: 0.6rem 1.2rem;
+  caret-color: transparent;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.Dropdown img {
+  transform: rotate(-90deg) scale(1.5);
+  transition: transform 0.2s ease-in-out;
+}
+.Dropdown img.active {
+  transform: rotate(90deg) scale(1.5);
+}
+.Dropdown .dropdown--content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  max-height: 0;
+  transform: translateY(0) scaleY(0);
+  transform-origin: bottom;
+  color: #121212;
+  transition: transform 0.2s ease-in-out, max-height 0.2s ease-in-out;
+}
+.Dropdown .dropdown--content .dropdown--item {
+  padding: 1.2rem;
+  border-bottom: 1px solid #121212;
+  transition: all 0.2s ease-in-out;
+}
+.Dropdown .dropdown--content .dropdown--item span {
+  font-size: 1.8rem;
+}
+.Dropdown .dropdown--content .dropdown--item:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.Dropdown .dropdown--content.active {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  transform: translateY(100%) scaleY(1);
+  background-color: #ffffff;
+}
+
+.BrowseMoviesByGenre {
+  display: flex;
+  width: 100%;
+}
+.BrowseMoviesByGenre .Filter {
+  width: 20%;
+}
+.BrowseMoviesByGenre .content--container {
+  width: 80%;
+  padding: 2.8rem;
+}
+.BrowseMoviesByGenre .content--container .header {
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 1.8rem;
+}
+.BrowseMoviesByGenre .content--container .header .header--content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+.BrowseMoviesByGenre .content--container .header .header--content .Dropdown {
+  width: 20%;
+}
+.BrowseMoviesByGenre .content--container .movies--container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.8rem;
+}
+.BrowseMoviesByGenre .content--container .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.8rem;
+  gap: 1.2rem;
+}
+.BrowseMoviesByGenre .content--container .pagination .btn {
+  padding: 1.2rem;
+  border-radius: 100000rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.BrowseMoviesByGenre .content--container .pagination span {
+  color: #ffffff;
+}
+
+.RangeSlider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.RangeSlider h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+.RangeSlider .fields--container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 2rem;
+}
+.RangeSlider .fields--container .separator {
+  height: 1px;
+  width: 20%;
+  background-color: #ffffff;
+}
+.RangeSlider .fields--container input {
+  background-color: #ffffff;
+  border-radius: 0.2rem;
+  border: none;
+  color: #121212;
+  width: 25%;
+  text-align: center;
+  transition: all 0.2s;
+  font-size: 1.8rem;
+}
+.RangeSlider .fields--container input:focus {
+  outline: none;
+}
+.RangeSlider .slider--container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.RangeSlider .slider--container .slider {
+  background-color: #aaaaaa;
+  width: 100%;
+  height: 5px;
+  position: absolute;
+}
+.RangeSlider .slider--container .slider .progress {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  height: 100%;
+  background: #000000;
+}
+.RangeSlider .slider--container input {
+  position: absolute;
+  padding: 0;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.RangeSlider .slider--container input[type=range]::-webkit-slider-thumb {
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  background-color: #ffffff;
 }
 
 * {

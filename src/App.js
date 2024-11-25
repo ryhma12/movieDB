@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import SingleView from "./pages/SingleView";
-import MainNav from "./components/MainNav";
+import MainNav from "./components/navigation/MainNav";
 import PlaceHolderOne from "./pages/PlaceHolderOne";
-import PlaceHolderTwo from "./pages/PlaceHolderTwo";
-import TintLayer from "./components/TintLayer";
+import Showtimes from "./pages/Showtimes";
+import TintLayer from "./components/utility/TintLayer";
 import BrowseMovies from "./pages/BrowseMovies";
+import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(false);
+  const [selectedGenre, setSelectedGenre] = useState(false);
+
+  useEffect(() => {
+    if (selectedMovie) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedMovie]);
 
   return (
     <div className="App">
@@ -24,11 +38,27 @@ function App() {
         <MainNav setSelectedMovie={setSelectedMovie} />
         <Routes>
           <Route path="/placeholderone" element={<PlaceHolderOne />} />
-          <Route path="/placeholdertwo" element={<PlaceHolderTwo />} />
+          <Route path="/Showtimes" element={<Showtimes />} />
           <Route
             path="/browse"
-            element={<BrowseMovies setSelectedMovie={setSelectedMovie} />}
+            element={
+              <BrowseMovies
+                setSelectedMovie={setSelectedMovie}
+                setSelectedGenre={setSelectedGenre}
+              />
+            }
           />
+          {selectedGenre && (
+            <Route
+              path={selectedGenre.name.toLowerCase()}
+              element={
+                <BrowseMoviesByGenre
+                  selectedGenre={selectedGenre}
+                  setSelectedMovie={setSelectedMovie}
+                />
+              }
+            />
+          )}
         </Routes>
       </BrowserRouter>
     </div>

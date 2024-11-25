@@ -1,41 +1,49 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
+
+import Loading from "./utility/Loading";
 import ProductCard from "./ProductCard";
 import arrowSVG from "../assets/arrfor.svg";
 
-const MovieGenrePreview = ({ genre, genreName, setSelectedMovie }) => {
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    try {
-      const getMoviesByGenre = async () => {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${genre}&sort_by=popularity.desc&language=en-US&page=1`
-        );
-        const moviesByGenre = await res.json();
+const MovieGenrePreview = ({
+  genre,
+  genreName,
+  setSelectedMovie,
+  setSelectedGenre,
+}) => {
+  const navigate = useNavigate();
+  const { data, error, isLoading } = useFetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${genre.id}&sort_by=popularity.desc&language=en-US&page=1`
+  );
 
-        setMovies(moviesByGenre.results.slice(0, 6));
-      };
-      getMoviesByGenre();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [genre]);
+  const handleNav = () => {
+    navigate(`/${genreName.toLowerCase()}`);
+    setSelectedGenre(genre);
+  };
+
   return (
     <div className="MovieGenrePreview">
       <div className="genre--header">
         <h2>{genreName}</h2>
-        <span>
+        <span onClick={handleNav}>
           See all {genreName} movies <img src={arrowSVG} alt="arrow icon" />
         </span>
       </div>
       <div className="movies--container">
-        {movies &&
-          movies.map((movie) => (
-            <ProductCard
-              item={movie}
-              interActive={true}
-              setSelectedMovie={setSelectedMovie}
-            />
-          ))}
+        {isLoading && <Loading />}
+        {data.results &&
+          !isLoading &&
+          data.results
+            .slice(0, 6)
+            .map((movie, index) => (
+              <ProductCard
+                key={index}
+                item={movie}
+                interActive={true}
+                setSelectedMovie={setSelectedMovie}
+              />
+            ))}
       </div>
     </div>
   );

@@ -1,42 +1,51 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import useFetch from "../hooks/useFetch";
-
+import useXmlParse from "../hooks/useXmlParse";
 import ProductSlide from "../components/ProductSlide";
-import SingleViewNav from "../components/SingleViewNav";
+import SingleViewNav from "../components/navigation/SingleViewNav";
 import ReviewSection from "../components/ReviewSection";
 import CastSection from "../components/CastSection";
 import ShowtimesSection from "../components/ShowtimesSection";
 import closeIcon from "../assets/close.svg";
-import { XMLParser } from "fast-xml-parser";
 
 const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [page, setPage] = useState("Reviews");
   const [directors, setDirectors] = useState([]);
   const [cast, setCast] = useState([]);
-  const [showtimeData, setShowtimeData] = useState([]);
+  const [showtimes, setShowtimes] = useState([]);
   const singleViewRef = useRef(null);
   const { data: creditsData, error: creditsError } = useFetch(
     `https://api.themoviedb.org/3/movie/${selectedMovie.id}/credits?language=en-US&api_key=${process.env.REACT_APP_API_KEY}`
   );
+
   const {
-    data: showtimesData,
-    error: showtimesError,
-    isLoading: showtimesIsLoading,
+    data: showtimeFetchData,
+    error: showtimeFetchError,
+    isLoading: showtimeIsLoading,
   } = useFetch(
     `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31`,
     "finnkino"
   );
 
+  const {
+    data: showtimeParseData = [],
+    error: showtimeParseError,
+    isParsing: showtimeIsParsing,
+  } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
+
   const handleNav = (page) => {
     setPage(page);
   };
 
-  const handleClose = (e, btnClick) => {
-    if (btnClick) setSelectedMovie(false);
-    if (singleViewRef.current && !singleViewRef.current.contains(e.target)) {
-      setSelectedMovie(false);
-    }
-  };
+  const handleClose = useCallback(
+    (e, btnClick) => {
+      if (btnClick) setSelectedMovie(false);
+      if (singleViewRef.current && !singleViewRef.current.contains(e.target)) {
+        setSelectedMovie(false);
+      }
+    },
+    [setSelectedMovie]
+  );
 
   useEffect(() => {
     if (creditsData && !creditsError && creditsData.length !== 0) {
@@ -50,23 +59,29 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
       setCast(creditsData.cast);
       setDirectors(uniqueById);
     }
-    if (showtimesData && !showtimesError && showtimesData.length !== 0) {
-      try {
-        const parser = new XMLParser();
-        const jObj = parser.parse(showtimesData);
-        const shows = jObj.Schedule?.Shows?.Show || [];
-
-        setShowtimeData(shows);
-      } catch (error) {
-        throw error;
-      }
-    }
 
     document.addEventListener("mousedown", handleClose);
     return () => {
       document.removeEventListener("mousedown", handleClose);
     };
-  }, [creditsData, creditsError, showtimesData, showtimesError]);
+  }, [creditsData, creditsError, handleClose]);
+
+  useEffect(() => {
+    if (showtimeFetchData && !showtimeFetchError) {
+      if (showtimeParseData && !showtimeParseError) {
+        const filter = showtimeParseData.filter(
+          (show) => show.OriginalTitle === selectedMovie.original_title
+        );
+        setShowtimes(filter);
+      }
+    }
+  }, [
+    showtimeFetchData,
+    showtimeFetchError,
+    showtimeParseData,
+    showtimeParseError,
+    selectedMovie.original_title,
+  ]);
 
   return (
     <div className="SingleView" ref={singleViewRef}>
@@ -84,9 +99,9 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
           {page === "Cast" && <CastSection cast={cast} />}
           {page === "Showtimes" && (
             <ShowtimesSection
-              showtimeData={showtimeData}
-              movie={selectedMovie}
-              isLoading={showtimesIsLoading}
+              showtimes={showtimes}
+              isLoading={showtimeIsLoading}
+              isParsing={showtimeIsParsing}
             />
           )}
         </div>
