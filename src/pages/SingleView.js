@@ -15,34 +15,22 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [cast, setCast] = useState([]);
   const [showtimes, setShowtimes] = useState([]);
   const singleViewRef = useRef(null);
-  const [theatreArea, setTheatreArea] = useState(1046);
+  const [selectedArea, setSelectedArea] = useState([]);
+  const [selectedAreaName, setSelectedAreaName] = useState("");
 
   const handleTheatreArea = (index) => {
-    switch (index) {
-      case 0:
-        setTheatreArea(1022);
-        break;
-      case 1:
-        setTheatreArea(1047);
-        break;
-      case 2:
-        setTheatreArea(1035);
-        break;
-      case 3:
-        setTheatreArea(1034);
-        break;
-      case 4:
-        setTheatreArea(1021);
-        break;
-      case 5:
-        setTheatreArea(1019);
-        break;
-      default:
-        setTheatreArea(1046);
-        break;
-    }
+    if (theatreAreaFetchData &&
+      !theatreAreaFetchError &&
+      theatreAreaParseData &&
+      !theatreAreaParseError) {
+      const currentArea = theatreAreaParseData[index + 1];
+      if (currentArea) {
+        setSelectedArea(currentArea.ID);
+        setSelectedAreaName(currentArea.Name);
+      };
+    };
   };
-  
+
   const { data: creditsData, error: creditsError } = useFetch(
     `https://api.themoviedb.org/3/movie/${selectedMovie.id}/credits?language=en-US&api_key=${process.env.REACT_APP_API_KEY}`
   );
@@ -52,7 +40,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     error: showtimeFetchError,
     isLoading: showtimeIsLoading,
   } = useFetch(
-    `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31&area=${theatreArea}`,
+    `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31&area=${selectedArea}`,
     "finnkino"
   );
 
@@ -130,10 +118,6 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     selectedMovie.original_title,
   ]);
 
-  // const areaFilter = useMemo(() => theatreAreaParseData.filter(
-  //   (area) => area. === 
-  // ), [theatreAreaParseData]);
-
   return (
     <div className="SingleView" ref={singleViewRef}>
       <div className="inner--container">
@@ -150,10 +134,11 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
           {page === "Cast" && <CastSection cast={cast} />}
           {page === "Showtimes" && (
             <div className="Showtimes">
-              <Dropdown
-                options={""}
+              <Dropdown 
+                className="Dropdown"
+                options={theatreAreaParseData.slice(1).map((area) => (area.Name))}
                 handleSort={handleTheatreArea}
-                dropdownName={"Filter by area"}
+                dropdownName={selectedAreaName ? `${selectedAreaName}` : "Filter by area"}
               />
               <ShowtimesSection
                 showtimes={showtimes}

@@ -5,7 +5,6 @@ import Showtime from "../components/Showtime";
 import Loading from "../components/utility/Loading";
 
 const Showtimes = () => {
-  
   const {
     data: showtimeFetchData,
     error: showtimeFetchError,
