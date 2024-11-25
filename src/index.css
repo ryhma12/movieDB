@@ -867,6 +867,122 @@
   background-color: #ffffff;
 }
 
+.form--window__container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 5;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  caret-color: auto;
+}
+.form--window__container.active {
+  pointer-events: all;
+}
+.form--window__container .form--window__inner {
+  width: 30%;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.form--window__container .form--window {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2.4rem;
+  overflow-y: auto;
+  transform: scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+.form--window__container .form--window.active {
+  transform: scale(1);
+}
+.form--window__container .form--window .contact--form__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3.6rem;
+  font-size: 2.4rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #121212;
+}
+.form--window__container .form--window .contact--form__header svg {
+  cursor: pointer;
+  border: 1px solid #121212;
+  border-radius: 10000rem;
+  padding: 0.4rem;
+  transition: all 0.2s ease-in-out;
+  fill: #121212;
+}
+.form--window__container .form--window .contact--form__header svg:hover {
+  transform: rotate(180deg);
+  background-color: #121212;
+  fill: #ffffff;
+  border: 1px solid #ffffff;
+}
+.form--window__container .form--window form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+.form--window__container .form--window form .form--input__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.form--window__container .form--window form .form--input__container input {
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  border: none;
+  background-color: #f0f0f0;
+}
+.form--window__container .form--window form .form--input__container input:focus {
+  border: 1px solid #2e2f4b;
+  outline: none;
+}
+.form--window__container .form--window form .form--footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form--window__container .form--window form .form--footer b {
+  border-bottom: 1px solid #121212;
+  cursor: pointer;
+  caret-color: transparent;
+}
+.form--window__container .form--window form .form--footer .send--button {
+  margin-top: 1.2rem;
+  border: 1px solid #121212;
+  color: #121212;
+  cursor: pointer;
+  background: none;
+  padding: 1.2rem 2.4rem;
+  border-radius: 10rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: 0.2s ease-in-out;
+}
+.form--window__container .form--window form .form--footer .send--button span {
+  font-size: 1.8rem;
+}
+.form--window__container .form--window form .form--footer .send--button:hover {
+  background-color: #121212;
+  color: #fff;
+}
+
+@media (max-width: 1400px) {
+  .form--window__inner {
+    width: 50% !important;
+  }
+}
+@media (max-width: 770px) {
+  .form--window__inner {
+    width: 80% !important;
+  }
+}
 * {
   padding: 0;
   margin: 0;

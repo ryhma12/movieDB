@@ -8,10 +8,12 @@ import Showtimes from "./pages/Showtimes";
 import TintLayer from "./components/utility/TintLayer";
 import BrowseMovies from "./pages/BrowseMovies";
 import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
+import LoginWindow from "./components/login/LoginWindow";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(false);
+  const [showLogin, setShowLogin] = useState({ open: false, form: "login" });
 
   useEffect(() => {
     if (selectedMovie) {
@@ -28,6 +30,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        {showLogin.open && (
+          <>
+            <LoginWindow form={showLogin.form} setShowLogin={setShowLogin} />
+            <TintLayer />
+          </>
+        )}
         {selectedMovie && <TintLayer />}
         {selectedMovie && (
           <SingleView
@@ -35,7 +43,10 @@ function App() {
             setSelectedMovie={setSelectedMovie}
           />
         )}
-        <MainNav setSelectedMovie={setSelectedMovie} />
+        <MainNav
+          setSelectedMovie={setSelectedMovie}
+          setShowLogin={setShowLogin}
+        />
         <Routes>
           <Route path="/placeholderone" element={<PlaceHolderOne />} />
           <Route path="/Showtimes" element={<Showtimes />} />
