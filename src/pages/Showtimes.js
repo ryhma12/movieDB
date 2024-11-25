@@ -10,7 +10,7 @@ const Showtimes = () => {
     error: showtimeFetchError,
     isLoading: showtimeIsLoading,
   } = useFetch(
-    `https://www.finnkino.fi/xml/Schedule?nrOfDays=31&Theatre=`,
+    `https://www.finnkino.fi/xml/Schedule?nrOfDays=31&area=1018`,
     "finnkino"
   );
 
