@@ -32,5 +32,8 @@
   .Showtimes {
     width: 100%;
     color: white;
+    .Dropdown {
+      margin-bottom: $space2;
+    }
   }
 }
