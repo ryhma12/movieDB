@@ -37,6 +37,10 @@
   align-items: center;
   justify-content: center;
 }
+.SingleView .Showtimes {
+  width: 100%;
+  color: white;
+}
 
 .ProductSlide {
   height: 60%;

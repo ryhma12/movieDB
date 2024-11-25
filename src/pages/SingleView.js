@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useMemo, useState, useEffect, useRef, useCallback } from "react";
 import useFetch from "../hooks/useFetch";
 import useXmlParse from "../hooks/useXmlParse";
 import ProductSlide from "../components/ProductSlide";
@@ -7,6 +7,7 @@ import ReviewSection from "../components/ReviewSection";
 import CastSection from "../components/CastSection";
 import ShowtimesSection from "../components/ShowtimesSection";
 import closeIcon from "../assets/close.svg";
+import Dropdown from "../components/Dropdown";
 
 const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [page, setPage] = useState("Reviews");
@@ -14,6 +15,34 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [cast, setCast] = useState([]);
   const [showtimes, setShowtimes] = useState([]);
   const singleViewRef = useRef(null);
+  const [theatreArea, setTheatreArea] = useState(1046);
+
+  const handleTheatreArea = (index) => {
+    switch (index) {
+      case 0:
+        setTheatreArea(1022);
+        break;
+      case 1:
+        setTheatreArea(1047);
+        break;
+      case 2:
+        setTheatreArea(1035);
+        break;
+      case 3:
+        setTheatreArea(1034);
+        break;
+      case 4:
+        setTheatreArea(1021);
+        break;
+      case 5:
+        setTheatreArea(1019);
+        break;
+      default:
+        setTheatreArea(1046);
+        break;
+    }
+  };
+  
   const { data: creditsData, error: creditsError } = useFetch(
     `https://api.themoviedb.org/3/movie/${selectedMovie.id}/credits?language=en-US&api_key=${process.env.REACT_APP_API_KEY}`
   );
@@ -23,7 +52,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     error: showtimeFetchError,
     isLoading: showtimeIsLoading,
   } = useFetch(
-    `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31`,
+    `https://www.finnkino.fi/xml/Schedule?OriginalTitle=${selectedMovie.original_title}&nrOfDays=31&area=${theatreArea}`,
     "finnkino"
   );
 
@@ -32,6 +61,21 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     error: showtimeParseError,
     isParsing: showtimeIsParsing,
   } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
+
+  const {
+    data: theatreAreaFetchData,
+    error: theatreAreaFetchError,
+    isLoading: theatreAreaIsLoading,
+  } = useFetch(
+    `https://www.finnkino.fi/xml/TheatreAreas/`,
+    "finnkino"
+  );
+
+  const {
+    data: theatreAreaParseData = [],
+    error: theatreAreaParseError,
+    isParsing: theatreAreaIsParsing,
+  } = useXmlParse(theatreAreaFetchData, "TheatreAreas.TheatreArea");
 
   const handleNav = (page) => {
     setPage(page);
@@ -86,6 +130,10 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     selectedMovie.original_title,
   ]);
 
+  // const areaFilter = useMemo(() => theatreAreaParseData.filter(
+  //   (area) => area. === 
+  // ), [theatreAreaParseData]);
+
   return (
     <div className="SingleView" ref={singleViewRef}>
       <div className="inner--container">
@@ -101,11 +149,18 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
           {page === "Reviews" && <ReviewSection item={selectedMovie} />}
           {page === "Cast" && <CastSection cast={cast} />}
           {page === "Showtimes" && (
-            <ShowtimesSection
-              showtimes={showtimes}
-              isLoading={showtimeIsLoading}
-              isParsing={showtimeIsParsing}
-            />
+            <div className="Showtimes">
+              <Dropdown
+                options={""}
+                handleSort={handleTheatreArea}
+                dropdownName={"Filter by area"}
+              />
+              <ShowtimesSection
+                showtimes={showtimes}
+                isLoading={showtimeIsLoading}
+                isParsing={showtimeIsParsing}
+              />
+            </div>
           )}
         </div>
       </div>
