@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS public."user"
     "Name" character varying(255) NOT NULL,
     "Password" character varying(255) NOT NULL,
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
-    "CreationDate" date NOT NULL,
-    "Email" character varying NOT NULL,
+    "CreationDate" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "Email" character varying (255)) NOT NULL,
     PRIMARY KEY (id)
 );
 
