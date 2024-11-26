@@ -46,7 +46,6 @@ const LoginWindow = ({ setShowLogin, form }) => {
           Name: name,
           Password: password,
           Email: email,
-          CreationDate: new Date().toISOString(),
         }),
       });
       const data = await res.json();
