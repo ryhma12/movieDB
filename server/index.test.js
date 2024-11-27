@@ -7,7 +7,8 @@ const today = new Date();
 const month = today.getMonth()+1;
     const year = today.getFullYear();
     const date = today. getDate();
-    const currentDate = '2014-04-04';
+  //  const currentDate = '2014-04-04';
+  const currentDate = year + "." + month + "." + date+"";
 const CreationDate= currentDate 
  //const currentDate = year + "-" + month + "-" + date+"";
 
@@ -25,9 +26,9 @@ const CreationDate= currentDate
 })
 
 describe('POST register',()=>{
-    const Name='taun'
-    const Password = 'uu'
-    const Email='tau@uu'
+    const Name='tausdasdsain'
+    const Password = 'uusidsadsakayttaja'
+    const Email='uusi@kayttdassdaaja'
     it('should register with valid Name,Password,CreationDate and Email',async()=>{
         const response = await fetch(base_url+'user/register',{
             method: 'post',
@@ -44,8 +45,8 @@ expect(data).to.include.all.keys("Name","CreationDate","Email")
 })
 
 describe('POST login',()=>{
-    const Email = 'testi@testi'
-    const Password = 'salsana'
+    const Email = 'uusi@kayttaja'
+    const Password = 'uusikayttaja'
     it ('should login with valid credentials', async()=> {
         const response = await fetch(base_url + 'user/login',{
             method: 'post',
@@ -58,5 +59,22 @@ describe('POST login',()=>{
         expect(response.status).to.equal(200,data.error)
         expect(data).to.be.an('object')
         expect(data).to.include.all.keys("id","Email")
+    })
+})
+
+describe('POST Group',()=>{
+    const groupName = 'test_Group_name'
+    it ('should create a group', async()=> {
+        const response = await fetch(base_url + 'group/create',{
+            method: 'post',
+            headers: {
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({"groupName":groupName})
+        })
+        const data = await response.json()
+        expect(response.status).to.equal(201,data.error)
+        expect(data).to.be.an('object')
+        expect(data).to.include.all.keys("id","groupName")
     })
 })

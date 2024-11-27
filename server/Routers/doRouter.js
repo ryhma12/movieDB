@@ -4,7 +4,6 @@ import { emptyOrRows } from '../helper/utils.js'
 
 const router = Router()
 
-// mahdollisesti vaihtaa kaikista samanlainen ,kuin tuosta router.get
 
 router.get('/',(req,res,next) => {
         pool.query('select * from "user" ', (error, result)=>{

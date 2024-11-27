@@ -13,11 +13,11 @@ const postRegistration = async (req, res, next) => {
         if (!req.body.Password || req.body.Password.length < 8) return next(new ApiError('Invalid password for user', 400));
 
         const hashedPassword = await hash(req.body.Password, 10);
-        const userFromDb = await insertUser(req.body.Name, req.body.Email, hashedPassword);
+        const userFromDb = await insertUser(req.body.Name, req.body.Email, hashedPassword, req.body.CreationDate);
         const user = userFromDb.rows[0];
         if (!user) return next(new ApiError(no_result, 401));
 
-        return res.status(200).json(createUserObject(user.Name, user.id, user.Email, user.CreationDate));
+        return res.status(201).json(createUserObject(user.Name, user.id, user.Email, user.CreationDate));
     } catch (error) {
         return next(error);
     };
@@ -42,11 +42,17 @@ const postLogin = async (req, res, next) => {
     };
 };
 
+
+
+
+
+
+
 const createUserObject = (name, id, email, CreationDate, token = undefined) => {
     return {
-        'name': name,
+        'Name': name,
         'id': id,
-        'email': email,
+        'Email': email,
         'CreationDate': CreationDate,
         ...(token !== undefined) && {'token':token}
     };
