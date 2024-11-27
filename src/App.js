@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useUser } from "./hooks/useUser";
 
 import SingleView from "./pages/SingleView";
 import MainNav from "./components/navigation/MainNav";
-import PlaceHolderOne from "./pages/PlaceHolderOne";
 import Showtimes from "./pages/Showtimes";
 import TintLayer from "./components/utility/TintLayer";
 import BrowseMovies from "./pages/BrowseMovies";
 import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
-import LoginWindow from "./components/login/LoginWindow";
+import LoginWindow from "./pages/login/LoginWindow";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(false);
-  const [showLogin, setShowLogin] = useState({ open: false, form: "login" });
+  const { user } = useUser();
 
   useEffect(() => {
     if (selectedMovie) {
@@ -21,21 +21,15 @@ function App() {
     } else {
       document.body.style.overflow = "";
     }
-
+    console.log(user);
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selectedMovie]);
+  }, [selectedMovie, user]);
 
   return (
     <div className="App">
       <BrowserRouter>
-        {showLogin.open && (
-          <>
-            <LoginWindow form={showLogin.form} setShowLogin={setShowLogin} />
-            <TintLayer />
-          </>
-        )}
         {selectedMovie && <TintLayer />}
         {selectedMovie && (
           <SingleView
@@ -43,12 +37,26 @@ function App() {
             setSelectedMovie={setSelectedMovie}
           />
         )}
-        <MainNav
-          setSelectedMovie={setSelectedMovie}
-          setShowLogin={setShowLogin}
-        />
+        <MainNav setSelectedMovie={setSelectedMovie} />
         <Routes>
-          <Route path="/placeholderone" element={<PlaceHolderOne />} />
+          <Route
+            path="/login"
+            element={
+              <>
+                <LoginWindow form={"login"} />
+                <TintLayer />
+              </>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <>
+                <LoginWindow form={"register"} />
+                <TintLayer />
+              </>
+            }
+          />
           <Route path="/Showtimes" element={<Showtimes />} />
           <Route
             path="/browse"
