@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 import BestMatch from "../BestMatch";
 import Alternatives from "../Alternatives";
@@ -9,10 +10,12 @@ import hamburger from "../../assets/hamburger.svg";
 import Logo from "../../assets/Logo.png";
 import searchSVG from "../../assets/search.svg";
 
-const MainNav = ({ setSelectedMovie, setShowLogin }) => {
+const MainNav = ({ setSelectedMovie }) => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user, dispatch } = useUser();
 
   const handleSearch = async (e) => {
     setText(e.target.value);
@@ -34,6 +37,10 @@ const MainNav = ({ setSelectedMovie, setShowLogin }) => {
 
   const handleSingleView = (item) => {
     setSelectedMovie(item);
+  };
+
+  const handleLogOut = () => {
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
@@ -60,18 +67,23 @@ const MainNav = ({ setSelectedMovie, setShowLogin }) => {
             </div>
           </li>
           <li className="login--buttons">
-            <button
-              className="login"
-              onClick={() => setShowLogin({ open: true, form: "login" })}
-            >
-              Login
-            </button>
-            <button
-              className="sign--up"
-              onClick={() => setShowLogin({ open: true, form: "register" })}
-            >
-              Sign up
-            </button>
+            {!user ? (
+              <>
+                <button className="login" onClick={() => navigate("/login")}>
+                  Login
+                </button>
+                <button
+                  className="sign--up"
+                  onClick={() => navigate("/register")}
+                >
+                  Sign up
+                </button>
+              </>
+            ) : (
+              <button className="login" onClick={handleLogOut}>
+                Logout
+              </button>
+            )}
           </li>
         </ul>
 
