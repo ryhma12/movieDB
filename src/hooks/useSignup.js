@@ -25,8 +25,8 @@ export const useSignup = () => {
       if (!res) throw new Error("Could not complete signup");
 
       const data = await res.json();
-      if (data.error) throw new Error(data.error);
       console.log(data);
+      if (data.error) throw new Error(data.error);
 
       dispatch({ type: "LOGIN", payload: data });
 
