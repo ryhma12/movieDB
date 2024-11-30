@@ -7,8 +7,8 @@ const { sign } = jwt
 const postcreateGroup= async (req,res,next) =>{
     try{
     //    if (req.body.GroupName === '') return next(Error('GroupName too small'))
-       const result = await CreateGroup(req.body.groupName)    
-        return res.status(201).json({groupName: result.rows[0].groupName, id:result.rows[0].id })
+       const result = await CreateGroup(req.body.groupName,req.body.AdminName,req.body.Password)    
+        return res.status(201).json({groupName: result.rows[0].groupName})
     } catch (error){
         return next (error)
     }

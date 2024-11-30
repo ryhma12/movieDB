@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   postRegistration,
   postLogin,
-  deleteAccount,
+  DeleteUser,
 } from "../controllers/UserController.js";
 
 const router = Router();
@@ -10,6 +10,7 @@ const router = Router();
 router.post("/register", postRegistration);
 
 router.post("/login", postLogin);
-router.delete("/delete", deleteAccount);
+
+router.delete("/delete", DeleteUser);
 
 export default router;

@@ -1,9 +1,5 @@
 import { hash, compare } from "bcrypt";
-import {
-  insertUser,
-  selectUserByEmail,
-  deleteAccountById,
-} from "../models/User.js";
+import { insertUser, selectUserByEmail, deleteuser } from "../models/User.js";
 import { ApiError } from "../helper/ApiError.js";
 import jwt from "jsonwebtoken";
 const { sign } = jwt;
@@ -70,17 +66,10 @@ const postLogin = async (req, res, next) => {
   }
 };
 
-const deleteAccount = async (req, res, next) => {
-  const invalid_message = "Invalid credentials";
+const DeleteUser = async (req, res, next) => {
   try {
-    const userFromDb = await selectUserByEmail(req.body.Email);
-    const user = userFromDb.rows[0];
-    if (!user) return next(new ApiError(invalid_message, 401));
-
-    const match = await compare(req.body.Password, user.Password);
-    if (!match) return next(new Error(invalid_message, 401));
-
-    deleteAccountById(req.body.id);
+    const result = await deleteuser(req.body.id);
+    const user = result.rows[0];
 
     return res.status(200).json({ message: "Account deleted" });
   } catch (error) {
@@ -98,4 +87,4 @@ const createUserObject = (name, id, email, CreationDate, token = undefined) => {
   };
 };
 
-export { postRegistration, postLogin, deleteAccount };
+export { postRegistration, postLogin, DeleteUser };
