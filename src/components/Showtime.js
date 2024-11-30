@@ -13,7 +13,7 @@ const Showtime = ({ data: {movie = "", time, place, spokenLang = "", subLang1 = 
     <li className="Showtime">
       <p className="time">{formattedDate}</p>
       <p className="place">{place}</p>
-      <p className="movie">{`${movie}`}</p>
+      <p className="movie">{movie}</p>
       <div className="lang">
         <p >{spokenLang ? `Language: ${spokenLang}` : null}</p>
         <p >{subLang1 ? `Sub 1: ${subLang1}` : null}</p>

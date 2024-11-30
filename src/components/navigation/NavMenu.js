@@ -24,6 +24,11 @@ const NavMenu = ({ menuOpen, setMenuOpen }) => {
         </span>
       </div>
       <div className="menu--section">
+        <span data-location="favourites" onClick={(e) => handleNav(e)}>
+          Favourites
+        </span>
+      </div>
+      <div className="menu--section">
         <h2>Movies</h2>
         <span data-location="browse" onClick={(e) => handleNav(e)}>
           Browse Genres

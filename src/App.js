@@ -5,6 +5,7 @@ import { useUser } from "./hooks/useUser";
 import SingleView from "./pages/SingleView";
 import MainNav from "./components/navigation/MainNav";
 import Showtimes from "./pages/Showtimes";
+import Favourites from "./pages/Favourites";
 import TintLayer from "./components/utility/TintLayer";
 import BrowseMovies from "./pages/BrowseMovies";
 import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
@@ -64,7 +65,8 @@ function App() {
               </>
             }
           />
-          <Route path="/Showtimes" element={<Showtimes />} />
+          <Route path="/showtimes" element={<Showtimes />} />
+          <Route path="/favourites" element={<Favourites />} />
           <Route
             path="/browse"
             element={

@@ -53,7 +53,6 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const {
     data: theatreAreaFetchData,
     error: theatreAreaFetchError,
-    isLoading: theatreAreaIsLoading,
   } = useFetch(
     `https://www.finnkino.fi/xml/TheatreAreas/`,
     "finnkino"
@@ -62,7 +61,6 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const {
     data: theatreAreaParseData = [],
     error: theatreAreaParseError,
-    isParsing: theatreAreaIsParsing,
   } = useXmlParse(theatreAreaFetchData, "TheatreAreas.TheatreArea");
 
   const handleNav = (page) => {
