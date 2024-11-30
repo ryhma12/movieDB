@@ -22,6 +22,11 @@
       display: flex;
       flex-direction: column;
       gap: 1.8rem;
+      b {
+        color: $color6;
+        text-decoration: underline;
+        cursor: pointer;
+      }
       h2 {
         font-size: 2.4rem;
       }

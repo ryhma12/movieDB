@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useUser } from "./hooks/useUser";
 
 import SingleView from "./pages/SingleView";
@@ -9,6 +9,8 @@ import TintLayer from "./components/utility/TintLayer";
 import BrowseMovies from "./pages/BrowseMovies";
 import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
 import LoginWindow from "./pages/login/LoginWindow";
+import UserSettings from "./pages/UserSettings/UserSettings";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(false);
@@ -47,6 +49,11 @@ function App() {
                 <TintLayer />
               </>
             }
+          />
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/settings"
+            element={user ? <UserSettings /> : <Navigate to="/login" />}
           />
           <Route
             path="/register"

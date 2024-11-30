@@ -1,7 +1,10 @@
+import { useState, useEffect } from "react";
+
 import RoundPhoto from "./RoundPhoto";
 import star from "../assets/star.svg";
 
 const Review = ({ review }) => {
+  const [previewReview, setPreviewReview] = useState("");
   const date = new Date(review.created_at);
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -11,14 +14,25 @@ const Review = ({ review }) => {
     minute: "numeric",
     hour12: true,
   }).format(date);
+
+  useEffect(() => {
+    if (review.content.length > 300) {
+      setPreviewReview(review.content.slice(0, 300));
+    }
+  }, [review.content]);
+
+  const readMore = () => {
+    setPreviewReview("");
+  };
+
   return (
     <div className="Review">
       <div className="rating">
         {review.author_details.rating ? (
-          <>
+          <div>
             <span>{review.author_details.rating} / 10</span>
             <img src={star} alt="star" />
-          </>
+          </div>
         ) : (
           "Unrated"
         )}
@@ -34,7 +48,14 @@ const Review = ({ review }) => {
           </div>
         </div>
         <div className="review--text">
-          <span>{review.content}</span>
+          {previewReview ? (
+            <span>
+              {previewReview}
+              <b onClick={readMore}>Read more...</b>
+            </span>
+          ) : (
+            <span>{review.content}</span>
+          )}
         </div>
       </div>
     </div>

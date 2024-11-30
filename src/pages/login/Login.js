@@ -9,9 +9,10 @@ const Login = ({ email, setEmail, password, setPassword, closeWindow }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    login(email, password);
+    await login(email, password);
     closeWindow();
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="form--input__container">
