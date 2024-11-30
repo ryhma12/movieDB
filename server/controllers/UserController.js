@@ -21,8 +21,7 @@ const postRegistration = async (req, res, next) => {
     const userFromDb = await insertUser(
       req.body.Name,
       req.body.Email,
-      hashedPassword,
-      req.body.CreationDate
+      hashedPassword
     );
     const user = userFromDb.rows[0];
     console.log(user);
@@ -67,20 +66,16 @@ const postLogin = async (req, res, next) => {
   }
 };
 
+const DeleteUser = async (req, res, next) => {
+  try {
+    const result = await deleteuser(req.body.id);
+    const user = result.rows[0];
 
-
-const DeleteUser = async (req,res,next) => {
-  try{
-     const result =await deleteuser(req.body.name,req.body.password)
-     const user = result.rows[0];
-     return res.status(204).json({Name: user.Name, Email: user.Email ,CreationDate: user.CreationDate})
-  } catch (error){
-    return next(error)
+    return res.status(200).json({ message: "Account deleted" });
+  } catch (error) {
+    return next(error);
   }
-}
-
-
-
+};
 
 const createUserObject = (name, id, email, CreationDate, token = undefined) => {
   return {
