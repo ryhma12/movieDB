@@ -24,7 +24,9 @@
 @import "./components/Dropdown";
 @import "./pages/BrowseMoviesByGenre";
 @import "./components/filter/RangeSlider";
-@import "./components/login/LoginWindows";
+@import "./pages/login/LoginWindow";
+@import "./pages/Favourites";
+@import "./components/Favourite";
 
 * {
   padding: 0;

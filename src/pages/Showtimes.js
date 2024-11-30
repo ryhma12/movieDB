@@ -24,7 +24,6 @@ const Showtimes = () => {
 
   const {
     data: showtimeFetchData,
-    error: showtimeFetchError,
     isLoading: showtimeIsLoading,
   } = useFetch(
     `https://www.finnkino.fi/xml/Schedule?nrOfDays=31&area=${selectedArea}`,
@@ -33,14 +32,12 @@ const Showtimes = () => {
 
   const {
     data: showtimeParseData,
-    error: showtimeParseError,
     isParsing: showtimeIsParsing,
   } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
 
   const {
     data: theatreAreaFetchData,
     error: theatreAreaFetchError,
-    isLoading: theatreAreaIsLoading,
   } = useFetch(
     `https://www.finnkino.fi/xml/TheatreAreas/`,
     "finnkino"
@@ -49,7 +46,6 @@ const Showtimes = () => {
   const {
     data: theatreAreaParseData = [],
     error: theatreAreaParseError,
-    isParsing: theatreAreaIsParsing,
   } = useXmlParse(theatreAreaFetchData, "TheatreAreas.TheatreArea");
 
   return (
