@@ -1,9 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import { pool } from './helper/db.js'
 import dotenv from 'dotenv'
+
 import userRouter  from './Routers/userRouter.js'
-import doRouter from './Routers/doRouter.js'
 import GroupRouter from './Routers/GroupRouter.js'
 
 
@@ -14,7 +13,7 @@ const app=express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-app.use('/',doRouter)
+
 app.use('/user', userRouter)
 app.use('/group', GroupRouter)
 
