@@ -1,0 +1,33 @@
+.GeneralSettings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+
+  .btn--container {
+    width: 50%;
+    margin-left: auto;
+    display: flex;
+    gap: 1.2rem;
+
+    .submit {
+      background-color: $color6;
+      color: $color5;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background-color: $color5;
+        color: $color6;
+        border: 1px solid $color6;
+      }
+    }
+    .reset {
+      background-color: $color2;
+      color: $color5;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background-color: $color5;
+        color: $color2;
+        border: 1px solid $color2;
+      }
+    }
+  }
+}

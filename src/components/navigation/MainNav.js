@@ -5,6 +5,7 @@ import { useUser } from "../../hooks/useUser";
 import BestMatch from "../BestMatch";
 import Alternatives from "../Alternatives";
 import NavMenu from "./NavMenu";
+import RoundPhoto from "../RoundPhoto";
 
 import hamburger from "../../assets/hamburger.svg";
 import Logo from "../../assets/Logo.png";
@@ -43,6 +44,12 @@ const MainNav = ({ setSelectedMovie }) => {
     dispatch({ type: "LOGOUT" });
   };
 
+  const handleDropDown = () => {
+    const content = document.querySelector(".dropdown--content");
+
+    content.classList.toggle("active");
+  };
+
   return (
     <>
       <NavMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
@@ -66,25 +73,38 @@ const MainNav = ({ setSelectedMovie }) => {
               <img src={searchSVG} alt="search--icon" />
             </div>
           </li>
-          <li className="login--buttons">
-            {!user ? (
-              <>
-                <button className="login" onClick={() => navigate("/login")}>
-                  Login
-                </button>
-                <button
-                  className="sign--up"
-                  onClick={() => navigate("/register")}
-                >
-                  Sign up
-                </button>
-              </>
-            ) : (
-              <button className="login" onClick={handleLogOut}>
-                Logout
+          {!user && (
+            <li className="login--buttons">
+              <button className="login" onClick={() => navigate("/login")}>
+                Login
               </button>
-            )}
-          </li>
+              <button
+                className="sign--up"
+                onClick={() => navigate("/register")}
+              >
+                Sign up
+              </button>
+            </li>
+          )}
+          {user && (
+            <li className="user">
+              <span>{user.Name}</span>
+              <div className="photo--container" onClick={handleDropDown}>
+                <RoundPhoto />
+              </div>
+              <div className="dropdown--content">
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/settings")}
+                >
+                  <span>Settings</span>
+                </div>
+                <div className="dropdown--item" onClick={handleLogOut}>
+                  <span>Logout</span>
+                </div>
+              </div>
+            </li>
+          )}
         </ul>
 
         <div

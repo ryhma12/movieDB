@@ -27,6 +27,9 @@
 @import "./pages/login/LoginWindow";
 @import "./pages/Favourites";
 @import "./components/Favourite";
+@import "./pages/UserSettings/UserSettings";
+@import "./pages/UserSettings/GeneralSettings";
+@import "./pages/UserSettings/DeleteUser";
 
 * {
   padding: 0;

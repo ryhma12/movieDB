@@ -7,10 +7,10 @@ const today = new Date();
 const month = today.getMonth()+1;
     const year = today.getFullYear();
     const date = today. getDate();
-  //  const currentDate = '2014-04-04';
   const currentDate = year + "." + month + "." + date+"";
+
 const CreationDate= currentDate 
- //const currentDate = year + "-" + month + "-" + date+"";
+
 
  describe('GET Tasks',()=>{
 
@@ -45,8 +45,8 @@ expect(data).to.include.all.keys("Name","CreationDate","Email")
 })
 
 describe('POST login',()=>{
-    const Email = 'uusi@kayttaja'
-    const Password = 'uusikayttaja'
+    const Email = 'uusi@kayttdassdaaja'
+    const Password = 'uusidsadsakayttaja'
     it ('should login with valid credentials', async()=> {
         const response = await fetch(base_url + 'user/login',{
             method: 'post',
@@ -64,17 +64,19 @@ describe('POST login',()=>{
 
 describe('POST Group',()=>{
     const groupName = 'test_Group_name'
+    const AdminName = 'tama'
+    const Password = 'testi'
     it ('should create a group', async()=> {
         const response = await fetch(base_url + 'group/create',{
             method: 'post',
             headers: {
                 'Content-Type':'application/json',
             },
-            body: JSON.stringify({"groupName":groupName})
+            body: JSON.stringify({"groupName":groupName, "AdminName": AdminName,"Password": Password})
         })
         const data = await response.json()
         expect(response.status).to.equal(201,data.error)
         expect(data).to.be.an('object')
-        expect(data).to.include.all.keys("id","groupName")
+        expect(data).to.include.all.keys("groupName")
     })
 })
