@@ -1,0 +1,14 @@
+.DeleteUser {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  .delete {
+    width: 100%;
+    background-color: $color11;
+    color: $color5;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: rgba($color: $color11, $alpha: 0.8);
+    }
+  }
+}

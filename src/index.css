@@ -207,6 +207,11 @@
   flex-direction: column;
   gap: 1.8rem;
 }
+.Review .review--content__container .review--text b {
+  color: #4f87d4;
+  text-decoration: underline;
+  cursor: pointer;
+}
 .Review .review--content__container .review--text h2 {
   font-size: 2.4rem;
 }
@@ -288,15 +293,66 @@
   position: relative;
   display: flex;
   align-items: center;
+  padding: 0.2rem 0;
   z-index: 3;
 }
 .MainNav ul {
   margin: auto;
   width: 68%;
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   list-style: none;
   gap: 1.2rem;
+}
+.MainNav ul .user {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  position: relative;
+}
+.MainNav ul .user .dropdown--content {
+  min-width: 200%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  border-radius: 0.8rem;
+  bottom: -1rem;
+  right: 0;
+  overflow: hidden;
+  width: -moz-fit-content;
+  width: fit-content;
+  transform: translateY(100%);
+  background-color: #ffffff;
+  color: #121212;
+  visibility: hidden;
+}
+.MainNav ul .user .dropdown--content .dropdown--item {
+  cursor: pointer;
+  caret-color: transparent;
+  padding: 1.2rem;
+  border-bottom: 1px solid #121212;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.MainNav ul .user .dropdown--content .dropdown--item span {
+  font-size: 1.8rem;
+}
+.MainNav ul .user .dropdown--content .dropdown--item:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.MainNav ul .user .dropdown--content.active {
+  visibility: visible;
+}
+.MainNav ul .user .photo--container {
+  height: 4rem;
+  width: auto;
+}
+.MainNav ul .user .photo--container .RoundPhoto {
+  height: 100%;
+  width: auto;
+  cursor: pointer;
 }
 .MainNav ul .nav__logo--container {
   cursor: pointer;
@@ -397,10 +453,10 @@
   display: none;
 }
 .MainNav .search--results__container .BestMatch {
-  width: 30%;
+  width: 35%;
 }
 .MainNav .search--results__container .Alternatives {
-  width: 30%;
+  width: 35%;
 }
 
 .BestMatch {
@@ -1002,6 +1058,127 @@
     width: 80% !important;
   }
 }
+.UserSettings {
+  width: 100%;
+  height: 100%;
+  padding: 4.8rem 9.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.UserSettings button {
+  padding: 0.6rem 1.8rem;
+  width: 50%;
+  border-radius: 0.6rem;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer;
+}
+.UserSettings .input--container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.UserSettings .input--container input {
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  border: none;
+  background-color: #f0f0f0;
+}
+.UserSettings .input--container input:focus {
+  border: 1px solid #2e2f4b;
+  outline: none;
+}
+.UserSettings .container {
+  height: 80vh;
+  width: 70%;
+}
+.UserSettings .container h2 {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #121212;
+  padding: 1.8rem 1.2rem;
+}
+.UserSettings .container .settings--container {
+  height: 100%;
+  width: 100%;
+  color: #121212;
+  background-color: #ffffff;
+  display: flex;
+}
+.UserSettings .container .settings--container .side--nav {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  border-right: 1px solid #121212;
+}
+.UserSettings .container .settings--container .side--nav div {
+  padding: 2.4rem 1.2rem;
+  border-bottom: 1px solid #121212;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  caret-color: transparent;
+}
+.UserSettings .container .settings--container .side--nav div span {
+  font-size: 1.8rem;
+}
+.UserSettings .container .settings--container .side--nav div:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.UserSettings .container .settings--container .settings {
+  width: 70%;
+  padding: 1.8rem;
+}
+
+.GeneralSettings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.GeneralSettings .btn--container {
+  width: 50%;
+  margin-left: auto;
+  display: flex;
+  gap: 1.2rem;
+}
+.GeneralSettings .btn--container .submit {
+  background-color: #4f87d4;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.GeneralSettings .btn--container .submit:hover {
+  background-color: #ffffff;
+  color: #4f87d4;
+  border: 1px solid #4f87d4;
+}
+.GeneralSettings .btn--container .reset {
+  background-color: #121212;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.GeneralSettings .btn--container .reset:hover {
+  background-color: #ffffff;
+  color: #121212;
+  border: 1px solid #121212;
+}
+
+.DeleteUser {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.DeleteUser .delete {
+  width: 100%;
+  background-color: #b22222;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.DeleteUser .delete:hover {
+  background-color: rgba(178, 34, 34, 0.8);
+}
+
 * {
   padding: 0;
   margin: 0;
