@@ -4,7 +4,7 @@ import { useUser } from "./useUser";
 export const useDeleteAccount = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { dispatch } = useUser();
+  const { user ,dispatch } = useUser();
 
   const deleteAccount = async (email, password, id) => {
     setError(null);
@@ -13,7 +13,10 @@ export const useDeleteAccount = () => {
     try {
       const res = await fetch("http://localhost:3001/user/delete", {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": user.token
+        },
         body: JSON.stringify({
           Password: password,
           Email: email,
