@@ -1,9 +1,9 @@
 import { pool } from "../helper/db.js";
 
-const insertUser = async (name, hashedPassword, email, CreationDate) => {
+const insertUser = async (name, hashedPassword, email) => {
   return await pool.query(
-    'insert into "user" ("Name","Password","Email","CreationDate") values ($1,$2,$3,$4) returning *',
-    [name, email, hashedPassword,CreationDate]
+    'insert into "user" ("Name","Password","Email") values ($1,$2,$3) returning *',
+    [name, email, hashedPassword]
   );
 };
 
