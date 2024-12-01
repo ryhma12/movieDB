@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { useUser } from "../hooks/useUser";
 
 import Review from "./Review";
 import RoundPhoto from "./RoundPhoto";
+import ReviewForm from "./ReviewForm";
 
 const ReviewSection = ({ item }) => {
   const [reviews, setReviews] = useState([]);
+  const [formOpen, setFormOpen] = useState(false);
+  const { user } = useUser();
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -16,14 +20,28 @@ const ReviewSection = ({ item }) => {
       setReviews(data.results);
     };
     handleSearch();
-  }, []);
+  }, [item.id]);
+
+  const handleSmth = () => {
+    setFormOpen(true);
+  };
 
   return (
     <div className="ReviewSection">
-      <div className="write--a__review">
-        <RoundPhoto />
-        <input type="text" placeholder="Write a review" />
-      </div>
+      {user && (
+        <div className="write--a__review">
+          <RoundPhoto />
+          {!formOpen ? (
+            <input
+              type="text"
+              placeholder="Write a review"
+              onClick={handleSmth}
+            />
+          ) : (
+            <ReviewForm setFormOpen={setFormOpen} movieId={item.id} />
+          )}
+        </div>
+      )}
       <div className="reviews--container">
         {reviews.length > 0 &&
           reviews.map((review) => <Review key={review.id} review={review} />)}

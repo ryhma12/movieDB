@@ -24,12 +24,13 @@
 @import "./components/Dropdown";
 @import "./pages/BrowseMoviesByGenre";
 @import "./components/filter/RangeSlider";
-@import "./pages/login/LoginWindows";
+@import "./pages/login/LoginWindow";
 @import "./pages/Favourites";
 @import "./components/Favourite";
 @import "./pages/UserSettings/UserSettings";
 @import "./pages/UserSettings/GeneralSettings";
 @import "./pages/UserSettings/DeleteUser";
+@import "./components/ReviewForm";
 
 * {
   padding: 0;

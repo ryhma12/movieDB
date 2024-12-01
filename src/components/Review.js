@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import RoundPhoto from "./RoundPhoto";
 import star from "../assets/star.svg";
 
 const Review = ({ review }) => {
-  const [previewReview, setPreviewReview] = useState("");
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const date = new Date(review.created_at);
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -15,24 +15,14 @@ const Review = ({ review }) => {
     hour12: true,
   }).format(date);
 
-  useEffect(() => {
-    if (review.content.length > 300) {
-      setPreviewReview(review.content.slice(0, 300));
-    }
-  }, [review.content]);
-
-  const readMore = () => {
-    setPreviewReview("");
-  };
-
   return (
     <div className="Review">
       <div className="rating">
         {review.author_details.rating ? (
-          <div>
+          <>
             <span>{review.author_details.rating} / 10</span>
             <img src={star} alt="star" />
-          </div>
+          </>
         ) : (
           "Unrated"
         )}
@@ -48,13 +38,16 @@ const Review = ({ review }) => {
           </div>
         </div>
         <div className="review--text">
-          {previewReview ? (
+          {review.content.length > 300 && isCollapsed ? (
             <span>
-              {previewReview}
-              <b onClick={readMore}>Read more...</b>
+              {review.content.slice(0, 300)}
+              <b onClick={() => setIsCollapsed(!isCollapsed)}>Read more...</b>
             </span>
           ) : (
-            <span>{review.content}</span>
+            <span>
+              {review.content}{" "}
+              <b onClick={() => setIsCollapsed(!isCollapsed)}>See less...</b>
+            </span>
           )}
         </div>
       </div>
