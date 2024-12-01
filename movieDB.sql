@@ -15,11 +15,12 @@ CREATE TABLE IF NOT EXISTS public."user"
 
 CREATE TABLE IF NOT EXISTS public.review
 (
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
     "movieId" integer,
-    id integer NOT NULL,
-    date date NOT NULL,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     content character varying(6502),
-    stars integer NOT NULL
+    stars integer NOT NULL,
+    "userId" integer NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public."group"
@@ -32,9 +33,9 @@ CREATE TABLE IF NOT EXISTS public."group"
 CREATE TABLE IF NOT EXISTS public.chat
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
-    content character varying(1002)[] NOT NULL,
-    "accId" integer NOT NULL,
-    date date NOT NULL,
+    content character varying(1002) NOT NULL,
+    "userId" integer NOT NULL,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "groupId" integer NOT NULL,
     PRIMARY KEY (id)
 );
@@ -43,8 +44,9 @@ CREATE TABLE IF NOT EXISTS public."Favourites"
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
     "movieId" integer NOT NULL,
-    date date NOT NULL,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "movieName" character varying(255) NOT NULL,
+    "userId" integer NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -53,48 +55,40 @@ CREATE TABLE IF NOT EXISTS public."Role"
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
     "groupId" integer NOT NULL,
     "userId" integer NOT NULL,
-    admin boolean NOT NULL DEFAULT '0',
-    "user" boolean NOT NULL DEFAULT '0',
+    is_admin boolean NOT NULL DEFAULT FALSE,
+    is_user boolean NOT NULL DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
 ALTER TABLE IF EXISTS public.review
-    ADD FOREIGN KEY (id)
-    REFERENCES public."user" (id) MATCH SIMPLE
+    ADD FOREIGN KEY ("userId")
+    REFERENCES public."user" (id)
     ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
+    ON DELETE NO ACTION;
 
 ALTER TABLE IF EXISTS public.chat
     ADD FOREIGN KEY ("groupId")
-    REFERENCES public."group" (id) MATCH SIMPLE
+    REFERENCES public."group" (id)
     ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
+    ON DELETE NO ACTION;
 
 ALTER TABLE IF EXISTS public."Favourites"
-    ADD FOREIGN KEY (id)
-    REFERENCES public."user" (id) MATCH SIMPLE
+    ADD FOREIGN KEY ("userId")
+    REFERENCES public."user" (id)
     ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
+    ON DELETE NO ACTION;
 
 ALTER TABLE IF EXISTS public."Role"
     ADD FOREIGN KEY ("groupId")
-    REFERENCES public."group" (id) MATCH SIMPLE
+    REFERENCES public."group" (id)
     ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
+    ON DELETE NO ACTION;
 
 ALTER TABLE IF EXISTS public."Role"
     ADD FOREIGN KEY ("userId")
-    REFERENCES public."user" (id) MATCH SIMPLE
+    REFERENCES public."user" (id)
     ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
+    ON DELETE NO ACTION;
+
 
 END;
