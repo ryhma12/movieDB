@@ -55,7 +55,7 @@ const MainNav = ({ setSelectedMovie }) => {
       <NavMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <div className="MainNav">
         <ul>
-          <li className="nav__logo--container">
+          <li className="nav__logo--container" onClick={() => navigate("/")}>
             <img src={Logo} alt="logo--icon" />
           </li>
           <li>

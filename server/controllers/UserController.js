@@ -1,5 +1,11 @@
 import { hash, compare } from "bcrypt";
-import { insertUser, selectUserByEmail, deleteuser } from "../models/User.js";
+import {
+  insertUser,
+  selectUserByEmail,
+  deleteuser,
+  insertReview,
+  getReviews,
+} from "../models/User.js";
 import { ApiError } from "../helper/ApiError.js";
 import jwt from "jsonwebtoken";
 const { sign } = jwt;
@@ -83,6 +89,30 @@ const DeleteUser = async (req, res, next) => {
   }
 };
 
+const postReview = async (req, res, next) => {
+  try {
+    const { userId, movieId, content, stars } = req.body;
+
+    const result = await insertReview(userId, movieId, content, stars);
+    if (!result.rows[0]) return next(new Error("Something went wrong", 500));
+
+    res.status(200).json({ message: "Review submitted succesfully" });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const getReviewsForAMovie = async (req, res, next) => {
+  try {
+    const movieId = req.query.movieId;
+    const result = await getReviews(movieId);
+    console.log(result.rows);
+    return res.status(200).json({ result: result.rows });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const createUserObject = (name, id, email, CreationDate, token = undefined) => {
   return {
     Name: name,
@@ -93,4 +123,11 @@ const createUserObject = (name, id, email, CreationDate, token = undefined) => {
   };
 };
 
-export { postRegistration, postLogin, DeleteUser };
+export {
+  postRegistration,
+  postLogin,
+  DeleteUser,
+  postReview,
+  getReviews,
+  getReviewsForAMovie,
+};
