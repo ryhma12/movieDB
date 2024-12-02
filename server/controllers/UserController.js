@@ -48,7 +48,11 @@ const postLogin = async (req, res, next) => {
     const match = await compare(req.body.Password, user.Password);
     if (!match) return next(new Error(invalid_message, 401));
 
-    const token = sign(user.Email, process.env.JWT_SECRET_KEY);
+    const token = sign(
+      { id: user.id, email: user.Email },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "1h" }
+    );
 
     return res
       .status(200)
@@ -68,10 +72,13 @@ const postLogin = async (req, res, next) => {
 
 const DeleteUser = async (req, res, next) => {
   try {
-    const result = await deleteuser(req.body.email);
+    const result = await deleteuser(req.user.id);
     const user = result.rows[0];
 
-    return res.status(200).json({ message: "Account deleted" });
+    return res.status(200).json({
+      user: user,
+      message: "Account deleted",
+    });
   } catch (error) {
     return next(error);
   }
