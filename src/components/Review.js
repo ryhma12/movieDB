@@ -5,7 +5,12 @@ import star from "../assets/star.svg";
 
 const Review = ({ review }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const date = new Date(review.created_at);
+
+  const rating = review.author_details?.rating || review.stars || "Unrated";
+  const author = review.author || review.userId;
+  const imgPath = review.author_details?.avatar_path || "";
+
+  const date = new Date(review.created_at || review.date);
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
@@ -18,9 +23,9 @@ const Review = ({ review }) => {
   return (
     <div className="Review">
       <div className="rating">
-        {review.author_details.rating ? (
+        {rating !== "Unrated" ? (
           <>
-            <span>{review.author_details.rating} / 10</span>
+            <span>{rating} / 10</span>
             <img src={star} alt="star" />
           </>
         ) : (
@@ -30,8 +35,8 @@ const Review = ({ review }) => {
       <div className="review--content__container">
         <div className="review--heading">
           <div className="person--container">
-            <RoundPhoto path={review.author_details.avatar_path} />
-            <span className="name">{review.author}</span>
+            <RoundPhoto path={imgPath} />
+            <span className="name">{author}</span>
           </div>
           <div className="created--at__container">
             <span>{formattedDate}</span>
@@ -46,7 +51,9 @@ const Review = ({ review }) => {
           ) : (
             <span>
               {review.content}{" "}
-              <b onClick={() => setIsCollapsed(!isCollapsed)}>See less...</b>
+              {review.content.length > 300 && (
+                <b onClick={() => setIsCollapsed(!isCollapsed)}>See less...</b>
+              )}
             </span>
           )}
         </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../hooks/useUser";
+import { useReview } from "../hooks/useReview";
 
 import Review from "./Review";
 import RoundPhoto from "./RoundPhoto";
@@ -17,7 +18,18 @@ const ReviewSection = ({ item }) => {
       );
       const data = await res.json();
 
-      setReviews(data.results);
+      const dbRes = await fetch(
+        `http://localhost:3001/user/review?movieId=${item.id}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (!dbRes.ok) throw new Error("Something went wrong", 500);
+      const dbData = await dbRes.json();
+
+      setReviews([...data.results, ...dbData.result]);
+      console.log(reviews);
     };
     handleSearch();
   }, [item.id]);
