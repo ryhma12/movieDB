@@ -76,7 +76,6 @@ const DeleteUser = async (req, res, next) => {
     const user = result.rows[0];
 
     return res.status(200).json({
-      user: user,
       message: "Account deleted",
     });
   } catch (error) {
