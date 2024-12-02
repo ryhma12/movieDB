@@ -1,6 +1,6 @@
 import { pool } from '../helper/db.js'
 
-const selectAllFavourites = async (userId) => {
+const selectUserFavourites = async (userId) => {
     return await pool.query('SELECT * FROM public."Favourites" WHERE "userId" = $1', [userId])
 }
 
@@ -12,4 +12,4 @@ const removeFavourite = async (id, userId) => {
     return await pool.query('DELETE FROM public."Favourites" WHERE id = $1 AND "userId" = $2', [id, userId]);
 };
 
-export { selectAllFavourites, insertFavourite, removeFavourite }
+export { selectUserFavourites, insertFavourite, removeFavourite }
