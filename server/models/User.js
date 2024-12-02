@@ -25,4 +25,10 @@ const insertReview = async (userId, movieId, content, stars) => {
   );
 };
 
-export { insertUser, selectUserByEmail, deleteuser, insertReview };
+const getReviews = async (movieId) => {
+  return await pool.query('select * from "review" where "movieId"=$1', [
+    movieId,
+  ]);
+};
+
+export { insertUser, selectUserByEmail, deleteuser, insertReview, getReviews };

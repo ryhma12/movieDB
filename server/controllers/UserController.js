@@ -4,6 +4,7 @@ import {
   selectUserByEmail,
   deleteuser,
   insertReview,
+  getReviews,
 } from "../models/User.js";
 import { ApiError } from "../helper/ApiError.js";
 import jwt from "jsonwebtoken";
@@ -95,6 +96,17 @@ const postReview = async (req, res, next) => {
   }
 };
 
+const getReviewsForAMovie = async (req, res, next) => {
+  try {
+    const movieId = req.query.movieId;
+    const result = await getReviews(movieId);
+    console.log(result.rows);
+    return res.status(200).json({ result: result.rows });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const createUserObject = (name, id, email, CreationDate, token = undefined) => {
   return {
     Name: name,
@@ -105,4 +117,11 @@ const createUserObject = (name, id, email, CreationDate, token = undefined) => {
   };
 };
 
-export { postRegistration, postLogin, DeleteUser, postReview };
+export {
+  postRegistration,
+  postLogin,
+  DeleteUser,
+  postReview,
+  getReviews,
+  getReviewsForAMovie,
+};
