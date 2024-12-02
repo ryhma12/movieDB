@@ -4,7 +4,7 @@ import {
   postLogin,
   DeleteUser,
 } from "../controllers/UserController.js";
-import { getUserFavourites } from "../controllers/favouritesController.js";
+import { getUserFavourites } from "../controllers/FavouritesController.js";
 import { auth } from "../helper/Auth.js";
 
 const router = Router();
