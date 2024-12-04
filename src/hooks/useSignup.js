@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useUser } from "./useUser";
 import { useLogin } from "./useLogin";
 
 export const useSignup = () => {
