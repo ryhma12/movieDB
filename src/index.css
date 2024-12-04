@@ -344,7 +344,7 @@
   gap: 1.4rem;
   position: relative;
 }
-.MainNav ul .user .dropdown--content {
+.MainNav ul .user .dropdown {
   min-width: 200%;
   display: flex;
   flex-direction: column;
@@ -358,24 +358,20 @@
   transform: translateY(105%);
   background-color: #ffffff;
   color: #121212;
-  visibility: hidden;
 }
-.MainNav ul .user .dropdown--content .dropdown--item {
+.MainNav ul .user .dropdown .dropdown--item {
   cursor: pointer;
   caret-color: transparent;
   padding: 1.2rem;
   border-bottom: 1px solid #121212;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
-.MainNav ul .user .dropdown--content .dropdown--item span {
+.MainNav ul .user .dropdown .dropdown--item span {
   font-size: 1.8rem;
 }
-.MainNav ul .user .dropdown--content .dropdown--item:hover {
+.MainNav ul .user .dropdown .dropdown--item:hover {
   background-color: #121212;
   color: #ffffff;
-}
-.MainNav ul .user .dropdown--content.active {
-  visibility: visible;
 }
 .MainNav ul .user .photo--container {
   height: 4rem;
@@ -1321,6 +1317,145 @@
     width: 80% !important;
   }
 }
+.GroupPage {
+  width: 100%;
+  height: 94vh;
+  background-color: white;
+  position: relative;
+}
+.GroupPage .add--user {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2.4rem;
+  border-radius: 1.2rem;
+  background-color: black;
+}
+.GroupPage .add--user input {
+  height: 10%;
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1.8rem;
+}
+.GroupPage .add--user .people--container {
+  height: 90%;
+  overflow-y: auto;
+}
+.GroupPage .group--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5%;
+  width: 100%;
+  padding: 1.2rem 1.2rem 1.2rem 0;
+  background-color: #1f1f1f;
+}
+.GroupPage .group--header .Dropdown {
+  width: 20%;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+.GroupPage .group--header h2 {
+  color: #ffffff;
+}
+.GroupPage .group--header .btn--container {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+.GroupPage .group--header .btn--container button {
+  padding: 0.6rem 1.8rem;
+  width: 40%;
+  border-radius: 0.6rem;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer;
+  background-color: #333;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.GroupPage .group--header .btn--container button:hover {
+  background-color: #ffffff;
+  color: #333;
+}
+.GroupPage .group--content {
+  display: flex;
+  height: 95%;
+  width: 100%;
+  background-color: blue;
+}
+.GroupPage .group--content .members--container {
+  background-color: #121212;
+  width: 20%;
+  overflow-y: auto;
+}
+.GroupPage .group--content .content--container {
+  background-color: #333;
+  width: 80%;
+  padding: 0 6.4rem;
+  display: flex;
+  flex-direction: column;
+}
+.GroupPage .group--content .content--container .user--input {
+  width: 100%;
+  height: 10%;
+}
+.GroupPage .group--content .content--container .user--input input {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  border: none;
+  background-color: #f0f0f0;
+}
+.GroupPage .group--content .content--container .user--input input:focus {
+  outline: none;
+}
+.GroupPage .group--content .content--container .content {
+  height: 90%;
+}
+.GroupPage .group--content .content--container .content .message {
+  display: flex;
+  gap: 1.8rem;
+  color: #ffffff;
+}
+.GroupPage .group--content .content--container .content .message .sender {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.GroupPage .group--content .content--container .content .message .sender .time {
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.PersonCard {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  height: 6.4rem;
+  padding: 3.6rem 0.6rem;
+  background-color: #121212;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in;
+}
+.PersonCard .RoundPhoto {
+  height: 5.4rem;
+  width: 5.4rem;
+}
+.PersonCard:hover {
+  background-color: #333;
+}
+
 * {
   padding: 0;
   margin: 0;

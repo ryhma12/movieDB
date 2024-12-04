@@ -14,6 +14,7 @@ const MainNav = ({ setSelectedMovie }) => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { user, dispatch } = useUser();
 
@@ -41,12 +42,6 @@ const MainNav = ({ setSelectedMovie }) => {
 
   const handleLogOut = () => {
     dispatch({ type: "LOGOUT" });
-  };
-
-  const handleDropDown = () => {
-    const content = document.querySelector(".dropdown--content");
-
-    content.classList.toggle("active");
   };
 
   return (
@@ -84,6 +79,12 @@ const MainNav = ({ setSelectedMovie }) => {
                 >
                   <span>Browse Genres</span>
                 </div>
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/groups")}
+                >
+                  <span>Groups</span>
+                </div>
               </div>
             )}
           </li>
@@ -109,20 +110,25 @@ const MainNav = ({ setSelectedMovie }) => {
           {user && (
             <li className="user">
               <span>{user.Name}</span>
-              <div className="photo--container" onClick={handleDropDown}>
+              <div
+                className="photo--container"
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+              >
                 <RoundPhoto />
               </div>
-              <div className="dropdown--content">
-                <div
-                  className="dropdown--item"
-                  onClick={() => navigate("/settings")}
-                >
-                  <span>Settings</span>
+              {userMenuOpen && (
+                <div className="dropdown">
+                  <div
+                    className="dropdown--item"
+                    onClick={() => navigate("/settings")}
+                  >
+                    <span>Settings</span>
+                  </div>
+                  <div className="dropdown--item" onClick={handleLogOut}>
+                    <span>Logout</span>
+                  </div>
                 </div>
-                <div className="dropdown--item" onClick={handleLogOut}>
-                  <span>Logout</span>
-                </div>
-              </div>
+              )}
             </li>
           )}
         </ul>
