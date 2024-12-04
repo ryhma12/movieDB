@@ -1,14 +1,16 @@
 import chevLeft from "../assets/chevLeft.svg";
 import { useOutsideClick } from "../hooks/useOutsideClick";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 
 const Dropdown = ({ options, handleSort, dropdownName }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
 
-  useOutsideClick(ref, () => {
+  const handleOutsideClick = useCallback(() => {
     if (isOpen) setIsOpen(false);
-  });
+  }, [isOpen]);
+
+  useOutsideClick([ref], handleOutsideClick);
 
   const handleDropDown = () => {
     setIsOpen((prev) => !prev);
