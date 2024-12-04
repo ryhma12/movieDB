@@ -1,0 +1,19 @@
+.PersonCard {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  height: 6.4rem;
+  padding: 3.6rem 0.6rem;
+  background-color: $color2;
+  color: $color5;
+  border-bottom: 1px solid rgba($color: $color5, $alpha: 0.3);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in;
+  .RoundPhoto {
+    height: 5.4rem;
+    width: 5.4rem;
+  }
+  &:hover {
+    background-color: $color9;
+  }
+}

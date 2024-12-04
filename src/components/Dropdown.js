@@ -10,7 +10,7 @@ const Dropdown = ({ options, handleSort, dropdownName }) => {
 
   return (
     <div className="Dropdown" onClick={handleDropDown}>
-      <h2>{dropdownName}</h2>
+      <h2>{dropdownName ? dropdownName : options[0]}</h2>
       <img src={chevLeft} alt="chev" className="dropdown--arrow" />
       <div className="dropdown--content">
         {options &&

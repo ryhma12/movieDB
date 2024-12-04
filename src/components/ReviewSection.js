@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../hooks/useUser";
-import { useReview } from "../hooks/useReview";
 
 import Review from "./Review";
 import RoundPhoto from "./RoundPhoto";
@@ -29,7 +28,6 @@ const ReviewSection = ({ item }) => {
       const dbData = await dbRes.json();
 
       setReviews([...data.results, ...dbData.result]);
-      console.log(reviews);
     };
     handleSearch();
   }, [item.id]);

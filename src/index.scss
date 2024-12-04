@@ -30,7 +30,8 @@
 @import "./pages/UserSettings/GeneralSettings";
 @import "./pages/UserSettings/DeleteUser";
 @import "./components/ReviewForm";
-
+@import "./pages/group/GroupPage";
+@import "./components/groups/PersonCard";
 * {
   padding: 0;
   margin: 0;

@@ -4,7 +4,7 @@ import Loading from "../../components/utility/Loading";
 
 const Login = ({ email, setEmail, password, setPassword, closeWindow }) => {
   const navigate = useNavigate();
-  const { login, isLoading, error } = useLogin();
+  const { login, isLoading } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
