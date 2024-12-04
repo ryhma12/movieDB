@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 import BestMatch from "../BestMatch";
 import Alternatives from "../Alternatives";
@@ -17,6 +18,20 @@ const MainNav = ({ setSelectedMovie }) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { user, dispatch } = useUser();
+  const menuRef = useRef(null);
+  const userMenuRef = useRef(null);
+
+  const handleOutsideClick = useCallback(() => {
+    console.log(menuRef.current, userMenuRef.current);
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
+    if (userMenuOpen) {
+      setUserMenuOpen(false);
+    }
+  }, [menuOpen, userMenuOpen]);
+
+  useOutsideClick([menuRef, userMenuRef], handleOutsideClick);
 
   const handleSearch = async (e) => {
     setText(e.target.value);
@@ -51,7 +66,7 @@ const MainNav = ({ setSelectedMovie }) => {
           <li className="nav__logo--container" onClick={() => navigate("/")}>
             <img src={Logo} alt="logo--icon" />
           </li>
-          <li className="menu">
+          <li className="menu" ref={menuRef}>
             <div
               className="menu__btn nav__btn"
               onClick={(e) => setMenuOpen(!menuOpen)}
@@ -108,7 +123,7 @@ const MainNav = ({ setSelectedMovie }) => {
             </li>
           )}
           {user && (
-            <li className="user">
+            <li className="user" ref={userMenuRef}>
               <span>{user.Name}</span>
               <div
                 className="photo--container"
