@@ -4,7 +4,6 @@ import { useUser } from "../../hooks/useUser";
 
 import BestMatch from "../BestMatch";
 import Alternatives from "../Alternatives";
-import NavMenu from "./NavMenu";
 import RoundPhoto from "../RoundPhoto";
 
 import hamburger from "../../assets/hamburger.svg";
@@ -52,13 +51,12 @@ const MainNav = ({ setSelectedMovie }) => {
 
   return (
     <>
-      <NavMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <div className="MainNav">
         <ul>
           <li className="nav__logo--container" onClick={() => navigate("/")}>
             <img src={Logo} alt="logo--icon" />
           </li>
-          <li>
+          <li className="menu">
             <div
               className="menu__btn nav__btn"
               onClick={(e) => setMenuOpen(!menuOpen)}
@@ -66,6 +64,28 @@ const MainNav = ({ setSelectedMovie }) => {
               <img src={hamburger} alt="menu--icon" />
               <span>Menu</span>
             </div>
+            {menuOpen && (
+              <div className="dropdown">
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/showtimes")}
+                >
+                  <span>Showtimes</span>
+                </div>
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/favourites")}
+                >
+                  <span>Favourites</span>
+                </div>
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/browse")}
+                >
+                  <span>Browse Genres</span>
+                </div>
+              </div>
+            )}
           </li>
           <li className="nav__searchbar">
             <input type="text" value={text} onChange={(e) => handleSearch(e)} />
