@@ -39,5 +39,13 @@ const RefuseUser = async (req,res,next) => {
     }
 }
 
+const sendUserMessage = async (req,res,next) => {
+    try{
+        const result =await sendUserMessageToGroup(req.body.name,req.body.groupName)
+        return res.status(200).json({message: "Your message to group "+result.rows[0].Name+ " has been sent"})
+    }catch(error){
+        return next (error)
+    }
+}
 
-export { postcreateGroup,AcceptUser,AskToJoin,RefuseUser }
+export { postcreateGroup,AcceptUser,AskToJoin,RefuseUser,sendUserMessage }
