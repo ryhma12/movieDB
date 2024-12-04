@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useUser } from "./useUser";
+import { useLogin } from "./useLogin";
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { dispatch } = useUser();
+  const { login } = useLogin();
 
   const signup = async (name, email, password) => {
     setError(null);
@@ -25,12 +25,10 @@ export const useSignup = () => {
       if (!res) throw new Error("Could not complete signup");
 
       const data = await res.json();
-      console.log(data);
       if (data.error) throw new Error(data.error);
 
-      dispatch({ type: "LOGIN", payload: data });
+      login(email, password);
 
-      console.log(data);
       setError(null);
     } catch (err) {
       setError(err);
