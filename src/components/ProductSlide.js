@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-
+import useUserFavourites from "../hooks/useUserFavourites";
 import ProductCard from "./ProductCard";
 import star from "../assets/star.svg";
+import { useUser } from "../hooks/useUser";
 
 const ProductSlide = ({ item, directors }) => {
   const [visibleDirectors, setVisibleDirectors] = useState([]);
   const [overflowingDirectors, setOverflowingDirectors] = useState(false);
+  const { user } = useUser();
+  const { addUserFavourite } = useUserFavourites();
 
   useEffect(() => {
     if (directors.length > 4) {
@@ -18,11 +21,23 @@ const ProductSlide = ({ item, directors }) => {
     return () => {};
   }, [directors]);
 
+  const favouritePress = (e) => {
+    e.preventDefault();
+    addUserFavourite(item.id, item.original_title);
+  };
+
   return (
     <div className="ProductSlide">
       <ProductCard item={item} interActive={false} />
       <div className="text--container">
-        <h2>{item.original_title}</h2>
+        <div>
+          <h2>{item.original_title}</h2>
+          {user && <button
+            onClick={(e) => favouritePress(e)}
+          >
+            liek
+          </button>}
+        </div>
         <p>{item.overview}</p>
         <div className="info--container">
           {visibleDirectors.length > 0

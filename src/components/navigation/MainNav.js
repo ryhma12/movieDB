@@ -22,7 +22,6 @@ const MainNav = ({ setSelectedMovie }) => {
   const userMenuRef = useRef(null);
 
   const handleOutsideClick = useCallback(() => {
-    console.log(menuRef.current, userMenuRef.current);
     if (menuOpen) {
       setMenuOpen(false);
     }

@@ -8,16 +8,14 @@ const useUserFavourites = () => {
   const { user } = useUser();
 
   useEffect(() => {
-    if (!user || !user.token) {
-      setError("No user.token found");
-      setIsLoading(false);
-      return;
-    }
-
-    setIsLoading(true);
-    setError(null);
-
     const fetchFavourites = async () => {
+      if (!user || !user.token) {
+        setError("No user.token found");
+        setIsLoading(false);
+        return;
+      }
+      setIsLoading(true);
+      setError(null);
       try {
         const res = await fetch("http://localhost:3001/user/favourites", {
           method: "GET",
@@ -41,7 +39,35 @@ const useUserFavourites = () => {
     fetchFavourites();
   }, [user]);
 
-  return { data, error, isLoading };
+  const addUserFavourite = async (movieId, movieName) => {
+    if (!user || !user.token) {
+      setError("No user.token found");
+      return;
+    }
+    try {
+      const res = await fetch("http://localhost:3001/user/favourites/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.token,
+        },
+        body: JSON.stringify({
+          movieId: movieId,
+          movieName: movieName,
+        }),
+      });
+
+      if (!res.ok) throw new Error(res.status);
+      const resData = await res.json();
+      // adds it to the data
+      setData((prevData) => [...prevData, resData.favourite]);
+    } catch (error) {
+      console.log(error);
+      setError("Failed to add favourite");
+    }
+  };
+
+  return { data, error, isLoading, addUserFavourite };
 };
 
 export default useUserFavourites;

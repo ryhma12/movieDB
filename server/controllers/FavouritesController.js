@@ -1,4 +1,4 @@
-import { selectUserFavourites } from "../models/Favourites.js";
+import { insertUserFavourite, selectUserFavourites } from "../models/Favourites.js";
 
 const getUserFavourites = async (req, res, next) => {
   try {
@@ -11,4 +11,19 @@ const getUserFavourites = async (req, res, next) => {
   }
 };
 
-export { getUserFavourites };
+const postUserFavourite = async (req, res, next) => {
+  try {
+    const result = await insertUserFavourite(
+      req.body.movieId, 
+      req.body.movieName, 
+      req.user.id
+    );
+    return res.status(201).json({
+      message: `${result.movieName} added to favourites`,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export { postUserFavourite, getUserFavourites };
