@@ -32,4 +32,17 @@ const RefuseUserToGroup = async (name, groupName) => {
   );
 };
 
-export { CreateGroup, AskToJoinGroup, AcceptUserToGroup, RefuseUserToGroup };
+const GetGroupsForUser = async (userId) => {
+  return await pool.query(
+    'SELECT "group".id, "group"."groupName" FROM "group" JOIN "Role" ON "group".id = "Role"."groupId" WHERE "Role"."userId" = $1;',
+    [userId]
+  );
+};
+
+export {
+  CreateGroup,
+  AskToJoinGroup,
+  AcceptUserToGroup,
+  RefuseUserToGroup,
+  GetGroupsForUser,
+};
