@@ -8,8 +8,8 @@ const insertUserFavourite = async (movieId, movieName, userId) => {
     return await pool.query('INSERT INTO public."Favourites" ("movieId", "movieName", "userId") VALUES ($1, $2, $3) returning *', [movieId, movieName, userId]);
 }
 
-const removeFavourite = async (id, userId) => {
-    return await pool.query('DELETE FROM public."Favourites" WHERE id = $1 AND "userId" = $2', [id, userId]);
+const removeUserFavourite = async (movieId, userId) => {
+    return await pool.query('DELETE FROM public."Favourites" WHERE "movieId" = $1 AND "userId" = $2 returning *', [movieId, userId]);
 };
 
-export { selectUserFavourites, insertUserFavourite, removeFavourite }
+export { selectUserFavourites, insertUserFavourite, removeUserFavourite }

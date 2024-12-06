@@ -1,4 +1,4 @@
-import { insertUserFavourite, selectUserFavourites } from "../models/Favourites.js";
+import { insertUserFavourite, selectUserFavourites, removeUserFavourite } from "../models/Favourites.js";
 
 const getUserFavourites = async (req, res, next) => {
   try {
@@ -19,11 +19,27 @@ const postUserFavourite = async (req, res, next) => {
       req.user.id
     );
     return res.status(201).json({
-      message: `${result.movieName} added to favourites`,
+      favourite: result.rows[0],
+      message: `${result.rows[0].movieName} added to user ${req.user.email} favourites`,
     });
   } catch (error) {
     return next(error);
   }
 };
 
-export { postUserFavourite, getUserFavourites };
+const deleteUserFavourite = async (req, res, next) => {
+  try {
+    const result = await removeUserFavourite(
+      req.body.movieId, 
+      req.user.id
+    );
+    return res.status(200).json({
+      favourite: result.rows[0],
+      message: `${result.rows[0].movieName} removed from user ${req.user.email} favourites`,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export { postUserFavourite, getUserFavourites, deleteUserFavourite };

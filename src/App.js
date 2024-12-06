@@ -25,7 +25,6 @@ function App() {
     } else {
       document.body.style.overflow = "";
     }
-    console.log(user);
     return () => {
       document.body.style.overflow = "";
     };

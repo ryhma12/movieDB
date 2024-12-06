@@ -17,7 +17,7 @@ const useUserFavourites = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const res = await fetch("http://localhost:3001/user/favourites", {
+        const res = await fetch("http://localhost:3001/user/favourites/get", {
           method: "GET",
           headers: {
             Authorization: user.token,
@@ -25,13 +25,13 @@ const useUserFavourites = () => {
         });
         if (!res.ok) throw new Error(res.status);
         const resData = await res.json();
-
+  
         if (Array.isArray(resData.favourites)) {
           setData(resData.favourites);
         }
       } catch (error) {
         console.log(error);
-        setError("Failed to fetch favourites");
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -44,6 +44,8 @@ const useUserFavourites = () => {
       setError("No user.token found");
       return;
     }
+    setIsLoading(true);
+    setError(null);
     try {
       const res = await fetch("http://localhost:3001/user/favourites/post", {
         method: "POST",
@@ -59,15 +61,52 @@ const useUserFavourites = () => {
 
       if (!res.ok) throw new Error(res.status);
       const resData = await res.json();
-      // adds it to the data
-      setData((prevData) => [...prevData, resData.favourite]);
+      console.log(resData);
+
+      setData((prevFavourites) => [...prevFavourites, resData.favourite]);
     } catch (error) {
       console.log(error);
-      setError("Failed to add favourite");
+      setError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { data, error, isLoading, addUserFavourite };
+  const removeUserFavourite = async (movieId) => {
+    if (!user || !user.token) {
+      setError("No user.token found");
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("http://localhost:3001/user/favourites/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.token,
+        },
+        body: JSON.stringify({
+          movieId: movieId,
+        }),
+      });
+
+      if (!res.ok) throw new Error(res.status);
+      const resData = await res.json();
+      if (resData.error) throw new Error(resData.error);
+      console.log(resData);
+
+      setData((prevFavourites) => prevFavourites.filter((fav) => fav.movieId !== movieId));
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { data, error, isLoading, addUserFavourite, removeUserFavourite };
 };
 
 export default useUserFavourites;
