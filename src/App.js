@@ -12,6 +12,7 @@ import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
 import LoginWindow from "./pages/login/LoginWindow";
 import UserSettings from "./pages/UserSettings/UserSettings";
 import HomePage from "./pages/HomePage";
+import GroupPage from "./pages/group/GroupPage";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(false);
@@ -24,7 +25,6 @@ function App() {
     } else {
       document.body.style.overflow = "";
     }
-    console.log(user);
     return () => {
       document.body.style.overflow = "";
     };
@@ -51,6 +51,7 @@ function App() {
               </>
             }
           />
+          <Route path="/groups" element={<GroupPage />} />
           <Route path="/" element={<HomePage />} />
           <Route
             path="/settings"

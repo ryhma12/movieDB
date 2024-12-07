@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import ProductCard from "./ProductCard";
 import star from "../assets/star.svg";
 
@@ -22,7 +21,9 @@ const ProductSlide = ({ item, directors }) => {
     <div className="ProductSlide">
       <ProductCard item={item} interActive={false} />
       <div className="text--container">
-        <h2>{item.original_title}</h2>
+        <div>
+          <h2>{item.original_title}</h2>
+        </div>
         <p>{item.overview}</p>
         <div className="info--container">
           {visibleDirectors.length > 0

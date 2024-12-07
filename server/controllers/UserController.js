@@ -55,7 +55,11 @@ const postLogin = async (req, res, next) => {
     const match = await compare(req.body.Password, user.Password);
     if (!match) return next(new Error(invalid_message, 401));
 
-    const token = sign(user.Email, process.env.JWT_SECRET_KEY);
+    const token = sign(
+      { id: user.id, email: user.Email },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "1h" }
+    );
 
     return res
       .status(200)

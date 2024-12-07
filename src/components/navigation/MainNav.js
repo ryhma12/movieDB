@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 import BestMatch from "../BestMatch";
 import Alternatives from "../Alternatives";
-import NavMenu from "./NavMenu";
 import RoundPhoto from "../RoundPhoto";
 
 import hamburger from "../../assets/hamburger.svg";
@@ -15,8 +15,22 @@ const MainNav = ({ setSelectedMovie }) => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { user, dispatch } = useUser();
+  const menuRef = useRef(null);
+  const userMenuRef = useRef(null);
+
+  const handleOutsideClick = useCallback(() => {
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
+    if (userMenuOpen) {
+      setUserMenuOpen(false);
+    }
+  }, [menuOpen, userMenuOpen]);
+
+  useOutsideClick([menuRef, userMenuRef], handleOutsideClick);
 
   const handleSearch = async (e) => {
     setText(e.target.value);
@@ -44,21 +58,14 @@ const MainNav = ({ setSelectedMovie }) => {
     dispatch({ type: "LOGOUT" });
   };
 
-  const handleDropDown = () => {
-    const content = document.querySelector(".dropdown--content");
-
-    content.classList.toggle("active");
-  };
-
   return (
     <>
-      <NavMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <div className="MainNav">
         <ul>
           <li className="nav__logo--container" onClick={() => navigate("/")}>
             <img src={Logo} alt="logo--icon" />
           </li>
-          <li>
+          <li className="menu" ref={menuRef}>
             <div
               className="menu__btn nav__btn"
               onClick={(e) => setMenuOpen(!menuOpen)}
@@ -66,6 +73,34 @@ const MainNav = ({ setSelectedMovie }) => {
               <img src={hamburger} alt="menu--icon" />
               <span>Menu</span>
             </div>
+            {menuOpen && (
+              <div className="dropdown">
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/showtimes")}
+                >
+                  <span>Showtimes</span>
+                </div>
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/favourites")}
+                >
+                  <span>Favourites</span>
+                </div>
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/browse")}
+                >
+                  <span>Browse Genres</span>
+                </div>
+                <div
+                  className="dropdown--item"
+                  onClick={() => navigate("/groups")}
+                >
+                  <span>Groups</span>
+                </div>
+              </div>
+            )}
           </li>
           <li className="nav__searchbar">
             <input type="text" value={text} onChange={(e) => handleSearch(e)} />
@@ -87,22 +122,27 @@ const MainNav = ({ setSelectedMovie }) => {
             </li>
           )}
           {user && (
-            <li className="user">
+            <li className="user" ref={userMenuRef}>
               <span>{user.Name}</span>
-              <div className="photo--container" onClick={handleDropDown}>
+              <div
+                className="photo--container"
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+              >
                 <RoundPhoto />
               </div>
-              <div className="dropdown--content">
-                <div
-                  className="dropdown--item"
-                  onClick={() => navigate("/settings")}
-                >
-                  <span>Settings</span>
+              {userMenuOpen && (
+                <div className="dropdown">
+                  <div
+                    className="dropdown--item"
+                    onClick={() => navigate("/settings")}
+                  >
+                    <span>Settings</span>
+                  </div>
+                  <div className="dropdown--item" onClick={handleLogOut}>
+                    <span>Logout</span>
+                  </div>
                 </div>
-                <div className="dropdown--item" onClick={handleLogOut}>
-                  <span>Logout</span>
-                </div>
-              </div>
+              )}
             </li>
           )}
         </ul>

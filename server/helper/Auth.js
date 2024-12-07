@@ -4,14 +4,14 @@ const authorizationRequired = "Authorization required";
 const invalidCredentials = "Invalid credentials";
 
 const auth = (req, res, next) => {
-  console.log(req.headers);
   if (!req.headers.authorization) {
     res.statusMessage = authorizationRequired;
     res.status(401).json({ message: authorizationRequired });
   } else {
     try {
       const token = req.headers.authorization;
-      verify(token, process.env.JWT_SECRET_KEY);
+      const { id, email } = verify(token, process.env.JWT_SECRET_KEY);
+      req.user = { id, email };
       next();
     } catch (error) {
       res.statusMessage = invalidCredentials;
