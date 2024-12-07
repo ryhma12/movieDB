@@ -1,5 +1,9 @@
 import { expect, should } from "chai";
 import { response } from "express";
+import { testDelete } from "./helper/test.js";
+import { auth } from "./helper/Auth.js";
+import jwt from 'jsonwebtoken'
+const { sign } = jwt
 //import  CurrentDate  from '../helper/CurrentDate.js'
 let base_url='http://localhost:3001/'
 
@@ -12,23 +16,10 @@ const month = today.getMonth()+1;
 const CreationDate= currentDate 
 
 
- describe('GET Tasks',()=>{
-
-    it('should get all tasks',async()=>{
-        const response=await fetch('http://localhost:3001/')
-        const data = await response.json()
-
-        expect(response.status).to.equal(200)
-        expect(data).to.be.an('array').that.is.not.empty
-        expect(data[0]).to.include.all.keys("Email","CreationDate")
-
-    })
-})
-
 describe('POST register',()=>{
-    const Name='tausdasdsain'
-    const Password = 'uusidsadsakayttaja'
-    const Email='uusi@kayttdassdaaja'
+    const Name='tausinuusiukko'
+    const Password = 'uusikayttaja222'
+    const Email='uusi@kayttaja822'
     it('should register with valid Name,Password,CreationDate and Email',async()=>{
         const response = await fetch(base_url+'user/register',{
             method: 'post',
@@ -42,11 +33,29 @@ expect(response.status).to.equal(201,data.error)
 expect(data).to.be.an('object')
 expect(data).to.include.all.keys("Name","CreationDate","Email")
 })
+
+it ('should not register with too short password',async()=>{
+    const email='mun@oma'
+    const password='eiimi'
+    const name='eitämätoimi'
+    const response = await fetch(base_url+'user/register',{
+        method: 'post',
+        headers:{
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({"Name":name,"Password":password,"Email":email})
+    })
+    const data = await response.json()
+    expect(response.status).to.equal(400)
+    expect(data).to.be.an('object')
+    expect(data).to.include.all.keys('error')
+})
+
 })
 
 describe('POST login',()=>{
-    const Email = 'uusi@kayttdassdaaja'
-    const Password = 'uusidsadsakayttaja'
+    const Email = 'uusi@kayttaja82'
+    const Password = 'uusikayttaja2'
     it ('should login with valid credentials', async()=> {
         const response = await fetch(base_url + 'user/login',{
             method: 'post',
@@ -60,19 +69,34 @@ describe('POST login',()=>{
         expect(data).to.be.an('object')
         expect(data).to.include.all.keys("id","Email")
     })
+
+    it ('should not login with invalid credentials',async()=>{
+        const email='mun@oma'
+        const password='eitoimi'
+        const response = await fetch(base_url+'user/login',{
+            method: 'post',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({"Email":email,"Password":password})
+        })
+        const data = await response.json()
+        expect(response.status).to.equal(401)
+        expect(data).to.be.an('object')
+        expect(data).to.include.all.keys('error')
+    })
 })
 
 describe('POST Group',()=>{
-    const groupName = 'test_Group_name'
-    const AdminName = 'tama'
-    const Password = 'testi'
+    const groupName = 'test_Group_name1'
+     const Email = 'uusi@kayttaja82'
     it ('should create a group', async()=> {
         const response = await fetch(base_url + 'group/create',{
             method: 'post',
             headers: {
                 'Content-Type':'application/json',
             },
-            body: JSON.stringify({"groupName":groupName, "AdminName": AdminName,"Password": Password})
+            body: JSON.stringify({"groupName":groupName, "Email":Email})
         })
         const data = await response.json()
         expect(response.status).to.equal(201,data.error)
@@ -80,3 +104,46 @@ describe('POST Group',()=>{
         expect(data).to.include.all.keys("groupName")
     })
 })
+
+describe('GET reviews',()=>{
+    const movieId = '1'
+    it ('should get reviews', async()=> {
+        const response = await fetch(base_url + 'user/review?movieId='+movieId,{
+            method: 'get',
+            headers: {
+                'Content-Type':'application/json',
+            },
+        //    body: JSON.stringify({"movieId":movieId})
+        })
+        const data = await response.json()
+        expect(response.status).to.equal(200,data.error)
+        expect(data).to.be.an('object')
+        expect(data).to.have.property('result')
+ //       console.log(data)
+    })
+})
+
+describe('delete user',()=>{
+    const groupName = 'test_Group_name142555'
+    const email = 'uusi@kayttaja8232'
+    const name='tausinuusiuuko'
+    testDelete(name,groupName)
+    const token = sign({ user: email }, process.env.JWT_SECRET_KEY)
+    it ('should delete a user', async()=> {
+        const response = await fetch(base_url + 'user/delete',{
+            method: 'delete',
+            headers: {
+                'Content-Type':'application/json',
+                Authorization: token
+            },
+            body: JSON.stringify({"email": email})
+        })
+        const data = await response.json()
+        expect(response.status).to.equal(200,data.error)
+        expect(data).to.be.an('object')
+        expect(data).to.have.property('message','Account deleted')
+     //   console.log(data)
+    })
+})
+
+

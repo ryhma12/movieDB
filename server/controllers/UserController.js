@@ -7,11 +7,12 @@ import {
   getReviews,
 } from "../models/User.js";
 import { ApiError } from "../helper/ApiError.js";
+import { auth } from "../helper/Auth.js";
 import jwt from "jsonwebtoken";
 const { sign } = jwt;
 
 const postRegistration = async (req, res, next) => {
-  const no_result = "no results found";
+  const no_result = "no results found/email already in use";
   console.log(req.body);
   try {
     if (!req.body.Name || req.body.Name.length === 0)
@@ -72,11 +73,11 @@ const postLogin = async (req, res, next) => {
   }
 };
 
+//auth middleware on jo olemassa ja pitää vaan lisätä siihen routeriin ennen DeleteUseria
+
 const DeleteUser = async (req, res, next) => {
   try {
     const result = await deleteuser(req.body.email);
-    const user = result.rows[0];
-
     return res.status(200).json({ message: "Account deleted" });
   } catch (error) {
     return next(error);
