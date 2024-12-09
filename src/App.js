@@ -51,7 +51,10 @@ function App() {
               </>
             }
           />
-          <Route path="/groups" element={<GroupPage />} />
+          <Route
+            path="/groups"
+            element={user ? <GroupPage /> : <Navigate to="/login" />}
+          />
           <Route path="/" element={<HomePage />} />
           <Route
             path="/settings"

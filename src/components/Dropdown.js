@@ -5,7 +5,7 @@ import { useState, useRef, useCallback } from "react";
 const Dropdown = ({ options, handleSort, dropdownName }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
-
+  console.log(options);
   const handleOutsideClick = useCallback(() => {
     if (isOpen) setIsOpen(false);
   }, [isOpen]);

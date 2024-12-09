@@ -39,10 +39,18 @@ const GetGroupsForUser = async (userId) => {
   );
 };
 
+const GetUsersForGroup = async (groupName) => {
+  return await pool.query(
+    'SELECT "user".id, "user"."Name", "user"."Email", "Role".is_admin, "Role".is_user FROM "user" JOIN "Role" ON "user".id = "Role"."userId" JOIN "group" ON "Role"."groupId" = "group".id WHERE "group"."groupName" = $1;',
+    [groupName]
+  );
+};
+
 export {
   CreateGroup,
   AskToJoinGroup,
   AcceptUserToGroup,
   RefuseUserToGroup,
   GetGroupsForUser,
+  GetUsersForGroup,
 };
