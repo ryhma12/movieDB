@@ -17,9 +17,9 @@ const CreationDate= currentDate
 
 
 describe('POST register',()=>{
-    const Name='tausinuusiukko'
-    const Password = 'uusikayttaja222'
-    const Email='uusi@kayttaja822'
+    const Name='ADHes'
+    const Password = 'Piqu233'
+    const Email='Lee@quet'
     it('should register with valid Name,Password,CreationDate and Email',async()=>{
         const response = await fetch(base_url+'user/register',{
             method: 'post',
@@ -54,8 +54,8 @@ it ('should not register with too short password',async()=>{
 })
 
 describe('POST login',()=>{
-    const Email = 'uusi@kayttaja82'
-    const Password = 'uusikayttaja2'
+    const Email = 'Leequet'
+    const Password = 'Piquei2233'
     it ('should login with valid credentials', async()=> {
         const response = await fetch(base_url + 'user/login',{
             method: 'post',
@@ -88,8 +88,8 @@ describe('POST login',()=>{
 })
 
 describe('POST Group',()=>{
-    const groupName = 'test_Group_name1'
-     const Email = 'uusi@kayttaja82'
+    const groupName = 'piquhmä'
+     const Email = 'Lsdauet'
     it ('should create a group', async()=> {
         const response = await fetch(base_url + 'group/create',{
             method: 'post',
@@ -124,9 +124,9 @@ describe('GET reviews',()=>{
 })
 
 describe('delete user',()=>{
-    const groupName = 'test_Group_name142555'
-    const email = 'uusi@kayttaja8232'
-    const name='tausinuusiuuko'
+    const groupName = 'piqeruetin ryhmä'
+    const email = 'Lee@Piquet'
+    const name='ADHDmies'
     testDelete(name,groupName)
     const token = sign({ user: email }, process.env.JWT_SECRET_KEY)
     it ('should delete a user', async()=> {
@@ -136,13 +136,13 @@ describe('delete user',()=>{
                 'Content-Type':'application/json',
                 Authorization: token
             },
-            body: JSON.stringify({"email": email})
+    //        body: JSON.stringify({"email": email})
         })
         const data = await response.json()
         expect(response.status).to.equal(200,data.error)
         expect(data).to.be.an('object')
         expect(data).to.have.property('message','Account deleted')
-     //   console.log(data)
+        console.log(data)
     })
 })
 

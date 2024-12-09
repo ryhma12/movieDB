@@ -81,7 +81,7 @@ const postLogin = async (req, res, next) => {
 
 const DeleteUser = async (req, res, next) => {
   try {
-    const result = await deleteuser(req.body.email);
+    const result = await deleteuser(req.user.email);
     return res.status(200).json({ message: "Account deleted" });
   } catch (error) {
     return next(error);

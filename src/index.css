@@ -91,12 +91,20 @@
   color: #aaaaaa;
 }
 
+.ProductCard {
+  position: relative;
+}
 .ProductCard.interactive {
   cursor: pointer;
 }
 .ProductCard img {
   width: 100%;
   height: 100%;
+}
+.ProductCard button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }
 .ProductCard .product--card__text {
   display: flex;
