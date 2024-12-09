@@ -5,6 +5,7 @@ import {
   AskToJoinGroup,
   RefuseUserToGroup,
   GetGroupsForUser,
+  GetUsersForGroup,
 } from "../models/Group.js";
 import { ApiError } from "../helper/ApiError.js";
 import jwt from "jsonwebtoken";
@@ -89,6 +90,17 @@ const getGroups = async (req, res, next) => {
   }
 };
 
+const getUsersOfAGroup = async (req, res, next) => {
+  try {
+    const result = await GetUsersForGroup(req.query.group);
+    return res.status(200).json({
+      result: result.rows,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export {
   postcreateGroup,
   AcceptUser,
@@ -96,4 +108,5 @@ export {
   RefuseUser,
   sendUserMessage,
   getGroups,
+  getUsersOfAGroup,
 };
