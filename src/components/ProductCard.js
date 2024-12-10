@@ -1,35 +1,10 @@
-import { useEffect, useState } from "react";
-import useUserFavourites from "../hooks/useUserFavourites";
+import { useFavourites } from "../hooks/useFavourites";
 import { useUser } from "../hooks/useUser";
 
 const ProductCard = ({ item, interActive, setSelectedMovie }) => {
-  const [favourites, setFavourites] = useState([]);
-  const [favourited, setFavourited] = useState(false);
+  const { favourites, addUserFavourite, removeUserFavourite } = useFavourites();
   const { user } = useUser();
-  const {
-    data: favouritesData,
-    error: favouritesDataError,
-    addUserFavourite,
-    removeUserFavourite,
-  } = useUserFavourites();
-
-  useEffect(() => {
-    if (favouritesData && !favouritesDataError) {
-      setFavourites(favouritesData);
-    }
-  }, [favouritesData, favouritesDataError]);
-
-  useEffect(() => {
-    if (Array.isArray(favourites)) {
-      const isFavourited = favourites.some(
-        (favourite) => favourite.movieId === item.id
-      );
-      setFavourited(isFavourited);
-    } else {
-      console.warn("Favourites is not an array:", favourites);
-      setFavourited(false);
-    }
-  }, [favourites, item.id]);
+  const favourited = favourites.some((favourite) => favourite.movieId === item.id);
 
   const favouritePress = async (e) => {
     e.preventDefault();
@@ -50,17 +25,16 @@ const ProductCard = ({ item, interActive, setSelectedMovie }) => {
       className={interActive ? "ProductCard interactive" : "ProductCard"}
       onClick={interActive ? handleNav : undefined}
     >
-      {user && <button onClick={(e) => favouritePress(e)}>liek</button>}
+      {user && (
+        <button onClick={(e) => favouritePress(e)}>
+          {!favourited ? "like" : "unlike"}
+        </button>
+      )}
       <img
         src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
         alt={`${item.original_title} Poster`}
         className="movie--poster"
       />
-      {/* {text && (
-        <div className="product--card__text">
-          <span>{text}</span>
-        </div>
-      )} */}
     </div>
   );
 };
