@@ -1,6 +1,6 @@
 import Loading from "../components/utility/Loading";
 import Favourite from "../components/Favourite";
-import { useFavourites } from "../context/FavouritesContext";
+import { useFavourites } from "../hooks/useFavourites";
 import { useUser } from "../hooks/useUser";
 
 const Favourites = () => {

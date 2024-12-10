@@ -1,7 +1,7 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useUser } from "../hooks/useUser";
 
-const FavouritesContext = createContext();
+export const FavouritesContext = createContext();
 
 export const FavouritesProvider = ({ children }) => {
   const { user } = useUser();
@@ -91,5 +91,3 @@ export const FavouritesProvider = ({ children }) => {
     </FavouritesContext.Provider>
   );
 };
-
-export const useFavourites = () => useContext(FavouritesContext);

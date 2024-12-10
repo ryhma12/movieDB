@@ -1,4 +1,4 @@
-import { useFavourites } from "../context/FavouritesContext";
+import { useFavourites } from "../hooks/useFavourites";
 import { useUser } from "../hooks/useUser";
 
 const ProductCard = ({ item, interActive, setSelectedMovie }) => {
