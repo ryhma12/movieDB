@@ -21,7 +21,6 @@ const getUserFavourites = async (req, res, next) => {
 const getPublicUserFavourites = async (req, res, next) => {
   try {
     const publicUser = req.query.publicUser;
-    console.log("test");
     if (!publicUser) return next(new ApiError("Public user not found", 404));
     const result = await selectPublicUserFavourites(publicUser);
     if (!result) return (new ApiError("Public favourites not found", 404));
