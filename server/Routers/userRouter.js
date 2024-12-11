@@ -14,13 +14,13 @@ const router = Router();
 router.post("/register", postRegistration);
 
 router.post("/login", postLogin);
-router.post("/review", postReview);
+router.post("/review", auth,postReview);
 
 router.get("/favourites/get", auth, getUserFavourites);
 router.post("/favourites/post", auth, postUserFavourite);
 router.delete("/favourites/delete", auth, deleteUserFavourite)
 
-router.get("/review", getReviewsForAMovie);
+router.get("/review",getReviewsForAMovie);
 router.delete("/delete", auth, DeleteUser);
 
 export default router;

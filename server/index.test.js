@@ -17,9 +17,9 @@ const CreationDate= currentDate
 
 
 describe('POST register',()=>{
-    const Name='ADHes'
-    const Password = 'Piqu233'
-    const Email='Lee@quet'
+    const Name='joooooo'
+    const Password = 'Jouoooooo'
+    const Email='jooooooooo@oooo'
     it('should register with valid Name,Password,CreationDate and Email',async()=>{
         const response = await fetch(base_url+'user/register',{
             method: 'post',
@@ -54,8 +54,8 @@ it ('should not register with too short password',async()=>{
 })
 
 describe('POST login',()=>{
-    const Email = 'Leequet'
-    const Password = 'Piquei2233'
+    const Email = 'jouuu@atto'
+    const Password = 'Joulllllu'
     it ('should login with valid credentials', async()=> {
         const response = await fetch(base_url + 'user/login',{
             method: 'post',
@@ -67,7 +67,7 @@ describe('POST login',()=>{
         const data = await response.json()
         expect(response.status).to.equal(200,data.error)
         expect(data).to.be.an('object')
-        expect(data).to.include.all.keys("id","Email")
+        expect(data).to.include.all.keys("id","Email", "token")
     })
 
     it ('should not login with invalid credentials',async()=>{
@@ -88,15 +88,19 @@ describe('POST login',()=>{
 })
 
 describe('POST Group',()=>{
-    const groupName = 'piquhmä'
-     const Email = 'Lsdauet'
+    const groupName = 'juuuuuuu'
+    const Name='joooooo'
+    const Password = 'Jouoooooo'
+    const email='jooooooooo@oooo'
+     const token = sign({user: email},process.env.JWT_SECRET_KEY)
     it ('should create a group', async()=> {
         const response = await fetch(base_url + 'group/create',{
             method: 'post',
             headers: {
                 'Content-Type':'application/json',
+                Authorization: token
             },
-            body: JSON.stringify({"groupName":groupName, "Email":Email})
+            body: JSON.stringify({"groupName":groupName, "Email":email, "Password":Password, "Name":Name})
         })
         const data = await response.json()
         expect(response.status).to.equal(201,data.error)
@@ -107,6 +111,7 @@ describe('POST Group',()=>{
 
 describe('GET reviews',()=>{
     const movieId = '1'
+    const email = 'jouuu@atto'
     it ('should get reviews', async()=> {
         const response = await fetch(base_url + 'user/review?movieId='+movieId,{
             method: 'get',
@@ -124,11 +129,20 @@ describe('GET reviews',()=>{
 })
 
 describe('delete user',()=>{
-    const groupName = 'piqeruetin ryhmä'
-    const email = 'Lee@Piquet'
-    const name='ADHDmies'
-    testDelete(name,groupName)
-    const token = sign({ user: email }, process.env.JWT_SECRET_KEY)
+    const email = 'jooooooooo@oooo'
+    let token='';
+    before(async () =>{
+        const response = await fetch(base_url + 'user/login',{
+            method: 'post',
+            headers: {
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify({"Email":email,"Password":'Jouoooooo'})
+        })
+        const data = await response.json()
+        token=data.token
+    });
+
     it ('should delete a user', async()=> {
         const response = await fetch(base_url + 'user/delete',{
             method: 'delete',
@@ -136,7 +150,6 @@ describe('delete user',()=>{
                 'Content-Type':'application/json',
                 Authorization: token
             },
-    //        body: JSON.stringify({"email": email})
         })
         const data = await response.json()
         expect(response.status).to.equal(200,data.error)
