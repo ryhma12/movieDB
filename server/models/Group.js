@@ -46,6 +46,13 @@ const GetUsersForGroup = async (groupName) => {
   );
 };
 
+const sendUserMessageToGroup = async (name, groupName, message) => {
+  return await pool.query(
+    'with first_insert as(select id as userId, "Name" from "user" where "Name" = $1),second_insert as(select id as groupId from "group" where "groupName" = $2),third_insert as(insert into "Message" ("userId", "groupId", "content", "createdAt") values (select userId from first_insert),(select groupId from second_insert),$3,now())returning id,content,createdAt)select id,content,createdAt from third_insert;',
+    [name,groupName,message]
+  );
+};
+
 export {
   CreateGroup,
   AskToJoinGroup,
@@ -53,4 +60,5 @@ export {
   RefuseUserToGroup,
   GetGroupsForUser,
   GetUsersForGroup,
+  sendUserMessageToGroup
 };
