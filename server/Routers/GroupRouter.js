@@ -8,10 +8,10 @@ import {
   getGroups,
   getUsersOfAGroup,
 } from "../controllers/GroupController.js";
-
+import { auth } from "../helper/Auth.js";
 const router = Router();
 
-router.post("/create", postcreateGroup);
+router.post("/create", auth, postcreateGroup);
 router.patch("/acceptuser", AcceptUser);
 router.post("/asktojoin", AskToJoin);
 router.delete("/refuseuser", RefuseUser);

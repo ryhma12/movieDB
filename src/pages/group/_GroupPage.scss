@@ -1,119 +1,71 @@
 .GroupPage {
   width: 100%;
   height: 94vh;
-  background-color: white;
   position: relative;
-  .add--user {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 25%;
-    height: 50%;
-    transform: translate(-50%, -50%);
-    padding: 2.4rem;
-    border-radius: 1.2rem;
-    background-color: black;
-    input {
-      height: 10%;
-      width: 100%;
-      padding: 0.6rem;
-      font-size: 1.8rem;
-    }
-    .people--container {
-      height: 90%;
-      overflow-y: auto;
-    }
-  }
-  .group--header {
+  .main--container {
+    width: 100%;
+    height: 90vh;
+    padding: 4.8rem 9.6rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    height: 5%;
-    width: 100%;
-    padding: 1.2rem 1.2rem 1.2rem 0;
-    background-color: $color7;
-    .Dropdown {
-      width: 20%;
-      border: none;
-      border-right: 1px solid rgba($color: $color5, $alpha: 0.5);
-    }
-    h2 {
-      color: $color5;
-    }
-    .btn--container {
-      width: 30%;
-      display: flex;
 
-      justify-content: flex-end;
-      gap: 1.2rem;
-      button {
-        padding: 0.6rem 1.8rem;
-        width: 40%;
-        border-radius: 0.6rem;
-        font-size: 1.8rem;
-        border: none;
-        cursor: pointer;
-
-        background-color: $color9;
-        color: $color5;
-        transition: all 0.2s ease-in-out;
-        &:hover {
-          background-color: $color5;
-          color: $color9;
-        }
+    .inner--container {
+      width: 70%;
+      height: 100%;
+      background-color: white;
+      &.form--open {
+        background-color: rgba($color: #000000, $alpha: 0.5);
       }
-    }
-  }
-  .group--content {
-    display: flex;
-    height: 95%;
-    width: 100%;
-    background-color: blue;
-    .members--container {
-      background-color: $color2;
-      width: 20%;
-      overflow-y: auto;
-    }
-    .content--container {
-      background-color: $color9;
-      width: 80%;
-      padding: 0 6.4rem;
-      display: flex;
-      flex-direction: column;
-      .user--input {
-        width: 100%;
+      .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.8rem 2.4rem;
+        border-bottom: 1px solid $color7;
         height: 10%;
-
-        input {
-          width: 100%;
-          padding: 1.2rem;
-          border-radius: 0.5rem;
-          font-size: 1.8rem;
-          border: none;
-          background-color: #f0f0f0;
-          &:focus {
-            outline: none;
+        .btn--container {
+          width: 50%;
+          display: flex;
+          gap: 1.2rem;
+          button {
+            padding: 0.6rem 1.8rem;
+            width: 50%;
+            border-radius: 0.6rem;
+            font-size: 1.8rem;
+            border: none;
+            cursor: pointer;
+            background-color: $color7;
+            color: $color5;
+            &:hover {
+              background-color: $color4;
+              color: $color7;
+            }
           }
         }
       }
-      .content {
+      .error--container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         height: 90%;
-        .message {
-          display: flex;
-          gap: 1.8rem;
-          color: $color5;
-          .sender {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-
-            font-weight: 600;
-            margin-bottom: 0.6rem;
-            .time {
-              font-weight: 500;
-              font-size: 1.2rem;
-              color: rgba($color: $color5, $alpha: 0.5);
-            }
+        padding: 2.4rem;
+        span {
+          font-size: 2.4rem;
+        }
+      }
+      .list--of__groups {
+        padding: 2.4rem;
+        overflow-y: auto;
+        height: 90%;
+        .list--item {
+          padding: 2.4rem;
+          caret-color: transparent;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          border-bottom: 1px solid $color7;
+          &:hover {
+            color: $color5;
+            background-color: $color7;
           }
         }
       }

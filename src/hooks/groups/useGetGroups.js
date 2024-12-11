@@ -19,11 +19,14 @@ export const useGetGroups = () => {
       if (!res.ok) {
         setError("getGroups failed");
       }
-
       const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      setData(data);
-      console.log(data);
+
+      if (!data || data.error || data.result.length === 0)
+        throw new Error(
+          data.error || "No groups found, considering creating one!"
+        );
+      setData(data.result.map((item) => item.groupName));
+
       setError(null);
     } catch (err) {
       setError(err.message);

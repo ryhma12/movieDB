@@ -1328,120 +1328,75 @@
 .GroupPage {
   width: 100%;
   height: 94vh;
-  background-color: white;
   position: relative;
 }
-.GroupPage .add--user {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 25%;
-  height: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2.4rem;
-  border-radius: 1.2rem;
-  background-color: black;
-}
-.GroupPage .add--user input {
-  height: 10%;
+.GroupPage .main--container {
   width: 100%;
-  padding: 0.6rem;
-  font-size: 1.8rem;
+  height: 90vh;
+  padding: 4.8rem 9.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.GroupPage .add--user .people--container {
-  height: 90%;
-  overflow-y: auto;
+.GroupPage .main--container .inner--container {
+  width: 70%;
+  height: 100%;
+  background-color: white;
 }
-.GroupPage .group--header {
+.GroupPage .main--container .inner--container.form--open {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.GroupPage .main--container .inner--container .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 5%;
-  width: 100%;
-  padding: 1.2rem 1.2rem 1.2rem 0;
-  background-color: #1f1f1f;
+  padding: 1.8rem 2.4rem;
+  border-bottom: 1px solid #1f1f1f;
+  height: 10%;
 }
-.GroupPage .group--header .Dropdown {
-  width: 20%;
-  border: none;
-  border-right: 1px solid rgba(255, 255, 255, 0.5);
-}
-.GroupPage .group--header h2 {
-  color: #ffffff;
-}
-.GroupPage .group--header .btn--container {
-  width: 30%;
+.GroupPage .main--container .inner--container .header .btn--container {
+  width: 50%;
   display: flex;
-  justify-content: flex-end;
   gap: 1.2rem;
 }
-.GroupPage .group--header .btn--container button {
+.GroupPage .main--container .inner--container .header .btn--container button {
   padding: 0.6rem 1.8rem;
-  width: 40%;
+  width: 50%;
   border-radius: 0.6rem;
   font-size: 1.8rem;
   border: none;
   cursor: pointer;
-  background-color: #333;
-  color: #ffffff;
-  transition: all 0.2s ease-in-out;
-}
-.GroupPage .group--header .btn--container button:hover {
-  background-color: #ffffff;
-  color: #333;
-}
-.GroupPage .group--content {
-  display: flex;
-  height: 95%;
-  width: 100%;
-  background-color: blue;
-}
-.GroupPage .group--content .members--container {
-  background-color: #121212;
-  width: 20%;
-  overflow-y: auto;
-}
-.GroupPage .group--content .content--container {
-  background-color: #333;
-  width: 80%;
-  padding: 0 6.4rem;
-  display: flex;
-  flex-direction: column;
-}
-.GroupPage .group--content .content--container .user--input {
-  width: 100%;
-  height: 10%;
-}
-.GroupPage .group--content .content--container .user--input input {
-  width: 100%;
-  padding: 1.2rem;
-  border-radius: 0.5rem;
-  font-size: 1.8rem;
-  border: none;
-  background-color: #f0f0f0;
-}
-.GroupPage .group--content .content--container .user--input input:focus {
-  outline: none;
-}
-.GroupPage .group--content .content--container .content {
-  height: 90%;
-}
-.GroupPage .group--content .content--container .content .message {
-  display: flex;
-  gap: 1.8rem;
+  background-color: #1f1f1f;
   color: #ffffff;
 }
-.GroupPage .group--content .content--container .content .message .sender {
+.GroupPage .main--container .inner--container .header .btn--container button:hover {
+  background-color: #aaaaaa;
+  color: #1f1f1f;
+}
+.GroupPage .main--container .inner--container .error--container {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.6rem;
+  justify-content: center;
+  height: 90%;
+  padding: 2.4rem;
 }
-.GroupPage .group--content .content--container .content .message .sender .time {
-  font-weight: 500;
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.5);
+.GroupPage .main--container .inner--container .error--container span {
+  font-size: 2.4rem;
+}
+.GroupPage .main--container .inner--container .list--of__groups {
+  padding: 2.4rem;
+  overflow-y: auto;
+  height: 90%;
+}
+.GroupPage .main--container .inner--container .list--of__groups .list--item {
+  padding: 2.4rem;
+  caret-color: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-bottom: 1px solid #1f1f1f;
+}
+.GroupPage .main--container .inner--container .list--of__groups .list--item:hover {
+  color: #ffffff;
+  background-color: #1f1f1f;
 }
 
 .PersonCard {
@@ -1462,6 +1417,187 @@
 }
 .PersonCard:hover {
   background-color: #333;
+}
+
+.SingleGroupView {
+  height: 100%;
+  width: 100%;
+}
+.SingleGroupView .add--user {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2.4rem;
+  border-radius: 1.2rem;
+  background-color: black;
+}
+.SingleGroupView .add--user input {
+  height: 10%;
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1.8rem;
+}
+.SingleGroupView .add--user .people--container {
+  height: 90%;
+  overflow-y: auto;
+}
+.SingleGroupView .group--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5%;
+  width: 100%;
+  padding: 1.2rem 1.2rem 1.2rem 0;
+  background-color: #1f1f1f;
+}
+.SingleGroupView .group--header .Dropdown {
+  width: 20%;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+.SingleGroupView .group--header h2 {
+  color: #ffffff;
+}
+.SingleGroupView .group--header .btn--container {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+.SingleGroupView .group--header .btn--container button {
+  padding: 0.6rem 1.8rem;
+  width: 40%;
+  border-radius: 0.6rem;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer;
+  background-color: #333;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.SingleGroupView .group--header .btn--container button:hover {
+  background-color: #ffffff;
+  color: #333;
+}
+.SingleGroupView .group--content {
+  display: flex;
+  height: 95%;
+  width: 100%;
+  background-color: blue;
+}
+.SingleGroupView .group--content .members--container {
+  background-color: #121212;
+  width: 20%;
+  overflow-y: auto;
+  position: relative;
+}
+.SingleGroupView .group--content .members--container .back--button__container {
+  position: absolute;
+  bottom: 0;
+  color: #ffffff;
+  background-color: #1f1f1f;
+  width: 100%;
+  cursor: pointer;
+  padding: 2.4rem;
+  transition: all 0.2s ease-in-out;
+}
+.SingleGroupView .group--content .members--container .back--button__container:hover {
+  background-color: #ffffff;
+  color: #1f1f1f;
+}
+.SingleGroupView .group--content .content--container {
+  background-color: #333;
+  width: 80%;
+  padding: 0 6.4rem;
+  display: flex;
+  flex-direction: column;
+}
+.SingleGroupView .group--content .content--container .user--input {
+  width: 100%;
+  height: 10%;
+}
+.SingleGroupView .group--content .content--container .user--input input {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  border: none;
+  background-color: #f0f0f0;
+}
+.SingleGroupView .group--content .content--container .user--input input:focus {
+  outline: none;
+}
+.SingleGroupView .group--content .content--container .content {
+  height: 90%;
+}
+.SingleGroupView .group--content .content--container .content .message {
+  display: flex;
+  gap: 1.8rem;
+  color: #ffffff;
+}
+.SingleGroupView .group--content .content--container .content .message .sender {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.SingleGroupView .group--content .content--container .content .message .sender .time {
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.CreateGroupForm {
+  background-color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.CreateGroupForm .input--container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.CreateGroupForm .input--container input {
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  border: none;
+  background-color: #f0f0f0;
+}
+.CreateGroupForm .input--container input:focus {
+  border: 1px solid #2e2f4b;
+  outline: none;
+}
+.CreateGroupForm .btn--container {
+  width: 100%;
+  display: flex;
+  gap: 1.2rem;
+}
+.CreateGroupForm .btn--container button {
+  margin-left: auto;
+  padding: 0.6rem 1.8rem;
+  width: 50%;
+  border-radius: 0.6rem;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer;
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+.CreateGroupForm .btn--container button:hover {
+  background-color: #aaaaaa;
+  color: #1f1f1f;
 }
 
 * {

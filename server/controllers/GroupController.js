@@ -19,13 +19,12 @@ const postcreateGroup = async (req, res, next) => {
     const user = userFromDb.rows[0];
     if (!user) return next(new ApiError("Invalid credentials", 401));
 
-    const match = await compare(req.body.Password, user.Password);
-    if (!match) return next(new Error("Invalid credentials", 401));
     const result = await CreateGroup(
       req.body.groupName,
       req.body.AdminName,
-      user.Password
+      req.body.Email
     );
+
     return res.status(201).json({ groupName: result.rows[0].groupName });
   } catch (error) {
     return next(error);
