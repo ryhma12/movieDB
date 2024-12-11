@@ -9,7 +9,6 @@ export const useLogin = () => {
   const login = async (email, password) => {
     setError(null);
     setIsLoading(true);
-
     try {
       const res = await fetch("http://localhost:3001/user/login", {
         method: "POST",

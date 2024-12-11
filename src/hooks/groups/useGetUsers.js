@@ -1,31 +1,29 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
-export const useGetGroups = () => {
+export const useGetUsers = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getGroups = async (id) => {
+  const getUsers = useCallback(async (id) => {
     setError(null);
     setIsLoading(true);
 
     try {
-      const res = await fetch(
-        "http://localhost:3001/group/getgroups?id=" + id,
-        {
-          method: "GET",
-        }
-      );
+      const res = await fetch("http://localhost:3001/user/allusers", {
+        method: "GET",
+      });
       if (!res.ok) {
-        setError("getGroups failed");
+        setError("getUsers failed");
       }
       const data = await res.json();
-
-      if (!data || data.error || data.result.length === 0)
+      if (!data || data.error)
         throw new Error(
           data.error || "No groups found, considering creating one!"
         );
-      setData(data.result.map((item) => item.groupName));
+      console.log(data);
+
+      setData(data);
 
       setError(null);
     } catch (err) {
@@ -33,7 +31,7 @@ export const useGetGroups = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  return { getGroups, isLoading, error, data };
+  return { getUsers, isLoading, error, data };
 };

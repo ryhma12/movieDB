@@ -1,11 +1,13 @@
 import RoundPhoto from "../RoundPhoto";
 
-const PersonCard = ({ name }) => {
+const PersonCard = ({ name, invite }) => {
   return (
     <div className="PersonCard">
-      <RoundPhoto />
-
-      <h2>{name}</h2>
+      <div className="person">
+        <RoundPhoto />
+        <h2>{name}</h2>
+      </div>
+      {invite && <button>Invite</button>}
     </div>
   );
 };

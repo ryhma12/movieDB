@@ -52,6 +52,8 @@ const MainNav = ({ setSelectedMovie }) => {
 
   const handleSingleView = (item) => {
     setSelectedMovie(item);
+    setText("");
+    setData([]);
   };
 
   const handleLogOut = () => {
