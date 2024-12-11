@@ -5,8 +5,11 @@ import {
   DeleteUser,
   postReview,
   getReviewsForAMovie,
+  getAllUsers,
 } from "../controllers/UserController.js";
+
 import { postUserFavourite, getUserFavourites, deleteUserFavourite, getPublicUserFavourites } from "../controllers/FavouritesController.js";
+
 import { auth } from "../helper/Auth.js";
 
 const router = Router();
@@ -23,5 +26,6 @@ router.get("/publicFavourites/get", getPublicUserFavourites)
 
 router.get("/review", getReviewsForAMovie);
 router.delete("/delete", auth, DeleteUser);
+router.get("/allusers", getAllUsers);
 
 export default router;

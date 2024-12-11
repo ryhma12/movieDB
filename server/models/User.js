@@ -12,9 +12,9 @@ const selectUserByEmail = async (email) => {
 };
 
 const deleteuser = async (email) => {
-  return await pool.query( 
-    'with first_insert as ( select id from "user" where "Email"=$1),second_insert as(select "groupId" from "Role" where "userId"=(select id from first_insert)),third_insert as(delete from "group" where id = (select "groupId" from second_insert)),fourth_insert as (delete from "chat" where "userId"=(select id from first_insert)),fifth_insert as (delete from "Role" where "userId" = (select id from first_insert)),sixth_insert as (delete from "Favourites" where "userId" = (select id from first_insert)),seventh_insert as (delete from "review" where "id"=(select id from first_insert))delete from "user" where id=(select id from first_insert)',  
-    [email] 
+  return await pool.query(
+    'with first_insert as ( select id from "user" where "Email"=$1),second_insert as(select "groupId" from "Role" where "userId"=(select id from first_insert)),third_insert as(delete from "group" where id = (select "groupId" from second_insert)),fourth_insert as (delete from "chat" where "userId"=(select id from first_insert)),fifth_insert as (delete from "Role" where "userId" = (select id from first_insert)),sixth_insert as (delete from "Favourites" where "userId" = (select id from first_insert)),seventh_insert as (delete from "review" where "id"=(select id from first_insert))delete from "user" where id=(select id from first_insert)',
+    [email]
   );
 };
 
@@ -31,4 +31,15 @@ const getReviews = async (movieId) => {
   ]);
 };
 
-export { insertUser, selectUserByEmail, deleteuser, insertReview, getReviews };
+const getUsers = async () => {
+  return await pool.query('SELECT "Name", id, "Email" FROM public."user"');
+};
+
+export {
+  insertUser,
+  selectUserByEmail,
+  deleteuser,
+  insertReview,
+  getReviews,
+  getUsers,
+};
