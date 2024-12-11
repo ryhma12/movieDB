@@ -33,7 +33,8 @@
 @import "./pages/group/GroupPage";
 @import "./components/groups/PersonCard";
 @import "./pages/group/SingleGroupView";
-@import "./pages/group/CreateGroup";
+@import "./components/groups/CreateGroup";
+@import "./components/groups/AddUserMenu";
 * {
   padding: 0;
   margin: 0;

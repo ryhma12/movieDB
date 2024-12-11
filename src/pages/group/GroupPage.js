@@ -7,7 +7,7 @@ import Dropdown from "../../components/Dropdown";
 import RoundPhoto from "../../components/RoundPhoto";
 
 import SingleGroupView from "./SingleGroupView";
-import CreateGroupForm from "./CreateGroupForm";
+import CreateGroupForm from "../../components/groups/CreateGroupForm";
 
 const GroupPage = () => {
   const [data, setData] = useState([]);
