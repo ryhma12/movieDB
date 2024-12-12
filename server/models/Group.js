@@ -27,7 +27,7 @@ const AcceptUserToGroup = async (name, groupName) => {
 
 const RefuseUserToGroup = async (name, groupName) => {
   return await pool.query(
-    'with first_insert as(select id,"Name" from "user" where "Name"=$1),second_insert as(select id from "group" where "groupName"=$2),third_insert as(delete from "Role" where "groupId"=(select id from second_insert) and "userId"=(select id from first_insert))select "Name" from "user" where "Name"=(select "Name" from first_insert) ',
+    'with first_insert as(select id,"Name" from "user" where "Name"=$1),second_insert as(select id from "group" where "groupName"=$2),third_insert as(delete from "Role" where "groupId"=(select id from second_insert) and "userId"=(select id from first_insert) and "is_admin"=false)select "Name" from "user" where "Name"=(select "Name" from first_insert) ',
     [name, groupName]
   );
 };
