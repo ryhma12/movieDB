@@ -5,6 +5,7 @@ import {
   deleteuser,
   insertReview,
   getReviews,
+  getUsers,
 } from "../models/User.js";
 import { ApiError } from "../helper/ApiError.js";
 import { auth } from "../helper/Auth.js";
@@ -24,14 +25,12 @@ const postRegistration = async (req, res, next) => {
 
     const hashedPassword = await hash(req.body.Password, 10);
 
-    console.log(hashedPassword);
     const userFromDb = await insertUser(
       req.body.Name,
       req.body.Email,
       hashedPassword
     );
     const user = userFromDb.rows[0];
-    console.log(user);
     if (!user) return next(new ApiError(no_result, 401));
 
     return res
@@ -121,6 +120,15 @@ const createUserObject = (name, id, email, CreationDate, token = undefined) => {
   };
 };
 
+const getAllUsers = async (req, res, next) => {
+  try {
+    const result = await getUsers();
+    if (result.rowCount === 0) throw new ApiError("No users found");
+
+    res.status(200).json(result.rows);
+  } catch (err) {}
+};
+
 export {
   postRegistration,
   postLogin,
@@ -128,4 +136,5 @@ export {
   postReview,
   getReviews,
   getReviewsForAMovie,
+  getAllUsers,
 };

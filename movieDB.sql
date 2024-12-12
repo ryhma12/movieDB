@@ -5,11 +5,12 @@ BEGIN;
 
 CREATE TABLE IF NOT EXISTS public."user"
 (
-    "Name" character varying(255) NOT NULL,
+    "Name" character varying(255) NOT NULL UNIQUE,
     "Password" character varying(255) NOT NULL,
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
     "CreationDate" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "Email" character varying (255) NOT NULL,
+    "Email" character varying (255) NOT NULL UNIQUE,
+    isPublic boolean NOT NULL DEFAULT true,
     PRIMARY KEY (id)
 );
 
@@ -25,7 +26,7 @@ CREATE TABLE IF NOT EXISTS public.review
 
 CREATE TABLE IF NOT EXISTS public."group"
 (
-    "groupName" character varying(32) NOT NULL,
+    "groupName" character varying(32) NOT NULL UNIQUE,
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 ),
     PRIMARY KEY (id)
 );

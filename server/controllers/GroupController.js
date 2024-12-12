@@ -6,6 +6,9 @@ import {
   RefuseUserToGroup,
   GetGroupsForUser,
   GetUsersForGroup,
+  GetGroupsWhereNoUser,
+  GetJoinRequestsForGroup,
+  sendUserMessageToGroup,
 } from "../models/Group.js";
 import { ApiError } from "../helper/ApiError.js";
 import jwt from "jsonwebtoken";
@@ -19,13 +22,13 @@ const postcreateGroup = async (req, res, next) => {
     const user = userFromDb.rows[0];
     if (!user) return next(new ApiError("Invalid credentials", 401));
 
-    const match = await compare(req.body.Password, user.Password);
-    if (!match) return next(new Error("Invalid credentials", 401));
     const result = await CreateGroup(
       req.body.groupName,
+
       req.body.Name,
-      user.Password
+
     );
+
     return res.status(201).json({ groupName: result.rows[0].groupName });
   } catch (error) {
     return next(error);
@@ -55,6 +58,7 @@ const AskToJoin = async (req, res, next) => {
 
 const RefuseUser = async (req, res, next) => {
   try {
+    console.log(req.body.name);
     const result = await RefuseUserToGroup(req.body.name, req.body.groupName);
     return res.status(200).json({
       message: "You refused user " + result.rows[0].Name + " from the group",
@@ -81,12 +85,30 @@ const sendUserMessage = async (req, res, next) => {
 
 const getGroups = async (req, res, next) => {
   try {
+    if (!req.query.id) throw new ApiError("No user id provided");
+
     const result = await GetGroupsForUser(req.query.id);
+    console.log(result);
     return res.status(200).json({
       result: result.rows,
     });
   } catch (error) {
     return next(error);
+  }
+};
+
+const getGroupsWhereUserIsNot = async (req, res, next) => {
+  try {
+    if (!req.query.id) throw new ApiError("No user id provided");
+
+    const result = await GetGroupsWhereNoUser(req.query.id);
+    if (result.rowCount === 0) throw new ApiError("No groups found");
+
+    return res.status(200).json({
+      result: result.rows,
+    });
+  } catch (err) {
+    return next(err);
   }
 };
 
@@ -101,6 +123,17 @@ const getUsersOfAGroup = async (req, res, next) => {
   }
 };
 
+const GetRequestsToJoinGroup = async (req, res, next) => {
+  try {
+    const result = await GetJoinRequestsForGroup(req.query.groupId);
+    return res.status(200).json({
+      result: result.rows,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export {
   postcreateGroup,
   AcceptUser,
@@ -109,4 +142,6 @@ export {
   sendUserMessage,
   getGroups,
   getUsersOfAGroup,
+  getGroupsWhereUserIsNot,
+  GetRequestsToJoinGroup,
 };

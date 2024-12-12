@@ -7,19 +7,22 @@ import {
   sendUserMessage,
   getGroups,
   getUsersOfAGroup,
+  getGroupsWhereUserIsNot,
+  GetRequestsToJoinGroup,
 } from "../controllers/GroupController.js";
 import { auth } from "../helper/Auth.js";
 
-
-
 const router = Router();
 
-router.post("/create", auth,postcreateGroup);
-router.patch("/acceptuser", auth,AcceptUser);
-router.post("/asktojoin", auth,AskToJoin);
-router.delete("/refuseuser", auth,RefuseUser);
-router.post("/sendusermessage", auth,sendUserMessage);
-router.get("/getgroups", auth,getGroups);
-router.get("/usersofgroup", auth,getUsersOfAGroup);
+router.post("/create", auth, postcreateGroup);
+router.patch("/acceptuser", AcceptUser);
+router.post("/asktojoin", auth, AskToJoin);
+router.delete("/refuseuser", RefuseUser);
+router.post("/sendusermessage", sendUserMessage);
+router.get("/getgroups", getGroups);
+router.get("/usersofgroup", getUsersOfAGroup);
+router.get("/browsegroups", getGroupsWhereUserIsNot);
+router.get("/getjoinrequests", GetRequestsToJoinGroup);
+
 
 export default router;

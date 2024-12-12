@@ -6,6 +6,7 @@ import SingleView from "./pages/SingleView";
 import MainNav from "./components/navigation/MainNav";
 import Showtimes from "./pages/Showtimes";
 import Favourites from "./pages/Favourites";
+import PublicFavourites from "./pages/PublicFavourites";
 import TintLayer from "./components/utility/TintLayer";
 import BrowseMovies from "./pages/BrowseMovies";
 import BrowseMoviesByGenre from "./pages/BrowseMoviesByGenre";
@@ -55,7 +56,7 @@ function App() {
             path="/groups"
             element={user ? <GroupPage /> : <Navigate to="/login" />}
           />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage setSelectedMovie={setSelectedMovie}/>} />
           <Route
             path="/settings"
             element={user ? <UserSettings /> : <Navigate to="/login" />}
@@ -71,6 +72,7 @@ function App() {
           />
           <Route path="/showtimes" element={<Showtimes />} />
           <Route path="/favourites" element={<Favourites />} />
+          <Route path="/favourites/public" element={<PublicFavourites />} />
           <Route
             path="/browse"
             element={

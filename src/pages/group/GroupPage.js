@@ -1,125 +1,138 @@
 import { useState, useEffect } from "react";
 import { useGetGroups } from "../../hooks/groups/useGetGroups";
 import { useUser } from "../../hooks/useUser";
+import { useRequestToJoinGroup } from "../../hooks/groups/useRequestToJoinGroup";
+import { useRefuseOrCancel } from "../../hooks/groups/useRefuseOrCancel";
 
-import PersonCard from "../../components/groups/PersonCard";
-import Dropdown from "../../components/Dropdown";
-import RoundPhoto from "../../components/RoundPhoto";
+import SingleGroupView from "./SingleGroupView";
+import CreateGroupForm from "../../components/groups/CreateGroupForm";
 
 const GroupPage = () => {
-  const [thingOpen, setThingOpen] = useState(false);
   const [data, setData] = useState([]);
-  const [users, setUsers] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState("");
+  const [formOpen, setFormOpen] = useState(false);
+  const [browseAllGroups, setBrowseAllGroups] = useState(false);
+  const [buttonText, setButtonText] = useState("Pending Approval");
+  const [requestButtonText, setRequestButtonText] = useState("Request to join");
+
   const { user } = useUser();
-
-  const handleGroupSwitch = (index) => {
-    setSelectedGroup(data[index]);
-    console.log("switch to group " + data[index]);
-  };
-
-  const doshit = () => {
-    setThingOpen(!thingOpen);
-  };
+  const { data: groupData, getGroups, error, isLoading } = useGetGroups();
+  const { requestToJoinGroup, error: requestError } = useRequestToJoinGroup();
+  const { refuseOrCancel, error: cancelError } = useRefuseOrCancel();
 
   useEffect(() => {
-    const getGroups = async () => {
-      try {
-        console.log(user);
-        if (!user) return;
-        const res = await fetch(
-          "http://localhost:3001/group/getgroups?id=" + user.id,
-          {
-            method: "GET",
-          }
-        );
-        if (!res.ok) {
-          console.log("no response");
-        }
-
-        const data = await res.json();
-        if (data.error) throw new Error(data.error);
-        setData(data.result.map((item) => item.groupName));
-        setSelectedGroup(data.result[0].groupName);
-        console.log(data);
-      } catch (err) {
-        console.log(err);
-      }
+    const fetchGroups = async () => {
+      await getGroups(user.id, browseAllGroups);
     };
+    fetchGroups();
+  }, [user.id, getGroups, browseAllGroups]);
 
-    getGroups();
-  }, [user.id]);
+  const openCreateGroupForm = () => {
+    setFormOpen(!formOpen);
+  };
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const res = await fetch(
-          "http://localhost:3001/group/usersofgroup?group=" + selectedGroup,
-          {
-            method: "GET",
-          }
-        );
-        if (!res.ok) {
-          console.log("no response");
-        }
+  const requestToJoin = async (group) => {
+    await requestToJoinGroup(user.Name, group, user.token);
+    if (!requestError) setRequestButtonText("Pending Approval");
+  };
 
-        const data = await res.json();
-        if (data.error) throw new Error(data.error);
-
-        setUsers(data.result.map((item) => item.Name));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUsers();
-  }, [selectedGroup]);
+  const handleCancelRequest = async (group) => {
+    await refuseOrCancel(user.Name, group, user.token);
+  };
 
   return (
     <div className="GroupPage">
-      {thingOpen && (
-        <div className="add--user">
-          <input type="text" />
-          <div className="people--container"></div>
-        </div>
-      )}
-      <div className="group--header">
-        <Dropdown
-          options={data ? data : []}
-          handleSort={handleGroupSwitch}
-          dropdownName={selectedGroup ? selectedGroup : data[0]}
-        />
-        <div className="btn--container">
-          <button onClick={doshit}>Add User</button>
-          <button>Settings</button>
-        </div>
-      </div>
-      <div className="group--content">
-        <div className="members--container">
-          {users && users.map((name) => <PersonCard name={name} />)}
-        </div>
-        <div className="content--container">
-          <div className="content">
-            <div className="message">
-              <RoundPhoto />
-              <div className="text--container">
-                <div className="sender">
-                  <span>Matti</span>
-                  <span className="time">Eilen 20.04</span>
-                </div>
-                <span>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-                  id velit quasi, natus fugit fugiat! A distinctio voluptatibus
-                  eligendi, similique corrupti ipsa non odit saepe eos iure ut
-                  perspiciatis incidunt!
-                </span>
+      {!selectedGroup && (
+        <div className="main--container">
+          {formOpen && (
+            <CreateGroupForm
+              setFormOpen={setFormOpen}
+              setSelectedGroup={setSelectedGroup}
+            />
+          )}
+          <div
+            className={
+              formOpen ? "inner--container form--open" : "inner--container"
+            }
+          >
+            <div className="header">
+              <h2>{!browseAllGroups ? "My Groups" : "Browse Groups"}</h2>
+              <div className="btn--container">
+                <button onClick={openCreateGroupForm}>Create Group</button>
+                <button onClick={() => setBrowseAllGroups(!browseAllGroups)}>
+                  {!browseAllGroups ? "Browse Groups" : "My Groups"}
+                </button>
               </div>
             </div>
-          </div>
-          <div className="user--input">
-            <input type="text" />
+            {error && (
+              <div className="error--container">
+                <span>{error}</span>
+              </div>
+            )}
+            {groupData && !error && (
+              <div className="list--of__groups">
+                {groupData.map((item, index) => (
+                  <div
+                    className={
+                      !browseAllGroups ? "list--item normal" : "list--item"
+                    }
+                    onClick={() => {
+                      !browseAllGroups &&
+                        (item.is_user || item.is_admin) &&
+                        setSelectedGroup(item.groupName);
+                    }}
+                    key={index}
+                  >
+                    {!browseAllGroups ? (
+                      <div>
+                        {item.is_user || item.is_admin ? (
+                          <span>{item.groupName}</span>
+                        ) : (
+                          <div className="requestable">
+                            <span>{item.groupName}</span>
+                            <button
+                              className="request--btn"
+                              onClick={() =>
+                                handleCancelRequest(item.groupName)
+                              }
+                              onMouseOver={() =>
+                                setButtonText("Cancel Request")
+                              }
+                              onMouseLeave={() =>
+                                setButtonText("Pending Approval")
+                              }
+                            >
+                              {buttonText}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="requestable">
+                        <span>{item.groupName}</span>
+                        <button
+                          className="request--btn"
+                          onClick={() => requestToJoin(item.groupName)}
+                        >
+                          {requestButtonText}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      )}
+      {selectedGroup && (
+        <SingleGroupView
+          selectedGroup={selectedGroup}
+          setSelectedGroup={setSelectedGroup}
+          data={groupData}
+          user={user}
+        />
+      )}
     </div>
   );
 };
