@@ -8,7 +8,7 @@ import {
   getAllUsers,
 } from "../controllers/UserController.js";
 
-import { postUserFavourite, getUserFavourites, deleteUserFavourite, getPublicUserFavourites, putUserStatus } from "../controllers/FavouritesController.js";
+import { postUserFavourite, getUserFavourites, deleteUserFavourite, getPublicUserFavourites, putUserStatus, getUserStatus } from "../controllers/FavouritesController.js";
 
 import { auth } from "../helper/Auth.js";
 
@@ -22,7 +22,8 @@ router.post("/review", auth,postReview);
 router.get("/favourites/get", auth, getUserFavourites);
 router.post("/favourites/post", auth, postUserFavourite);
 router.delete("/favourites/delete", auth, deleteUserFavourite)
-router.put("/favourites/status", auth, putUserStatus)
+router.put("/favourites/status/put", auth, putUserStatus)
+router.get("/favourites/status/get", auth, getUserStatus)
 router.get("/publicFavourites/get", getPublicUserFavourites)
 
 router.get("/review",getReviewsForAMovie);

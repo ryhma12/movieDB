@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import GeneralSettings from "./GeneralSettings";
 import DeleteUser from "./DeleteUser";
+import FavouriteSettings from "./FavouriteSettings";
 
 const UserSettings = () => {
   const [activePage, setActivePage] = useState("General");
@@ -18,10 +19,14 @@ const UserSettings = () => {
             <div onClick={() => setActivePage("Delete")}>
               <span>Delete Account</span>
             </div>
+            <div onClick={() => setActivePage("Favourite")}>
+              <span>Favourites</span>
+            </div>
           </div>
           <div className="settings">
             {activePage === "General" && <GeneralSettings />}
             {activePage === "Delete" && <DeleteUser />}
+            {activePage === "Favourite" && <FavouriteSettings />}
           </div>
         </div>
       </div>
