@@ -60,6 +60,13 @@ const GetGroupsWhereNoUser = async (userId) => {
   );
 };
 
+const GetJoinRequestsForGroup = async (groupId) => {
+  return await pool.query(
+    'select "Role"."userId", "user"."Name", "Role"."groupId", "group"."groupName" from "Role" join "user" on "Role"."userId" = "user".id join "group" on "Role"."groupId" = "group".id where "Role"."is_user" = false and "Role"."is_admin" = false and "Role"."groupId" = $1',
+    [groupId]
+  );
+};
+
 export {
   CreateGroup,
   AskToJoinGroup,
@@ -69,4 +76,5 @@ export {
   GetUsersForGroup,
   sendUserMessageToGroup,
   GetGroupsWhereNoUser,
+  GetJoinRequestsForGroup,
 };
