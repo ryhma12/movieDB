@@ -26,7 +26,7 @@ const postcreateGroup = async (req, res, next) => {
       req.body.groupName,
 
       req.body.Name,
-
+       user.Password
     );
 
     return res.status(201).json({ groupName: result.rows[0].groupName });
