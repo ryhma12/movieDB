@@ -5,6 +5,7 @@ import { useState } from "react";
 import RoundPhoto from "../RoundPhoto";
 
 import { useRefuseOrCancel } from "../../hooks/groups/useRefuseOrCancel";
+import { useAcceptUser } from "../../hooks/groups/useAcceptUser";
 
 const AddUserMenu = ({
   setAddUserMenuOpen,
@@ -17,6 +18,7 @@ const AddUserMenu = ({
   const [displayUsers, setDisplayUsers] = useState(true);
   const [pendingRequests, setPendingRequests] = useState([]);
   const { refuseOrCancel, error: cancelError } = useRefuseOrCancel();
+  const { acceptUser, error: acceptError } = useAcceptUser();
 
   useEffect(() => {
     const handleFetch = async () => {
@@ -32,7 +34,9 @@ const AddUserMenu = ({
     setPendingRequests(filtered);
   }, [allUsers, user.Email]);
 
-  const handleAccept = async () => {};
+  const handleAccept = async (item) => {
+    await acceptUser(item.Name, selectedGroup, user.token);
+  };
 
   const handleRefuse = async (item) => {
     console.log(selectedGroup);
@@ -98,7 +102,7 @@ const AddUserMenu = ({
                       <h2>{item.Name}</h2>
                     </div>
                     <div className="button--container">
-                      <button onClick={handleAccept}>Accept</button>
+                      <button onClick={() => handleAccept(item)}>Accept</button>
                       <button onClick={() => handleRefuse(item)}>Refuse</button>
                     </div>
                   </div>

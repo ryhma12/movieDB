@@ -20,7 +20,7 @@ const AskToJoinGroup = async (name, groupName) => {
 
 const AcceptUserToGroup = async (name, groupName) => {
   return await pool.query(
-    'with first_insert as(select id from "user" where "Name"=$1),second_insert as(select id,"groupName" from "group" where "groupName"=$2),third_insert as (update "Role" set "user"=true where "groupId"=(select id from second_insert) and "userId"=(select id from first_insert))select "groupName" from "group" where "groupName"=(select "groupName" from second_insert)',
+    'with first_insert as(select id from "user" where "Name"=$1),second_insert as(select id,"groupName" from "group" where "groupName"=$2),third_insert as (update "Role" set "is_user"=true where "groupId"=(select id from second_insert) and "userId"=(select id from first_insert))select "groupName" from "group" where "groupName"=(select "groupName" from second_insert)',
     [name, groupName]
   );
 };
