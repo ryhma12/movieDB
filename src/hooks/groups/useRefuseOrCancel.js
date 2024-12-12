@@ -10,6 +10,7 @@ export const useRefuseOrCancel = () => {
     setIsLoading(true);
 
     try {
+      console.log(userName, groupName, token);
       const res = await fetch("http://localhost:3001/group/refuseuser", {
         method: "DELETE",
         headers: {

@@ -57,6 +57,7 @@ const AskToJoin = async (req, res, next) => {
 
 const RefuseUser = async (req, res, next) => {
   try {
+    console.log(req.body.name);
     const result = await RefuseUserToGroup(req.body.name, req.body.groupName);
     return res.status(200).json({
       message: "You refused user " + result.rows[0].Name + " from the group",
