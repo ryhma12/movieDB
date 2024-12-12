@@ -60,12 +60,34 @@
         .list--item {
           padding: 2.4rem;
           caret-color: transparent;
-          cursor: pointer;
           transition: all 0.15s ease;
           border-bottom: 1px solid $color7;
-          &:hover {
-            color: $color5;
-            background-color: $color7;
+          &.normal {
+            cursor: pointer;
+            &:hover {
+              color: $color5;
+              background-color: $color7;
+            }
+          }
+          .requestable {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            .request--btn {
+              padding: 0.6rem 1.8rem;
+              border-radius: 0.6rem;
+              font-size: 1.8rem;
+              border: none;
+              cursor: pointer;
+              background-color: $color7;
+              color: $color5;
+              transition: all 0.15s ease-in-out;
+              &:hover {
+                background-color: $color4;
+                color: $color7;
+              }
+            }
           }
         }
       }

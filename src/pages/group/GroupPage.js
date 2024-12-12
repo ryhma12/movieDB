@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGetGroups } from "../../hooks/groups/useGetGroups";
 import { useUser } from "../../hooks/useUser";
+import { useRequestToJoinGroup } from "../../hooks/groups/useRequestToJoinGroup";
 
 import SingleGroupView from "./SingleGroupView";
 import CreateGroupForm from "../../components/groups/CreateGroupForm";
@@ -11,15 +12,18 @@ const GroupPage = () => {
   const [selectedGroup, setSelectedGroup] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [browseAllGroups, setBrowseAllGroups] = useState(false);
+  const [buttonText, setButtonText] = useState("Pending Approval");
+  const [requestButtonText, setRequestButtonText] = useState("Request to join");
   const { user } = useUser();
   const { data: groupData, getGroups, error, isLoading } = useGetGroups();
+  const { requestToJoinGroup, error: requestError } = useRequestToJoinGroup();
 
   useEffect(() => {
     const fetchGroups = async () => {
       await getGroups(user.id, browseAllGroups);
     };
     fetchGroups();
-  }, [user.id, formOpen, getGroups, browseAllGroups]);
+  }, [user.id, getGroups, browseAllGroups]);
 
   const openCreateGroupForm = () => {
     setFormOpen(!formOpen);
@@ -40,8 +44,8 @@ const GroupPage = () => {
 
         const data = await res.json();
         if (data.error) throw new Error(data.error);
-
-        setUsers(data.result.map((item) => item.Name));
+        console.log(data);
+        setUsers(data.result);
       } catch (err) {
         console.log(err);
       }
@@ -49,7 +53,15 @@ const GroupPage = () => {
     getUsers();
   }, [selectedGroup]);
 
-  console.log(groupData, error);
+  const requestToJoin = async (group) => {
+    await requestToJoinGroup(user.Name, group, user.token);
+    if (!requestError) setRequestButtonText("Pending Approval");
+  };
+
+  const handleCancelRequest = async (group) => {
+    console.log(group);
+  };
+
   return (
     <div className="GroupPage">
       {!selectedGroup && (
@@ -83,11 +95,51 @@ const GroupPage = () => {
               <div className="list--of__groups">
                 {groupData.map((item, index) => (
                   <div
-                    className="list--item"
-                    onClick={() => setSelectedGroup(item)}
+                    className={
+                      !browseAllGroups ? "list--item normal" : "list--item"
+                    }
+                    onClick={() => {
+                      !browseAllGroups &&
+                        (item.is_user || item.is_admin) &&
+                        setSelectedGroup(item.groupName);
+                    }}
                     key={index}
                   >
-                    <span>{item}</span>
+                    {!browseAllGroups ? (
+                      <div>
+                        {item.is_user || item.is_admin ? (
+                          <span>{item.groupName}</span>
+                        ) : (
+                          <div className="requestable">
+                            <span>{item.groupName}</span>
+                            <button
+                              className="request--btn"
+                              onClick={() =>
+                                handleCancelRequest(item.groupName)
+                              }
+                              onMouseOver={() =>
+                                setButtonText("Cancel Request")
+                              }
+                              onMouseLeave={() =>
+                                setButtonText("Pending Approval")
+                              }
+                            >
+                              {buttonText}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="requestable">
+                        <span>{item.groupName}</span>
+                        <button
+                          className="request--btn"
+                          onClick={() => requestToJoin(item.groupName)}
+                        >
+                          {requestButtonText}
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
