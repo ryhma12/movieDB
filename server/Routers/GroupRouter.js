@@ -14,7 +14,7 @@ const router = Router();
 
 router.post("/create", auth, postcreateGroup);
 router.patch("/acceptuser", AcceptUser);
-router.post("/asktojoin", AskToJoin);
+router.post("/asktojoin", auth, AskToJoin);
 router.delete("/refuseuser", RefuseUser);
 router.post("/sendusermessage", sendUserMessage);
 router.get("/getgroups", getGroups);
