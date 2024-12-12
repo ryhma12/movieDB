@@ -45,8 +45,13 @@ const SingleGroupView = ({
         <div className="group--content">
           <div className="members--container">
             {users &&
-              users.map((name, index) => (
-                <PersonCard key={index} name={name} />
+              users.map((item, index) => (
+                <>
+                  {item.is_user ||
+                    (item.is_admin && (
+                      <PersonCard key={index} name={item.Name} />
+                    ))}
+                </>
               ))}
             <div
               className="back--button__container"

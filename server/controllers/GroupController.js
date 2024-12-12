@@ -85,6 +85,7 @@ const getGroups = async (req, res, next) => {
     if (!req.query.id) throw new ApiError("No user id provided");
 
     const result = await GetGroupsForUser(req.query.id);
+    console.log(result);
     return res.status(200).json({
       result: result.rows,
     });

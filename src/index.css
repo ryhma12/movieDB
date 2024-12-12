@@ -598,9 +598,10 @@
 }
 
 .TintLayer {
-  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: brightness(25%);
+          backdrop-filter: brightness(25%);
   z-index: 4;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
 }
@@ -1390,13 +1391,35 @@
 .GroupPage .main--container .inner--container .list--of__groups .list--item {
   padding: 2.4rem;
   caret-color: transparent;
-  cursor: pointer;
   transition: all 0.15s ease;
   border-bottom: 1px solid #1f1f1f;
 }
-.GroupPage .main--container .inner--container .list--of__groups .list--item:hover {
+.GroupPage .main--container .inner--container .list--of__groups .list--item.normal {
+  cursor: pointer;
+}
+.GroupPage .main--container .inner--container .list--of__groups .list--item.normal:hover {
   color: #ffffff;
   background-color: #1f1f1f;
+}
+.GroupPage .main--container .inner--container .list--of__groups .list--item .requestable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.GroupPage .main--container .inner--container .list--of__groups .list--item .requestable .request--btn {
+  padding: 0.6rem 1.8rem;
+  border-radius: 0.6rem;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer;
+  background-color: #1f1f1f;
+  color: #ffffff;
+  transition: all 0.15s ease-in-out;
+}
+.GroupPage .main--container .inner--container .list--of__groups .list--item .requestable .request--btn:hover {
+  background-color: #aaaaaa;
+  color: #1f1f1f;
 }
 
 .PersonCard {

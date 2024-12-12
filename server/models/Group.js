@@ -34,7 +34,7 @@ const RefuseUserToGroup = async (name, groupName) => {
 
 const GetGroupsForUser = async (userId) => {
   return await pool.query(
-    'SELECT "group".id, "group"."groupName" FROM "group" JOIN "Role" ON "group".id = "Role"."groupId" WHERE "Role"."userId" = $1;',
+    'SELECT "group".id, "group"."groupName", "Role"."is_admin", "Role"."is_user" FROM "group" JOIN "Role" ON "group".id = "Role"."groupId" WHERE "Role"."userId" = $1;',
     [userId]
   );
 };
