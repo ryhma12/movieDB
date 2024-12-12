@@ -81,15 +81,14 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
             {users &&
               users.map((item, index) => (
                 <>
-                  {item.is_user ||
-                    (item.is_admin && (
-                      <div className="PersonCard" key={index}>
-                        <div className="person">
-                          <RoundPhoto />
-                          <h2>{item.Name}</h2>
-                        </div>
+                  {(item.is_user || item.is_admin) && (
+                    <div className="PersonCard" key={index}>
+                      <div className="person">
+                        <RoundPhoto />
+                        <h2>{item.Name}</h2>
                       </div>
-                    ))}
+                    </div>
+                  )}
                 </>
               ))}
             <div
