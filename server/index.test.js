@@ -18,8 +18,9 @@ const CreationDate= currentDate
 
 describe('POST register',()=>{
     const Name='joooooo'
-    const Password = 'Jouoooooo'
+   const Password = 'Jouoooooo'
     const Email='jooooooooo@oooo'
+
     it('should register with valid Name,Password,CreationDate and Email',async()=>{
         const response = await fetch(base_url+'user/register',{
             method: 'post',
@@ -54,8 +55,8 @@ it ('should not register with too short password',async()=>{
 })
 
 describe('POST login',()=>{
-    const Email = 'jouuu@atto'
-    const Password = 'Joulllllu'
+    const Email = 'jooooooooo@oooo'
+    const Password = 'Jouoooooo'
     it ('should login with valid credentials', async()=> {
         const response = await fetch(base_url + 'user/login',{
             method: 'post',
@@ -155,8 +156,27 @@ describe('delete user',()=>{
         expect(response.status).to.equal(200,data.error)
         expect(data).to.be.an('object')
         expect(data).to.have.property('message','Account deleted')
-        console.log(data)
+ //       console.log(data)
     })
 })
 
-
+describe('Log out',()=>{
+    const groupName = 'JohnDoeGroup'
+    const Name='TestingJohnDoe'
+    const Password = 'PasswordJohnDoe'
+    const email='Testing@JohnDoe'
+    it ('should throw error, because it try create group without being logged in(no token)', async()=> {
+        const response = await fetch(base_url + 'group/create',{
+            method: 'post',
+            headers: {
+                'Content-Type':'application/json',
+              //  Authorization: token
+            },
+            body: JSON.stringify({"groupName":groupName, "Email":email, "Password":Password, "Name":Name})
+        })
+        const data = await response.json()
+        expect(response.status).to.equal(401)
+        expect(data).to.be.an('object')
+        expect(data).to.have.property('message', 'Authorization required')
+    })
+})
