@@ -1,12 +1,16 @@
-import React from "react";
-import tmdb from "../assets/tmdb.svg"
-const HomePage = () => {
+import tmdb from "../assets/tmdb.svg";
+import Carousel from "../components/Carousel";
+
+const HomePage = ({ setSelectedMovie }) => {
   return (
-  <div style={{marginTop: '100%', marginLeft: '0%'}}>
-    <h3>datasource:</h3>
- <img className="Photo" src={tmdb} width={150} height={40} alt="tmdb Logo"/>
- </div>
-);
+    <div className="homepage">
+      <Carousel name="Top rated" setSelectedMovie={setSelectedMovie}></Carousel>
+      <Carousel
+        name="Top rated 2"
+        setSelectedMovie={setSelectedMovie}
+      ></Carousel>
+    </div>
+  );
 };
 
 export default HomePage;
