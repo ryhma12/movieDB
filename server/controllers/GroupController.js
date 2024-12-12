@@ -6,6 +6,7 @@ import {
   RefuseUserToGroup,
   GetGroupsForUser,
   GetUsersForGroup,
+  GetGroupsWhereNoUser,
 } from "../models/Group.js";
 import { ApiError } from "../helper/ApiError.js";
 import jwt from "jsonwebtoken";
@@ -80,12 +81,29 @@ const sendUserMessage = async (req, res, next) => {
 
 const getGroups = async (req, res, next) => {
   try {
+    if (!req.query.id) throw new ApiError("No user id provided");
+
     const result = await GetGroupsForUser(req.query.id);
     return res.status(200).json({
       result: result.rows,
     });
   } catch (error) {
     return next(error);
+  }
+};
+
+const getGroupsWhereUserIsNot = async (req, res, next) => {
+  try {
+    if (!req.query.id) throw new ApiError("No user id provided");
+
+    const result = await GetGroupsWhereNoUser(req.query.id);
+    if (result.rowCount === 0) throw new ApiError("No groups found");
+
+    return res.status(200).json({
+      result: result.rows,
+    });
+  } catch (err) {
+    return next(err);
   }
 };
 
@@ -108,4 +126,5 @@ export {
   sendUserMessage,
   getGroups,
   getUsersOfAGroup,
+  getGroupsWhereUserIsNot,
 };

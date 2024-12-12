@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import { useGetGroups } from "../../hooks/groups/useGetGroups";
 import { useUser } from "../../hooks/useUser";
 
-import PersonCard from "../../components/groups/PersonCard";
-import Dropdown from "../../components/Dropdown";
-import RoundPhoto from "../../components/RoundPhoto";
-
 import SingleGroupView from "./SingleGroupView";
 import CreateGroupForm from "../../components/groups/CreateGroupForm";
 
@@ -14,15 +10,16 @@ const GroupPage = () => {
   const [users, setUsers] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState("");
   const [formOpen, setFormOpen] = useState(false);
+  const [browseAllGroups, setBrowseAllGroups] = useState(false);
   const { user } = useUser();
   const { data: groupData, getGroups, error, isLoading } = useGetGroups();
 
   useEffect(() => {
     const fetchGroups = async () => {
-      await getGroups(user.id);
+      await getGroups(user.id, browseAllGroups);
     };
     fetchGroups();
-  }, [user.id, formOpen]);
+  }, [user.id, formOpen, getGroups, browseAllGroups]);
 
   const openCreateGroupForm = () => {
     setFormOpen(!formOpen);
@@ -69,10 +66,12 @@ const GroupPage = () => {
             }
           >
             <div className="header">
-              <h2>Groups</h2>
+              <h2>{!browseAllGroups ? "My Groups" : "Browse Groups"}</h2>
               <div className="btn--container">
                 <button onClick={openCreateGroupForm}>Create Group</button>
-                <button>Browse Groups</button>
+                <button onClick={() => setBrowseAllGroups(!browseAllGroups)}>
+                  {!browseAllGroups ? "Browse Groups" : "My Groups"}
+                </button>
               </div>
             </div>
             {error && (
