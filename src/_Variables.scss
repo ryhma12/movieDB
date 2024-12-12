@@ -9,3 +9,10 @@ $color9: #333;
 $color10: #e4bc0e;
 $color11: #b22222;
 $space2: 2.4rem;
+
+@mixin responsive-width {
+  width: 80%;
+  @media (max-width: 900px) {
+    width: 95%;
+  }
+}

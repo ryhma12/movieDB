@@ -56,7 +56,7 @@ function App() {
             path="/groups"
             element={user ? <GroupPage /> : <Navigate to="/login" />}
           />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage setSelectedMovie={setSelectedMovie}/>} />
           <Route
             path="/settings"
             element={user ? <UserSettings /> : <Navigate to="/login" />}
