@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useGetGroups } from "../../hooks/groups/useGetGroups";
 import { useUser } from "../../hooks/useUser";
 import { useRequestToJoinGroup } from "../../hooks/groups/useRequestToJoinGroup";
+import { useRefuseOrCancel } from "../../hooks/groups/useRefuseOrCancel";
 
 import SingleGroupView from "./SingleGroupView";
 import CreateGroupForm from "../../components/groups/CreateGroupForm";
@@ -17,6 +18,7 @@ const GroupPage = () => {
   const { user } = useUser();
   const { data: groupData, getGroups, error, isLoading } = useGetGroups();
   const { requestToJoinGroup, error: requestError } = useRequestToJoinGroup();
+  const { refuseOrCancel, error: cancelError } = useRefuseOrCancel();
 
   useEffect(() => {
     const fetchGroups = async () => {
@@ -59,7 +61,7 @@ const GroupPage = () => {
   };
 
   const handleCancelRequest = async (group) => {
-    console.log(group);
+    await refuseOrCancel(user.Name, group, user.token);
   };
 
   return (
