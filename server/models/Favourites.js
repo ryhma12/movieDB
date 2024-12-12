@@ -28,8 +28,14 @@ const removeUserFavourite = async (movieId, userId) => {
   );
 };
 
-const updatePublicStatus = async (userId) => {
-  return await pool.query('UPDATE user SET "isPublic" = $1 WHERE id = $2', [
+const selectPublicStatus = async (userId) => {
+  return await pool.query('SELECT "user"."ispublic" FROM public."user" WHERE id = $1', [
+    userId,
+  ]);
+};
+
+const updatePublicStatus = async (isPublic, userId) => {
+  return await pool.query('UPDATE "user" SET "ispublic" = $1 WHERE id = $2 returning *', [isPublic, 
     userId,
   ]);
 };
@@ -37,6 +43,7 @@ const updatePublicStatus = async (userId) => {
 export {
   selectUserFavourites,
   selectPublicUserFavourites,
+  selectPublicStatus,
   insertUserFavourite,
   removeUserFavourite,
   updatePublicStatus,
