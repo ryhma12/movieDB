@@ -13,7 +13,7 @@ const CreateGroup = async (groupName, AdminName, Email) => {
 
 const AskToJoinGroup = async (name, groupName) => {
   return await pool.query(
-    'with first_insert as(select id from "user" where "Name"=$1),second_insert as(select id,"groupName" from "group" where "groupName"=$2),third_insert as(insert into "Role" ("groupId","userId","admin","user") values ((select id from second_insert),(select id from first_insert),false,false))select "groupName" from "group" where "groupName"=(select "groupName" from second_insert)',
+    'with first_insert as (select id from "user" where "Name" = $1), second_insert as (select id, "groupName" from "group" where "groupName" = $2) insert into "Role" ("groupId", "userId", "is_admin", "is_user") values ((select id from second_insert), (select id from first_insert), false, false) returning (select "groupName" from "group" where "groupName" = $2)',
     [name, groupName]
   );
 };
