@@ -9,12 +9,12 @@ import CreateGroupForm from "../../components/groups/CreateGroupForm";
 
 const GroupPage = () => {
   const [data, setData] = useState([]);
-  const [users, setUsers] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [browseAllGroups, setBrowseAllGroups] = useState(false);
   const [buttonText, setButtonText] = useState("Pending Approval");
   const [requestButtonText, setRequestButtonText] = useState("Request to join");
+
   const { user } = useUser();
   const { data: groupData, getGroups, error, isLoading } = useGetGroups();
   const { requestToJoinGroup, error: requestError } = useRequestToJoinGroup();
@@ -30,30 +30,6 @@ const GroupPage = () => {
   const openCreateGroupForm = () => {
     setFormOpen(!formOpen);
   };
-
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const res = await fetch(
-          "http://localhost:3001/group/usersofgroup?group=" + selectedGroup,
-          {
-            method: "GET",
-          }
-        );
-        if (!res.ok) {
-          console.log("no response");
-        }
-
-        const data = await res.json();
-        if (data.error) throw new Error(data.error);
-        console.log(data);
-        setUsers(data.result);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUsers();
-  }, [selectedGroup]);
 
   const requestToJoin = async (group) => {
     await requestToJoinGroup(user.Name, group, user.token);
@@ -154,8 +130,7 @@ const GroupPage = () => {
           selectedGroup={selectedGroup}
           setSelectedGroup={setSelectedGroup}
           data={groupData}
-          users={users}
-          setUsers={setUsers}
+          user={user}
         />
       )}
     </div>

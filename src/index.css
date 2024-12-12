@@ -1436,6 +1436,10 @@
   transition: background-color 0.15s ease-in;
   position: relative;
 }
+.PersonCard .button--container {
+  display: flex;
+  gap: 1.2rem;
+}
 .PersonCard button {
   margin-left: auto;
   padding: 0.6rem 1.8rem;
@@ -1631,22 +1635,52 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 50%;
+  width: 70%;
   height: 50%;
   transform: translate(-50%, -50%);
-  padding: 2.4rem;
   border-radius: 1.2rem;
   background-color: #1f1f1f;
   z-index: 5;
+  display: flex;
 }
-.AddUserMenu .header {
+.AddUserMenu .user--menu__nav {
+  padding: 2.4rem 1.2rem 2.4rem 0;
+  width: 30%;
+}
+.AddUserMenu .user--menu__nav .nav--button {
+  padding: 2.4rem 1.2rem;
+  border-bottom: 1px solid #aaaaaa;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.AddUserMenu .user--menu__nav .nav--button span {
+  color: #aaaaaa;
+  font-size: 2.4rem;
+}
+.AddUserMenu .user--menu__nav .nav--button:hover {
+  border-bottom: 1px solid #ffffff;
+}
+.AddUserMenu .user--menu__nav .nav--button:hover span {
+  color: #ffffff;
+}
+.AddUserMenu .user--menu__nav .nav--button.active {
+  border-bottom: 1px solid #ffffff;
+}
+.AddUserMenu .user--menu__nav .nav--button.active span {
+  color: #ffffff;
+}
+.AddUserMenu .content--container {
+  width: 70%;
+  padding: 2.4rem;
+}
+.AddUserMenu .content--container .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.8rem;
   color: #ffffff;
 }
-.AddUserMenu .header svg {
+.AddUserMenu .content--container .header svg {
   cursor: pointer;
   border: 1px solid #ffffff;
   border-radius: 10000rem;
@@ -1654,21 +1688,21 @@
   transition: all 0.2s ease-in-out;
   fill: #ffffff;
 }
-.AddUserMenu .header svg:hover {
+.AddUserMenu .content--container .header svg:hover {
   transform: rotate(180deg);
 }
-.AddUserMenu input {
+.AddUserMenu .content--container input {
   height: 10%;
   width: 100%;
   padding: 0.6rem;
   font-size: 1.8rem;
 }
-.AddUserMenu .people--container {
+.AddUserMenu .content--container .people--container {
   margin-top: 1.8rem;
   height: 90%;
   overflow-y: auto;
 }
-.AddUserMenu .people--container .PersonCard {
+.AddUserMenu .content--container .people--container .PersonCard {
   padding: 3.6rem 1.2rem;
 }
 
