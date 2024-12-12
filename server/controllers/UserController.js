@@ -76,11 +76,10 @@ const postLogin = async (req, res, next) => {
   }
 };
 
-//auth middleware on jo olemassa ja pitää vaan lisätä siihen routeriin ennen DeleteUseria
-
 const DeleteUser = async (req, res, next) => {
   try {
     const result = await deleteuser(req.user.email);
+    console.log("///"+req.user.email)
     return res.status(200).json({ message: "Account deleted" });
   } catch (error) {
     return next(error);

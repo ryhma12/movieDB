@@ -24,8 +24,9 @@ const postcreateGroup = async (req, res, next) => {
 
     const result = await CreateGroup(
       req.body.groupName,
-      req.body.AdminName,
-      req.body.Email
+
+      req.body.Name,
+
     );
 
     return res.status(201).json({ groupName: result.rows[0].groupName });

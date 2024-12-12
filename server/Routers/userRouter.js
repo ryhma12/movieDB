@@ -17,7 +17,7 @@ const router = Router();
 router.post("/register", postRegistration);
 
 router.post("/login", postLogin);
-router.post("/review", postReview);
+router.post("/review", auth,postReview);
 
 router.get("/favourites/get", auth, getUserFavourites);
 router.post("/favourites/post", auth, postUserFavourite);
@@ -25,7 +25,7 @@ router.delete("/favourites/delete", auth, deleteUserFavourite)
 router.put("/favourites/status", auth, putUserStatus)
 router.get("/publicFavourites/get", getPublicUserFavourites)
 
-router.get("/review", getReviewsForAMovie);
+router.get("/review",getReviewsForAMovie);
 router.delete("/delete", auth, DeleteUser);
 router.get("/allusers", getAllUsers);
 
