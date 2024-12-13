@@ -68,6 +68,13 @@ const GetJoinRequestsForGroup = async (groupId) => {
   );
 };
 
+const getMessages = async (groupId) => {
+  return await pool.query(
+    'SELECT c.id AS message_id, c.content AS message_content, c.date AS message_date, u."Name" AS sender_name FROM public.chat c JOIN public."user" u ON c."userId" = u.id JOIN public."group" g ON c."groupId" = g.id WHERE g."groupName" = $1 ORDER BY c.date',
+    [groupId]
+  );
+};
+
 export {
   CreateGroup,
   AskToJoinGroup,
@@ -78,4 +85,5 @@ export {
   sendUserMessageToGroup,
   GetGroupsWhereNoUser,
   GetJoinRequestsForGroup,
+  getMessages,
 };
