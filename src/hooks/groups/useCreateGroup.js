@@ -17,7 +17,7 @@ export const useCreateGroup = () => {
           Authorization: token,
         },
         body: JSON.stringify({
-          AdminName: userName,
+          Name: userName,
           Email: userEmail,
           groupName: groupName,
         }),
