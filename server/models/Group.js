@@ -49,14 +49,14 @@ const GetUsersForGroup = async (groupName) => {
 
 const sendUserMessageToGroup = async (name, groupName, message) => {
   return await pool.query(
-    'with first_insert as(select id as userId, "Name" from "user" where "Name" = $1),second_insert as(select id as groupId from "group" where "groupName" = $2),third_insert as(insert into "Message" ("userId", "groupId", "content", "createdAt") values (select userId from first_insert),(select groupId from second_insert),$3,now())returning id,content,createdAt)select id,content,createdAt from third_insert;',
+    'WITH first_insert AS (SELECT id AS userId FROM "user" WHERE "Name" = $1), second_insert AS (SELECT id AS groupId FROM "group" WHERE "groupName" = $2) INSERT INTO "chat" ("userId", "groupId", "content", "date") SELECT userId, groupId, $3, NOW() FROM first_insert, second_insert RETURNING id, content, date',
     [name, groupName, message]
   );
 };
 
 const GetGroupsWhereNoUser = async (userId) => {
   return await pool.query(
-    ' SELECT "group".id, "group"."groupName" FROM "group" WHERE NOT EXISTS (SELECT 1  FROM "Role" WHERE "Role"."groupId" = "group".id AND "Role"."userId" = $1)',
+    'SELECT "group".id, "group"."groupName" FROM "group" WHERE NOT EXISTS (SELECT 1  FROM "Role" WHERE "Role"."groupId" = "group".id AND "Role"."userId" = $1)',
     [userId]
   );
 };
