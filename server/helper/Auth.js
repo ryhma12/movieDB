@@ -10,6 +10,7 @@ const auth = (req, res, next) => {
   } else {
     try {
       const token = req.headers.authorization;
+      console.log(token);
       const { id, email } = verify(token, process.env.JWT_SECRET_KEY);
       req.user = { id, email };
       next();

@@ -19,6 +19,7 @@ const Dropdown = ({ options, handleSort, dropdownName }) => {
   const handleClick = (e, index) => {
     e.preventDefault();
     e.stopPropagation();
+    console.log(e, index);
     handleSort(index);
     handleDropDown();
   };

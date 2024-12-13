@@ -8,7 +8,6 @@ import SingleGroupView from "./SingleGroupView";
 import CreateGroupForm from "../../components/groups/CreateGroupForm";
 
 const GroupPage = () => {
-  const [data, setData] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [browseAllGroups, setBrowseAllGroups] = useState(false);
@@ -25,7 +24,7 @@ const GroupPage = () => {
       await getGroups(user.id, browseAllGroups);
     };
     fetchGroups();
-  }, [user.id, getGroups, browseAllGroups]);
+  }, [user.id, getGroups, browseAllGroups, formOpen]);
 
   const openCreateGroupForm = () => {
     setFormOpen(!formOpen);

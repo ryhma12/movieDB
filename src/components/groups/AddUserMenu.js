@@ -13,6 +13,8 @@ const AddUserMenu = ({
   allUsers,
   user,
   selectedGroup,
+  acceptTrigger,
+  setAcceptTrigger,
 }) => {
   const { getUsers, data } = useGetUsers();
   const [displayUsers, setDisplayUsers] = useState(true);
@@ -36,11 +38,12 @@ const AddUserMenu = ({
 
   const handleAccept = async (item) => {
     await acceptUser(item.Name, selectedGroup, user.token);
+    setAcceptTrigger(!acceptTrigger);
   };
 
   const handleRefuse = async (item) => {
-    console.log(selectedGroup);
     await refuseOrCancel(item.Name, selectedGroup, user.token);
+    setAcceptTrigger(!acceptTrigger);
   };
 
   const handleInvite = () => {};

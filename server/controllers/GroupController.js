@@ -20,14 +20,16 @@ const postcreateGroup = async (req, res, next) => {
     //    if (req.body.GroupName === '') return next(Error('GroupName too small'))
     const userFromDb = await selectUserByEmail(req.body.Email);
     const user = userFromDb.rows[0];
-    if (!user) return next(new ApiError("Invalid credentials", 401));
 
+    if (!user) return next(new ApiError("Invalid credentials", 401));
+    console.log(req.body.groupName, req.body.Name, user.Email);
     const result = await CreateGroup(
       req.body.groupName,
 
       req.body.Name,
-       user.Password
+      user.Email
     );
+    console.log(result);
 
     return res.status(201).json({ groupName: result.rows[0].groupName });
   } catch (error) {

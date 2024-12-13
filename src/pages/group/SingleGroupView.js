@@ -9,6 +9,7 @@ import AddUserMenu from "../../components/groups/AddUserMenu";
 const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
   const [addUserMenuOpen, setAddUserMenuOpen] = useState(false);
   const [currentUserIsAdmin, setCurrentUserIsAdmin] = useState(false);
+  const [acceptTrigger, setAcceptTrigger] = useState(false);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -42,16 +43,18 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
       }
     };
     getUsers();
-  }, [selectedGroup, user.Email]);
+  }, [selectedGroup, user.Email, addUserMenuOpen, acceptTrigger]);
 
   const handleGroupSwitch = (index) => {
-    setSelectedGroup(data[index]);
-    console.log("switch to group " + data[index]);
+    setSelectedGroup(data[index].groupName);
+    console.log("switch to group " + data[index].groupName);
   };
 
   const openAddUserMenu = () => {
     setAddUserMenuOpen(!addUserMenuOpen);
   };
+
+  console.log("data on ", data);
   return (
     <div className="SingleGroupView">
       {addUserMenuOpen && (
@@ -61,13 +64,15 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
           allUsers={users}
           user={user}
           selectedGroup={selectedGroup}
+          acceptTrigger={acceptTrigger}
+          setAcceptTrigger={setAcceptTrigger}
         />
       )}
       {addUserMenuOpen && <TintLayer />}
       <div className="container">
         <div className="group--header">
           <Dropdown
-            options={data ? data.groupName : []}
+            options={data ? data.map((group) => group.groupName) : []}
             handleSort={handleGroupSwitch}
             dropdownName={selectedGroup ? selectedGroup : data[0].groupName}
           />
