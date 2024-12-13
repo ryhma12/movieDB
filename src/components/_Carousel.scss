@@ -1,35 +1,61 @@
-
-
 .carousel {
-  @include responsive-width;
   position: relative;
+  @include responsive-width;
   background-color: $color2;
   padding: 2rem;
+  overflow: hidden;
   .name {
     color: $color5;
     margin-bottom: 1rem;
   }
   .card-container {
     display: flex;
-    gap: $space2;
-    width: 100%;
-    height: 100%;
     .card {
+      padding: 0.5rem;
       .rating-container {
         color: $color5;
       }
     }
   }
   .carousel-move {
-    .back {
-      position: absolute;
-      top: 50%;
-      left: $space2;
-    }
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    .back,
     .forward {
       position: absolute;
-      top: 50%;
-      right: $space2;
+      cursor: pointer;
+      color: $color5;
+      top: 25%;
+      width: 10rem;
+      height: 50%;
+      border: 2px solid $color10;
+      background-color: #00000123;
+      box-shadow: none;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 0 2rem #08080873;
+    }
+
+    .back {
+      left: 0px;
+      border-radius: 0 50% 50% 0;
+      border-left: none;
+    }
+
+    .forward {
+      right: 0px;
+      border-radius: 50% 0 0 50%;
+      border-right: none;
+    }
+
+    .back:hover,
+    .forward:hover {
+      background-color: #00000080;
+      box-shadow: 0 0 2rem #dfdfdf86;
+    }
+  }
+  &:hover {
+    .carousel-move {
+      opacity: 1;
     }
   }
   &:not(:last-child) {
