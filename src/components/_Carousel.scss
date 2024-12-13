@@ -32,6 +32,7 @@
       background-color: #00000123;
       box-shadow: none;
       transition: background-color 0.3s ease;
+      box-shadow: 0 0 2rem #08080873;
     }
 
     .back {
@@ -49,7 +50,6 @@
     .back:hover,
     .forward:hover {
       background-color: #00000080;
-
       box-shadow: 0 0 2rem #dfdfdf86;
     }
   }

@@ -43,27 +43,30 @@ const Carousel = ({ name, setSelectedMovie }) => {
           transform: `translateX(${-(100 / cardsToShow) * cardIndex}%)`,
         }}
       >
-        {data?.results?.map((movie, index) => {
-          return (
-            <div
-              key={movie.id}
-              className="card"
-              style={{
-                flex: `0 0 ${100 / cardsToShow}%`,
-                //display: isVisible ? "block" : "none",
-              }}
-            >
-              <ProductCard
-                item={movie}
-                interActive={true}
-                setSelectedMovie={setSelectedMovie}
-              />
-              <div className="rating-container">
-                <span>Rating: {movie.vote_average.toFixed(1)}</span>
+        {!error && !isLoading && data?.results?.length > 0 ? (
+          data?.results?.map((movie) => {
+            return (
+              <div
+                key={movie.id}
+                className="card"
+                style={{
+                  flex: `0 0 ${100 / cardsToShow}%`,
+                }}
+              >
+                <ProductCard
+                  item={movie}
+                  interActive={true}
+                  setSelectedMovie={setSelectedMovie}
+                />
+                <div className="rating-container">
+                  <span>Rating: {movie.vote_average.toFixed(1)}</span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div>Loading</div>
+        )};
       </div>
       <div className="carousel-move">
         <button
