@@ -32,7 +32,7 @@ const MessageArea = ({ user, selectedGroup }) => {
     setTriggerFetchMessages(!triggerFetchMessages);
   };
   return (
-    <div className="content--container">
+    <div className="MessageArea">
       <div className="content">
         {messagesData.result &&
           messagesData.result.map((message, index) => (
