@@ -9,6 +9,7 @@ import {
   GetGroupsWhereNoUser,
   GetJoinRequestsForGroup,
   sendUserMessageToGroup,
+  getMessages,
 } from "../models/Group.js";
 import { ApiError } from "../helper/ApiError.js";
 import jwt from "jsonwebtoken";
@@ -138,6 +139,18 @@ const GetRequestsToJoinGroup = async (req, res, next) => {
   }
 };
 
+const getMessagesOfAGroup = async (req, res, next) => {
+  try {
+    const result = await getMessages(req.query.groupName);
+    console.log(result);
+    return res.status(200).json({
+      result: result.rows,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export {
   postcreateGroup,
   AcceptUser,
@@ -148,4 +161,5 @@ export {
   getUsersOfAGroup,
   getGroupsWhereUserIsNot,
   GetRequestsToJoinGroup,
+  getMessagesOfAGroup,
 };

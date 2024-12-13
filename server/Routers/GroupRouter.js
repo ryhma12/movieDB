@@ -9,6 +9,7 @@ import {
   getUsersOfAGroup,
   getGroupsWhereUserIsNot,
   GetRequestsToJoinGroup,
+  getMessagesOfAGroup,
 } from "../controllers/GroupController.js";
 import { auth } from "../helper/Auth.js";
 
@@ -23,6 +24,6 @@ router.get("/getgroups", getGroups);
 router.get("/usersofgroup", getUsersOfAGroup);
 router.get("/browsegroups", getGroupsWhereUserIsNot);
 router.get("/getjoinrequests", GetRequestsToJoinGroup);
-
+router.get("/getmessages", getMessagesOfAGroup);
 
 export default router;
