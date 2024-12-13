@@ -70,50 +70,7 @@
           }
         }
       }
-      .content--container {
-        background-color: $color9;
-        width: 80%;
-        padding: 0 6.4rem;
-        display: flex;
-        flex-direction: column;
-        .user--input {
-          width: 100%;
-          height: 10%;
 
-          input {
-            width: 100%;
-            padding: 1.2rem;
-            border-radius: 0.5rem;
-            font-size: 1.8rem;
-            border: none;
-            background-color: #f0f0f0;
-            &:focus {
-              outline: none;
-            }
-          }
-        }
-        .content {
-          height: 90%;
-          .message {
-            display: flex;
-            gap: 1.8rem;
-            color: $color5;
-            .sender {
-              display: flex;
-              align-items: center;
-              gap: 1.2rem;
-
-              font-weight: 600;
-              margin-bottom: 0.6rem;
-              .time {
-                font-weight: 500;
-                font-size: 1.2rem;
-                color: rgba($color: $color5, $alpha: 0.5);
-              }
-            }
-          }
-        }
-      }
     }
   }
 }

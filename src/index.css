@@ -559,13 +559,17 @@
 
 .ShowtimesSection {
   display: flex;
-  width: 100%;
+  width: 80%;
   flex-direction: column;
   gap: 2.4rem;
 }
+@media (max-width: 900px) {
+  .ShowtimesSection {
+    width: 95%;
+  }
+}
 .ShowtimesSection ul {
   justify-content: flex-start;
-  width: 80%;
   list-style: none;
 }
 .ShowtimesSection .empty {
@@ -1088,7 +1092,7 @@
 .UserSettings {
   width: 100%;
   height: 100%;
-  padding: 4.8rem 9.6rem;
+  padding-top: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1119,7 +1123,12 @@
 }
 .UserSettings .container {
   height: 80vh;
-  width: 70%;
+  width: 80%;
+}
+@media (max-width: 900px) {
+  .UserSettings .container {
+    width: 95%;
+  }
 }
 .UserSettings .container h2 {
   width: 100%;
@@ -1539,48 +1548,6 @@
   background-color: #ffffff;
   color: #1f1f1f;
 }
-.SingleGroupView .container .group--content .content--container {
-  background-color: #333;
-  width: 80%;
-  padding: 0 6.4rem;
-  display: flex;
-  flex-direction: column;
-}
-.SingleGroupView .container .group--content .content--container .user--input {
-  width: 100%;
-  height: 10%;
-}
-.SingleGroupView .container .group--content .content--container .user--input input {
-  width: 100%;
-  padding: 1.2rem;
-  border-radius: 0.5rem;
-  font-size: 1.8rem;
-  border: none;
-  background-color: #f0f0f0;
-}
-.SingleGroupView .container .group--content .content--container .user--input input:focus {
-  outline: none;
-}
-.SingleGroupView .container .group--content .content--container .content {
-  height: 90%;
-}
-.SingleGroupView .container .group--content .content--container .content .message {
-  display: flex;
-  gap: 1.8rem;
-  color: #ffffff;
-}
-.SingleGroupView .container .group--content .content--container .content .message .sender {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.6rem;
-}
-.SingleGroupView .container .group--content .content--container .content .message .sender .time {
-  font-weight: 500;
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.5);
-}
 
 .CreateGroupForm {
   background-color: #ffffff;
@@ -1704,6 +1671,118 @@
 }
 .AddUserMenu .content--container .people--container .PersonCard {
   padding: 3.6rem 1.2rem;
+}
+
+.carousel {
+  width: 80%;
+  position: relative;
+  background-color: #121212;
+  padding: 2rem;
+}
+@media (max-width: 900px) {
+  .carousel {
+    width: 95%;
+  }
+}
+.carousel .name {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+.carousel .card-container {
+  display: flex;
+  gap: 2.4rem;
+  width: 100%;
+  height: 100%;
+}
+.carousel .card-container .card .rating-container {
+  color: #ffffff;
+}
+.carousel .carousel-move .back {
+  position: absolute;
+  top: 50%;
+  left: 2.4rem;
+}
+.carousel .carousel-move .forward {
+  position: absolute;
+  top: 50%;
+  right: 2.4rem;
+}
+.carousel:not(:last-child) {
+  border-bottom: 3px solid #1a1a1a;
+  margin-bottom: 2.4rem;
+  padding-bottom: 2.4rem;
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.4rem;
+}
+
+.content--container {
+  background-color: #333;
+  width: 80%;
+  padding: 0 6.4rem;
+  display: flex;
+  flex-direction: column;
+}
+.content--container .user--input {
+  width: 100%;
+  height: 10%;
+}
+.content--container .user--input input {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  border: none;
+  background-color: #f0f0f0;
+}
+.content--container .user--input input:focus {
+  outline: none;
+}
+.content--container .content {
+  width: 100%;
+  height: 90%;
+  overflow-y: auto;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.content--container .content .message {
+  display: flex;
+  width: 100%;
+  gap: 1.8rem;
+  color: #ffffff;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 1.8rem 0;
+}
+.content--container .content .message .RoundPhoto {
+  width: 4.8rem;
+  height: 4.8rem;
+}
+.content--container .content .message .text--container {
+  width: 100%;
+}
+.content--container .content .message .text--container .message--content {
+  word-wrap: break-word; /* Allows long words to break and wrap onto the next line */
+  overflow-wrap: break-word; /* Ensures that text doesn't overflow horizontally */
+  white-space: normal; /* Prevents the text from being kept on one line */
+  word-break: break-word; /* Breaks long words to prevent horizontal scrolling */
+}
+.content--container .content .message .text--container .sender {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.content--container .content .message .text--container .sender .time {
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 * {
