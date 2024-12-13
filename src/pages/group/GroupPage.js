@@ -13,6 +13,7 @@ const GroupPage = () => {
   const [browseAllGroups, setBrowseAllGroups] = useState(false);
   const [buttonText, setButtonText] = useState("Pending Approval");
   const [requestButtonText, setRequestButtonText] = useState("Request to join");
+  const [cancelTrigger, setCancelTrigger] = useState(false);
 
   const { user } = useUser();
   const { data: groupData, getGroups, error, isLoading } = useGetGroups();
@@ -24,7 +25,7 @@ const GroupPage = () => {
       await getGroups(user.id, browseAllGroups);
     };
     fetchGroups();
-  }, [user.id, getGroups, browseAllGroups, formOpen]);
+  }, [user.id, getGroups, browseAllGroups, formOpen, cancelTrigger]);
 
   const openCreateGroupForm = () => {
     setFormOpen(!formOpen);
@@ -37,6 +38,7 @@ const GroupPage = () => {
 
   const handleCancelRequest = async (group) => {
     await refuseOrCancel(user.Name, group, user.token);
+    setCancelTrigger(!cancelTrigger);
   };
 
   return (

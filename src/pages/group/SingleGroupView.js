@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useUser } from "../../hooks/useUser";
 
 import Dropdown from "../../components/Dropdown";
 import RoundPhoto from "../../components/RoundPhoto";
 import TintLayer from "../../components/utility/TintLayer";
 import AddUserMenu from "../../components/groups/AddUserMenu";
+import MessageArea from "../../components/groups/MessageArea";
 
 const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
   const [addUserMenuOpen, setAddUserMenuOpen] = useState(false);
@@ -54,7 +54,6 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
     setAddUserMenuOpen(!addUserMenuOpen);
   };
 
-  console.log("data on ", data);
   return (
     <div className="SingleGroupView">
       {addUserMenuOpen && (
@@ -103,28 +102,7 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
               <span>Back to group lobby</span>
             </div>
           </div>
-          <div className="content--container">
-            <div className="content">
-              <div className="message">
-                <RoundPhoto />
-                <div className="text--container">
-                  <div className="sender">
-                    <span>Matti</span>
-                    <span className="time">Eilen 20.04</span>
-                  </div>
-                  <span>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nisi id velit quasi, natus fugit fugiat! A distinctio
-                    voluptatibus eligendi, similique corrupti ipsa non odit
-                    saepe eos iure ut perspiciatis incidunt!
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="user--input">
-              <input type="text" />
-            </div>
-          </div>
+          <MessageArea user={user} selectedGroup={selectedGroup} />
         </div>
       </div>
     </div>
