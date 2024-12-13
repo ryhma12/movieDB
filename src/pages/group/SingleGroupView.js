@@ -76,7 +76,9 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
             dropdownName={selectedGroup ? selectedGroup : data[0].groupName}
           />
           <div className="btn--container">
-            <button onClick={openAddUserMenu}>Add User</button>
+            {currentUserIsAdmin && (
+              <button onClick={openAddUserMenu}>Add User</button>
+            )}
             <button>Settings</button>
           </div>
         </div>

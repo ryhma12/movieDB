@@ -1359,6 +1359,7 @@
 .GroupPage .main--container .inner--container .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1.8rem 2.4rem;
   border-bottom: 1px solid #1f1f1f;
   height: 10%;
@@ -1431,6 +1432,23 @@
   color: #1f1f1f;
 }
 
+@media (max-width: 1200px) {
+  .header .btn--container {
+    width: 60% !important;
+  }
+}
+@media (max-height: 840px) {
+  .header {
+    height: 12% !important;
+    padding: 1.2rem 1.8rem !important;
+  }
+}
+@media (max-height: 600px) {
+  .header {
+    height: 12% !important;
+    padding: 0.2rem 1.8rem !important;
+  }
+}
 .PersonCard {
   display: flex;
   align-items: center;
@@ -1526,13 +1544,14 @@
   display: flex;
   height: 95%;
   width: 100%;
-  background-color: blue;
 }
 .SingleGroupView .container .group--content .members--container {
   background-color: #121212;
   width: 20%;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
+  font-size: 1.2rem;
 }
 .SingleGroupView .container .group--content .members--container .back--button__container {
   position: absolute;
@@ -1549,6 +1568,35 @@
   color: #1f1f1f;
 }
 
+@media (max-width: 1200px) {
+  .members--container {
+    display: none;
+  }
+}
+@media (max-width: 1000px) {
+  .group--header .btn--container {
+    width: 50% !important;
+  }
+  .group--header .Dropdown {
+    width: 40% !important;
+  }
+}
+@media (max-width: 650px) {
+  .group--header .btn--container {
+    width: 60% !important;
+  }
+  .group--header .Dropdown {
+    width: 40% !important;
+  }
+}
+@media (max-height: 850px) {
+  .group--header {
+    height: 10% !important;
+  }
+  .group--content {
+    height: 90% !important;
+  }
+}
 .CreateGroupForm {
   background-color: #ffffff;
   position: absolute;
@@ -1673,6 +1721,28 @@
   padding: 3.6rem 1.2rem;
 }
 
+@media (max-width: 1000px) {
+  .AddUserMenu {
+    width: 80%;
+    height: 80%;
+  }
+}
+@media (max-width: 900px) {
+  .AddUserMenu {
+    width: 90%;
+    height: 90%;
+    flex-direction: column;
+  }
+  .AddUserMenu .content--container {
+    width: 100%;
+    font-size: 1.4rem !important;
+  }
+  .AddUserMenu .user--menu__nav {
+    display: flex;
+    width: 100%;
+    gap: 1.2rem;
+  }
+}
 .carousel {
   width: 80%;
   position: relative;
@@ -1720,18 +1790,18 @@
   margin-top: 2.4rem;
 }
 
-.content--container {
+.MessageArea {
   background-color: #333;
   width: 80%;
   padding: 0 6.4rem;
   display: flex;
   flex-direction: column;
 }
-.content--container .user--input {
+.MessageArea .user--input {
   width: 100%;
   height: 10%;
 }
-.content--container .user--input input {
+.MessageArea .user--input input {
   width: 100%;
   padding: 1.2rem;
   border-radius: 0.5rem;
@@ -1739,10 +1809,10 @@
   border: none;
   background-color: #f0f0f0;
 }
-.content--container .user--input input:focus {
+.MessageArea .user--input input:focus {
   outline: none;
 }
-.content--container .content {
+.MessageArea .content {
   width: 100%;
   height: 90%;
   overflow-y: auto;
@@ -1751,7 +1821,7 @@
   flex-direction: column;
   gap: 1.8rem;
 }
-.content--container .content .message {
+.MessageArea .content .message {
   display: flex;
   width: 100%;
   gap: 1.8rem;
@@ -1759,30 +1829,61 @@
   border-bottom: 1px solid #aaaaaa;
   padding: 1.8rem 0;
 }
-.content--container .content .message .RoundPhoto {
+.MessageArea .content .message .RoundPhoto {
   width: 4.8rem;
   height: 4.8rem;
 }
-.content--container .content .message .text--container {
+.MessageArea .content .message .text--container {
   width: 100%;
 }
-.content--container .content .message .text--container .message--content {
+.MessageArea .content .message .text--container .message--content {
   word-wrap: break-word; /* Allows long words to break and wrap onto the next line */
   overflow-wrap: break-word; /* Ensures that text doesn't overflow horizontally */
   white-space: normal; /* Prevents the text from being kept on one line */
   word-break: break-word; /* Breaks long words to prevent horizontal scrolling */
 }
-.content--container .content .message .text--container .sender {
+.MessageArea .content .message .text--container .sender {
   display: flex;
   align-items: center;
   gap: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.6rem;
 }
-.content--container .content .message .text--container .sender .time {
+.MessageArea .content .message .text--container .sender .time {
   font-weight: 500;
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 1600px) {
+  .MessageArea {
+    padding: 0 3.2rem;
+  }
+}
+@media (max-width: 1200px) {
+  .MessageArea {
+    width: 100%;
+    padding: 0 1.6rem;
+  }
+}
+.content::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+.content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 * {
