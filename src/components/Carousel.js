@@ -1,17 +1,13 @@
-import useFetch from "../hooks/useFetch";
 import ProductCard from "./ProductCard";
 import { useState, useEffect } from "react";
 
-const Carousel = ({ name, setSelectedMovie }) => {
+const Carousel = ({ name, setSelectedMovie, data = null }) => {
   const [cardIndex, setCardIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(() => {
     if (window.innerWidth < 720) return 2;
     if (window.innerWidth < 900) return 4;
     return 6;
   });
-  const { data, isLoading, error } = useFetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&adult=false`
-  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,6 +29,8 @@ const Carousel = ({ name, setSelectedMovie }) => {
     });
   };
 
+  if (!data?.results?.length) return;
+
   return (
     <div className="carousel">
       <div className="name">{name}</div>
@@ -43,30 +41,26 @@ const Carousel = ({ name, setSelectedMovie }) => {
           transform: `translateX(${-(100 / cardsToShow) * cardIndex}%)`,
         }}
       >
-        {!error && !isLoading && data?.results?.length > 0 ? (
-          data?.results?.map((movie) => {
-            return (
-              <div
-                key={movie.id}
-                className="card"
-                style={{
-                  flex: `0 0 ${100 / cardsToShow}%`,
-                }}
-              >
-                <ProductCard
-                  item={movie}
-                  interActive={true}
-                  setSelectedMovie={setSelectedMovie}
-                />
-                <div className="rating-container">
-                  <span>Rating: {movie.vote_average.toFixed(1)}</span>
-                </div>
+        {data?.results?.map((movie) => {
+          return (
+            <div
+              key={movie.id}
+              className="card"
+              style={{
+                flex: `0 0 ${100 / cardsToShow}%`,
+              }}
+            >
+              <ProductCard
+                item={movie}
+                interActive={true}
+                setSelectedMovie={setSelectedMovie}
+              />
+              <div className="rating-container">
+                <span>Rating: {movie.vote_average.toFixed(1)}</span>
               </div>
-            );
-          })
-        ) : (
-          <div>Loading</div>
-        )};
+            </div>
+          );
+        })}
       </div>
       <div className="carousel-move">
         <button
