@@ -7,7 +7,7 @@ import { useState, useRef } from "react";
 import chevLeft from "../assets/chevLeft.svg";
 import chevRight from "../assets/chevRight.svg";
 
-const Showtimes = () => {
+const Showtimes = ({ setSelectedMovie }) => {
   const [selectedArea, setSelectedArea] = useState([]);
   const [selectedAreaName, setSelectedAreaName] = useState("");
   const [page, setPage] = useState(1);
@@ -96,6 +96,7 @@ const Showtimes = () => {
                       subLang2:
                         show.SubtitleLanguage2?.ISOTwoLetterCode || null,
                     }}
+                    setSelectedMovie={setSelectedMovie}
                   />
                 ))
               ) : (

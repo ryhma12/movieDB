@@ -12,6 +12,7 @@ const Showtime = ({
     subLang1 = "",
     subLang2 = "",
   },
+  setSelectedMovie,
 }) => {
   const date = new Date(time);
 
@@ -34,7 +35,7 @@ const Showtime = ({
     }&query=${movie.replace(" ", "+")}`
   );
 
-  console.log(data);
+  console.log(data.results);
 
   return (
     <li className="Showtime">
@@ -50,6 +51,7 @@ const Showtime = ({
               }
               alt={`${data.results[0].original_title || "Movie"} Poster`}
               className="movie--poster"
+              onClick={() => setSelectedMovie(data.results[0])}
             />
           )}
           <div className="movie--texts">
@@ -71,14 +73,16 @@ const Showtime = ({
                     {data.results[0].overview || "No overview available."}
                   </span>
                   <div className="rating">
-                    <span>
-                      Rating:{" "}
-                      {data.results[0].vote_average
-                        ? data.results[0].vote_average.toFixed(1)
-                        : "N/A"}{" "}
-                      / 10
-                    </span>
-                    {data.results[0].vote_average && <Star />}
+                    {data.results[0].vote_average ? (
+                      <>
+                        <span>
+                          Rating: {data.results[0].vote_average.toFixed(1)}
+                        </span>
+                        {data.results[0].vote_average && <Star />}
+                      </>
+                    ) : (
+                      <span>Unrated</span>
+                    )}
                   </div>
                 </>
               )}
