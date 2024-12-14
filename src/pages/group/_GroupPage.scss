@@ -96,22 +96,28 @@
   }
 }
 @media (max-width: 1200px) {
-  .header {
-    .btn--container {
-      width: 60% !important;
+  .GroupPage {
+    .header {
+      .btn--container {
+        width: 60% !important;
+      }
     }
   }
 }
 
 @media (max-height: 840px) {
-  .header {
-    height: 12% !important;
-    padding: 1.2rem 1.8rem !important;
+  .GroupPage {
+    .header {
+      height: 12% !important;
+      padding: 1.2rem 1.8rem !important;
+    }
   }
 }
 @media (max-height: 600px) {
-  .header {
-    height: 12% !important;
-    padding: 0.2rem 1.8rem !important;
+  .GroupPage {
+    .header {
+      height: 12% !important;
+      padding: 0.2rem 1.8rem !important;
+    }
   }
 }

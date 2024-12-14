@@ -559,11 +559,11 @@
 
 .ShowtimesSection {
   display: flex;
-  width: 80%;
+  width: 70%;
   flex-direction: column;
   gap: 2.4rem;
 }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .ShowtimesSection {
     width: 95%;
   }
@@ -581,22 +581,68 @@
   gap: 2.4rem;
   color: #ffffff;
 }
-.Showtime .time {
-  color: #4f87d4;
+.Showtime .movie--poster {
+  width: 15%;
 }
-.Showtime .movie {
+.Showtime .time--container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  padding: 1.2rem;
+}
+.Showtime .time--container .time {
+  color: #4f87d4;
+  font-size: 3.2rem;
+}
+.Showtime .time--container .date {
+  font-size: 1.8rem;
+}
+.Showtime .movie--texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+  width: 70%;
+}
+.Showtime .movie--texts .header {
+  display: flex;
+  justify-content: space-between;
+}
+.Showtime .movie--texts .header .title--container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.Showtime .movie--texts .movie--details__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  height: 100%;
+  position: relative;
+}
+.Showtime .movie--texts .movie--details__container .rating {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.Showtime .movie--texts .movie--details__container .rating svg {
+  height: 2.4rem;
+}
+.Showtime .movie--texts .movie {
   color: #e4bc0e;
 }
-.Showtime .lang {
+.Showtime .movie--texts .lang {
   display: flex;
   margin-left: auto;
   gap: 2.4rem;
 }
-.Showtime .lang p:empty {
+.Showtime .movie--texts .lang p:empty {
   display: none;
 }
 .Showtime:not(:last-child) {
-  border-bottom: 2px solid #1a1a1a;
+  border-bottom: 1px solid rgba(170, 170, 170, 0.5);
   margin-bottom: 2.4rem;
   padding-bottom: 2.4rem;
 }
@@ -653,21 +699,50 @@
 
 .showtimes {
   display: flex;
-  flex-direction: column;
+  gap: 1.2rem;
   align-items: center;
+  overflow: hidden;
+  height: 94vh;
+}
+.showtimes .filter--container {
+  width: 30%;
+  height: 100%;
+  background-color: black;
+}
+.showtimes .filter--container .Dropdown {
+  color: white;
+  margin: 2.4rem;
 }
 .showtimes .ShowtimesSection {
   display: flex;
-  width: 100%;
+  padding: 2.4rem;
+  width: 70%;
+  height: 100%;
   align-items: center;
+  overflow-y: auto;
 }
 .showtimes .ShowtimesSection .empty {
   color: white;
 }
-.showtimes .Dropdown {
-  color: white;
-  width: 80%;
-  margin: 2.4rem;
+
+.ShowtimesSection::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+.ShowtimesSection::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.ShowtimesSection::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.ShowtimesSection::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .BrowseMovies {
@@ -1123,9 +1198,9 @@
 }
 .UserSettings .container {
   height: 80vh;
-  width: 80%;
+  width: 70%;
 }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .UserSettings .container {
     width: 95%;
   }
@@ -1433,18 +1508,18 @@
 }
 
 @media (max-width: 1200px) {
-  .header .btn--container {
+  .GroupPage .header .btn--container {
     width: 60% !important;
   }
 }
 @media (max-height: 840px) {
-  .header {
+  .GroupPage .header {
     height: 12% !important;
     padding: 1.2rem 1.8rem !important;
   }
 }
 @media (max-height: 600px) {
-  .header {
+  .GroupPage .header {
     height: 12% !important;
     padding: 0.2rem 1.8rem !important;
   }
@@ -1744,12 +1819,13 @@
   }
 }
 .carousel {
-  width: 80%;
   position: relative;
+  width: 70%;
   background-color: #121212;
   padding: 2rem;
+  overflow: hidden;
 }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .carousel {
     width: 95%;
   }
@@ -1760,22 +1836,48 @@
 }
 .carousel .card-container {
   display: flex;
-  gap: 2.4rem;
-  width: 100%;
-  height: 100%;
+}
+.carousel .card-container .card {
+  padding: 0.5rem;
 }
 .carousel .card-container .card .rating-container {
   color: #ffffff;
 }
-.carousel .carousel-move .back {
-  position: absolute;
-  top: 50%;
-  left: 2.4rem;
+.carousel .carousel-move {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
+.carousel .carousel-move .back,
 .carousel .carousel-move .forward {
   position: absolute;
-  top: 50%;
-  right: 2.4rem;
+  cursor: pointer;
+  color: #ffffff;
+  top: 25%;
+  width: 10rem;
+  height: 50%;
+  border: 2px solid #e4bc0e;
+  background-color: rgba(0, 0, 1, 0.137254902);
+  box-shadow: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 2rem rgba(8, 8, 8, 0.4509803922);
+}
+.carousel .carousel-move .back {
+  left: 0px;
+  border-radius: 0 50% 50% 0;
+  border-left: none;
+}
+.carousel .carousel-move .forward {
+  right: 0px;
+  border-radius: 50% 0 0 50%;
+  border-right: none;
+}
+.carousel .carousel-move .back:hover,
+.carousel .carousel-move .forward:hover {
+  background-color: rgba(0, 0, 0, 0.5019607843);
+  box-shadow: 0 0 2rem rgba(223, 223, 223, 0.5254901961);
+}
+.carousel:hover .carousel-move {
+  opacity: 1;
 }
 .carousel:not(:last-child) {
   border-bottom: 3px solid #1a1a1a;
