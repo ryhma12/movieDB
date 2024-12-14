@@ -1,7 +1,7 @@
 import ProductCard from "./ProductCard";
 import { useState, useEffect } from "react";
 
-const Carousel = ({ name, setSelectedMovie, data=null }) => {
+const Carousel = ({ name, setSelectedMovie, data = null }) => {
   const [cardIndex, setCardIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(() => {
     if (window.innerWidth < 720) return 2;
@@ -29,6 +29,8 @@ const Carousel = ({ name, setSelectedMovie, data=null }) => {
     });
   };
 
+  if (!data?.results?.length) return;
+
   return (
     <div className="carousel">
       <div className="name">{name}</div>
@@ -39,30 +41,26 @@ const Carousel = ({ name, setSelectedMovie, data=null }) => {
           transform: `translateX(${-(100 / cardsToShow) * cardIndex}%)`,
         }}
       >
-        {data?.results?.length > 0 ? (
-          data?.results?.map((movie) => {
-            return (
-              <div
-                key={movie.id}
-                className="card"
-                style={{
-                  flex: `0 0 ${100 / cardsToShow}%`,
-                }}
-              >
-                <ProductCard
-                  item={movie}
-                  interActive={true}
-                  setSelectedMovie={setSelectedMovie}
-                />
-                <div className="rating-container">
-                  <span>Rating: {movie.vote_average.toFixed(1)}</span>
-                </div>
+        {data?.results?.map((movie) => {
+          return (
+            <div
+              key={movie.id}
+              className="card"
+              style={{
+                flex: `0 0 ${100 / cardsToShow}%`,
+              }}
+            >
+              <ProductCard
+                item={movie}
+                interActive={true}
+                setSelectedMovie={setSelectedMovie}
+              />
+              <div className="rating-container">
+                <span>Rating: {movie.vote_average.toFixed(1)}</span>
               </div>
-            );
-          })
-        ) : (
-          <div>cursed?</div>
-        )};
+            </div>
+          );
+        })}
       </div>
       <div className="carousel-move">
         <button
