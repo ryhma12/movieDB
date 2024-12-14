@@ -1,28 +1,73 @@
 .Showtime {
+  display: flex;
+  gap: $space2;
+  color: $color5;
+  .movie--poster {
+    width: 15%;
+  }
+  .time--container {
     display: flex;
-    gap: $space2;
-    color: $color5;
-
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    padding: 1.2rem;
     .time {
-        color: $color6;
+      color: $color6;
+      font-size: 3.2rem;
     }
+    .date {
+      font-size: 1.8rem;
+    }
+  }
+  .movie--texts {
+    display: flex;
+    flex-direction: column;
+    gap: 2.8rem;
 
+    width: 70%;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      .title--container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+    }
+    .movie--details__container {
+      display: flex;
+      flex-direction: column;
+      gap: 2.4rem;
+      height: 100%;
+      position: relative;
+      .rating {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        svg {
+          height: 2.4rem;
+        }
+      }
+    }
     .movie {
-        color:$color10
+      color: $color10;
     }
 
     .lang {
-        display: flex;
-        margin-left: auto;
-        gap: $space2;
-        p:empty {
-            display: none;
-        }
+      display: flex;
+      margin-left: auto;
+      gap: $space2;
+      p:empty {
+        display: none;
+      }
     }
+  }
 
-    &:not(:last-child) {
-        border-bottom: 2px solid #1a1a1a;
-        margin-bottom: $space2;
-        padding-bottom: $space2;
-    }
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba($color: $color4, $alpha: 0.5);
+    margin-bottom: $space2;
+    padding-bottom: $space2;
+  }
 }

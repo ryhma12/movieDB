@@ -1,19 +1,48 @@
 .showtimes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .ShowtimesSection {
-        display: flex;
-        width: 100%;
-        align-items: center;
-
-        .empty {
-            color: white;
-        }
-    }
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  overflow: hidden;
+  height: 94vh;
+  .filter--container {
+    width: 30%;
+    height: 100%;
+    background-color: black;
     .Dropdown {
-        color: white;
-        width: 80%;
-        margin: $space2;
+      color: white;
+      margin: $space2;
     }
+  }
+  .ShowtimesSection {
+    display: flex;
+    padding: 2.4rem;
+    width: 70%;
+    height: 100%;
+    align-items: center;
+    overflow-y: auto;
+
+    .empty {
+      color: white;
+    }
+  }
+}
+
+.ShowtimesSection::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+.ShowtimesSection::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.ShowtimesSection::-webkit-scrollbar-thumb {
+  background-color: rgba($color: $color5, $alpha: 1);
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.ShowtimesSection::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }

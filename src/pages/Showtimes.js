@@ -10,52 +10,50 @@ const Showtimes = () => {
   const [selectedAreaName, setSelectedAreaName] = useState("");
 
   const handleTheatreArea = (index) => {
-    if (theatreAreaFetchData &&
+    if (
+      theatreAreaFetchData &&
       !theatreAreaFetchError &&
       theatreAreaParseData &&
-      !theatreAreaParseError) {
+      !theatreAreaParseError
+    ) {
       const currentArea = theatreAreaParseData[index + 1];
       if (currentArea) {
         setSelectedArea(currentArea.ID);
         setSelectedAreaName(currentArea.Name);
-      };
-    };
+      }
+    }
   };
 
-  const {
-    data: showtimeFetchData,
-    isLoading: showtimeIsLoading,
-  } = useFetch(
+  const { data: showtimeFetchData, isLoading: showtimeIsLoading } = useFetch(
     `https://www.finnkino.fi/xml/Schedule?nrOfDays=31&area=${selectedArea}`,
     "finnkino"
   );
 
-  const {
-    data: showtimeParseData,
-    isParsing: showtimeIsParsing,
-  } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
+  const { data: showtimeParseData, isParsing: showtimeIsParsing } = useXmlParse(
+    showtimeFetchData,
+    "Schedule.Shows.Show"
+  );
 
-  const {
-    data: theatreAreaFetchData,
-    error: theatreAreaFetchError,
-  } = useFetch(
+  const { data: theatreAreaFetchData, error: theatreAreaFetchError } = useFetch(
     `https://www.finnkino.fi/xml/TheatreAreas/`,
     "finnkino"
   );
 
-  const {
-    data: theatreAreaParseData = [],
-    error: theatreAreaParseError,
-  } = useXmlParse(theatreAreaFetchData, "TheatreAreas.TheatreArea");
+  const { data: theatreAreaParseData = [], error: theatreAreaParseError } =
+    useXmlParse(theatreAreaFetchData, "TheatreAreas.TheatreArea");
 
   return (
     <div className="showtimes">
-      <Dropdown
-        className="Dropdown"
-        options={theatreAreaParseData.slice(1).map((area) => (area.Name))}
-        handleSort={handleTheatreArea}
-        dropdownName={selectedAreaName ? `${selectedAreaName}` : "Filter by area"}
-      />
+      <div className="filter--container">
+        <Dropdown
+          className="Dropdown"
+          options={theatreAreaParseData.slice(1).map((area) => area.Name)}
+          handleSort={handleTheatreArea}
+          dropdownName={
+            selectedAreaName ? `${selectedAreaName}` : "Filter by area"
+          }
+        />
+      </div>
       <div className="ShowtimesSection">
         {showtimeIsLoading || showtimeIsParsing ? (
           <Loading />
