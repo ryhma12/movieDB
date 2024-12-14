@@ -1,6 +1,7 @@
 import useFetch from "../hooks/useFetch";
 import Loading from "./utility/Loading";
 import { ReactComponent as Star } from "../assets/star.svg";
+import fallBackPic from "../assets/fallback.png";
 
 const Showtime = ({
   data: {
@@ -42,9 +43,11 @@ const Showtime = ({
         <>
           {data.results && data.results.length > 0 && (
             <img
-              src={`https://image.tmdb.org/t/p/w500${
-                data.results[0].poster_path || ""
-              }`}
+              src={
+                data.results[0].poster_path
+                  ? `https://image.tmdb.org/t/p/w500${data.results[0].poster_path}`
+                  : fallBackPic
+              }
               alt={`${data.results[0].original_title || "Movie"} Poster`}
               className="movie--poster"
             />

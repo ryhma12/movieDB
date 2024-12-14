@@ -721,6 +721,27 @@
   align-items: center;
   overflow-y: auto;
 }
+.showtimes .ShowtimesSection .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.8rem;
+  gap: 1.2rem;
+}
+.showtimes .ShowtimesSection .pagination .btn {
+  padding: 1.2rem;
+  border-radius: 100000rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.showtimes .ShowtimesSection .pagination span {
+  color: #ffffff;
+}
 .showtimes .ShowtimesSection .empty {
   color: white;
 }
