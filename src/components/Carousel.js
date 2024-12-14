@@ -1,17 +1,13 @@
-import useFetch from "../hooks/useFetch";
 import ProductCard from "./ProductCard";
 import { useState, useEffect } from "react";
 
-const Carousel = ({ name, setSelectedMovie }) => {
+const Carousel = ({ name, setSelectedMovie, data=null }) => {
   const [cardIndex, setCardIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(() => {
     if (window.innerWidth < 720) return 2;
     if (window.innerWidth < 900) return 4;
     return 6;
   });
-  const { data, isLoading, error } = useFetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&adult=false`
-  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,7 +39,7 @@ const Carousel = ({ name, setSelectedMovie }) => {
           transform: `translateX(${-(100 / cardsToShow) * cardIndex}%)`,
         }}
       >
-        {!error && !isLoading && data?.results?.length > 0 ? (
+        {data?.results?.length > 0 ? (
           data?.results?.map((movie) => {
             return (
               <div
@@ -65,7 +61,7 @@ const Carousel = ({ name, setSelectedMovie }) => {
             );
           })
         ) : (
-          <div>Loading</div>
+          <div>cursed?</div>
         )};
       </div>
       <div className="carousel-move">
