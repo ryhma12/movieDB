@@ -5,6 +5,7 @@ import RoundPhoto from "../../components/RoundPhoto";
 import TintLayer from "../../components/utility/TintLayer";
 import AddUserMenu from "../../components/groups/AddUserMenu";
 import MessageArea from "../../components/groups/MessageArea";
+import { ReactComponent as Hamburger } from "../../assets/hamburger.svg";
 
 const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
   const [addUserMenuOpen, setAddUserMenuOpen] = useState(false);
@@ -53,6 +54,16 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
     setAddUserMenuOpen(!addUserMenuOpen);
   };
 
+  const handleMobileNav = () => {
+    document
+      .querySelector(".members--container")
+      .classList.toggle("mobile--menu__open");
+
+    document
+      .querySelector(".group--mobile__nav")
+      .classList.toggle("mobile--menu__open");
+  };
+
   return (
     <div className="SingleGroupView">
       {addUserMenuOpen && (
@@ -69,6 +80,7 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
       {addUserMenuOpen && <TintLayer />}
       <div className="container">
         <div className="group--header">
+          <Hamburger onClick={handleMobileNav} className="group--mobile__nav" />
           <Dropdown
             options={data ? data.map((group) => group.groupName) : []}
             handleSort={handleGroupSwitch}

@@ -1644,6 +1644,9 @@
 }
 
 @media (max-width: 1200px) {
+  .GroupPage .main--container {
+    padding: 2.4rem 4.8rem;
+  }
   .GroupPage .header .btn--container {
     width: 60% !important;
   }
@@ -1721,6 +1724,23 @@
   width: 100%;
   padding: 1.2rem 1.2rem 1.2rem 0;
   background-color: #1f1f1f;
+  position: relative;
+}
+.SingleGroupView .container .group--header .group--mobile__nav {
+  height: 4.8rem;
+  width: 4.8rem;
+  background-color: black;
+  border-radius: 1rem;
+  padding: 0.6rem;
+  margin: 1.2rem;
+  cursor: pointer;
+  display: none;
+  transition: all 0.2s ease-in-out;
+}
+.SingleGroupView .container .group--header .group--mobile__nav.mobile--menu__open {
+  border-radius: 1000rem;
+  background-color: white;
+  fill: black;
 }
 .SingleGroupView .container .group--header .Dropdown {
   width: 20%;
@@ -1780,8 +1800,31 @@
 }
 
 @media (max-width: 1200px) {
-  .members--container {
+  .SingleGroupView .members--container {
     display: none;
+  }
+  .SingleGroupView .members--container.mobile--menu__open {
+    display: block;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+  .SingleGroupView .group--mobile__nav {
+    display: block !important;
+    z-index: 6;
+  }
+  .SingleGroupView .group--mobile__nav.mobile--menu__open {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+  }
+  .SingleGroupView .Dropdown {
+    display: none;
+  }
+  .SingleGroupView .group--mobile__nav {
+    display: block;
   }
 }
 @media (max-width: 1000px) {

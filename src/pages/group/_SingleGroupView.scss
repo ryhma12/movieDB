@@ -13,6 +13,24 @@
       width: 100%;
       padding: 1.2rem 1.2rem 1.2rem 0;
       background-color: $color7;
+
+      position: relative;
+      .group--mobile__nav {
+        height: 4.8rem;
+        width: 4.8rem;
+        background-color: black;
+        border-radius: 1rem;
+        padding: 0.6rem;
+        margin: 1.2rem;
+        cursor: pointer;
+        display: none;
+        transition: all 0.2s ease-in-out;
+        &.mobile--menu__open {
+          border-radius: 1000rem;
+          background-color: white;
+          fill: black;
+        }
+      }
       .Dropdown {
         width: 20%;
         border: none;
@@ -75,8 +93,33 @@
   }
 }
 @media (max-width: 1200px) {
-  .members--container {
-    display: none;
+  .SingleGroupView {
+    .members--container {
+      display: none;
+      &.mobile--menu__open {
+        display: block;
+        position: absolute !important;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0 !important;
+        left: 0 !important;
+      }
+    }
+    .group--mobile__nav {
+      display: block !important;
+      z-index: 6;
+      &.mobile--menu__open {
+        position: absolute !important;
+        top: 0 !important;
+        right: 0 !important;
+      }
+    }
+    .Dropdown {
+      display: none;
+    }
+    .group--mobile__nav {
+      display: block;
+    }
   }
 }
 @media (max-width: 1000px) {
