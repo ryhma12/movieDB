@@ -640,6 +640,10 @@
   height: 100%;
   position: relative;
 }
+.Showtime .movie--texts .movie--details__container .overview {
+  overflow-y: auto;
+  height: 70%;
+}
 .Showtime .movie--texts .movie--details__container .rating {
   position: absolute;
   bottom: 0;
@@ -666,6 +670,53 @@
   padding-bottom: 2.4rem;
 }
 
+.overview::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+.overview::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.overview::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.overview::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 1000px) {
+  .Showtime .time--container .time {
+    color: #4f87d4;
+    font-size: 2.8rem;
+  }
+  .Showtime .time--container .date {
+    font-size: 1.4rem;
+  }
+}
+@media (max-width: 800px) {
+  .Showtime {
+    flex-direction: column;
+    height: 32rem;
+  }
+  .Showtime .movie--poster {
+    width: 100%;
+    display: none;
+  }
+  .Showtime .time--container {
+    width: 100%;
+    height: 20%;
+  }
+  .Showtime .movie--texts {
+    width: 100%;
+    height: 80%;
+  }
+}
 .TintLayer {
   -webkit-backdrop-filter: brightness(25%);
           backdrop-filter: brightness(25%);
@@ -722,6 +773,26 @@
   align-items: center;
   overflow: hidden;
   height: 94vh;
+  position: relative;
+}
+.showtimes .mobile--nav__btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 4.8rem;
+  width: 4.8rem;
+  background-color: black;
+  border-radius: 1rem;
+  padding: 0.6rem;
+  margin: 1.2rem;
+  cursor: pointer;
+  display: none;
+  transition: all 0.2s ease-in-out;
+}
+.showtimes .mobile--nav__btn.mobile--menu__open {
+  border-radius: 1000rem;
+  background-color: white;
+  fill: black;
 }
 .showtimes .filter--container {
   width: 30%;
@@ -765,6 +836,31 @@
   color: white;
 }
 
+@media (max-width: 1200px) {
+  .showtimes .mobile--nav__btn {
+    display: block;
+    z-index: 6;
+  }
+  .showtimes .filter--container {
+    display: none;
+  }
+  .showtimes .filter--container.mobile--menu__open {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 5;
+  }
+  .showtimes .ShowtimesSection {
+    width: 100%;
+  }
+}
+@media (max-width: 1100px) {
+  .showtimes {
+    font-size: 1.6rem;
+  }
+}
 .ShowtimesSection::-webkit-scrollbar {
   width: 1.2rem;
 }
