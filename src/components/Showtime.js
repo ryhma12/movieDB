@@ -35,8 +35,6 @@ const Showtime = ({
     }&query=${movie.replace(" ", "+")}`
   );
 
-  console.log(data.results);
-
   return (
     <li className="Showtime">
       {isLoading && <Loading />}

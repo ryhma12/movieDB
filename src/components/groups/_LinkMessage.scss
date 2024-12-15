@@ -1,0 +1,21 @@
+.LinkMessage {
+  background-color: $color2;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  width: fit-content;
+  cursor: pointer;
+  caret-color: transparent;
+  .container {
+    display: flex;
+    gap: 1.2rem;
+    width: fit-content;
+    .text {
+      display: flex;
+      gap: 1.2rem;
+      flex-direction: column;
+    }
+    .poster {
+      width: 10%;
+    }
+  }
+}

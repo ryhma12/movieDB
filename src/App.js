@@ -54,7 +54,13 @@ function App() {
           />
           <Route
             path="/groups"
-            element={user ? <GroupPage /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <GroupPage setSelectedMovie={setSelectedMovie} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             path="/"

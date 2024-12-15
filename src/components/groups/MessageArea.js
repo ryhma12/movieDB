@@ -2,8 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import { useSendMessage } from "../../hooks/groups/useSendMessage";
 import { useGetMessages } from "../../hooks/groups/useGetMessages";
 import RoundPhoto from "../RoundPhoto";
+import LinkMessage from "./LinkMessage";
 
-const MessageArea = ({ user, selectedGroup }) => {
+const isLink = (message) => {
+  const urlRegex = /^(https?:\/\/[^\s]+)/g;
+  return urlRegex.test(message);
+};
+
+const MessageArea = ({ user, selectedGroup, setSelectedMovie }) => {
   const [message, setMessage] = useState("");
   const { sendMessage } = useSendMessage();
   const [triggerFetchMessages, setTriggerFetchMessages] = useState(false);
@@ -31,6 +37,7 @@ const MessageArea = ({ user, selectedGroup }) => {
     setMessage("");
     setTriggerFetchMessages(!triggerFetchMessages);
   };
+
   return (
     <div className="MessageArea">
       <div className="content">
@@ -44,7 +51,14 @@ const MessageArea = ({ user, selectedGroup }) => {
                   <span className="time">{message.message_date}</span>
                 </div>
                 <span className="message--content">
-                  {message.message_content}
+                  {isLink(message.message_content) ? (
+                    <LinkMessage
+                      link={message.message_content}
+                      setSelectedMovie={setSelectedMovie}
+                    />
+                  ) : (
+                    message.message_content
+                  )}
                 </span>
               </div>
             </div>

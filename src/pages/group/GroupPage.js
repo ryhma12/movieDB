@@ -7,7 +7,7 @@ import { useRefuseOrCancel } from "../../hooks/groups/useRefuseOrCancel";
 import SingleGroupView from "./SingleGroupView";
 import CreateGroupForm from "../../components/groups/CreateGroupForm";
 
-const GroupPage = () => {
+const GroupPage = ({ setSelectedMovie }) => {
   const [selectedGroup, setSelectedGroup] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [browseAllGroups, setBrowseAllGroups] = useState(false);
@@ -132,6 +132,7 @@ const GroupPage = () => {
           setSelectedGroup={setSelectedGroup}
           data={groupData}
           user={user}
+          setSelectedMovie={setSelectedMovie}
         />
       )}
     </div>
