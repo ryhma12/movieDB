@@ -4,6 +4,26 @@
   align-items: center;
   overflow: hidden;
   height: 94vh;
+  position: relative;
+  .mobile--nav__btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 4.8rem;
+    width: 4.8rem;
+    background-color: black;
+    border-radius: 1rem;
+    padding: 0.6rem;
+    margin: 1.2rem;
+    cursor: pointer;
+    display: none;
+    transition: all 0.2s ease-in-out;
+    &.mobile--menu__open {
+      border-radius: 1000rem;
+      background-color: white;
+      fill: black;
+    }
+  }
   .filter--container {
     width: 30%;
     height: 100%;
@@ -44,6 +64,34 @@
     .empty {
       color: white;
     }
+  }
+}
+@media (max-width: 1200px) {
+  .showtimes {
+    .mobile--nav__btn {
+      display: block;
+      z-index: 6;
+    }
+    .filter--container {
+      display: none;
+
+      &.mobile--menu__open {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        z-index: 5;
+      }
+    }
+    .ShowtimesSection {
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 1100px) {
+  .showtimes {
+    font-size: 1.6rem;
   }
 }
 

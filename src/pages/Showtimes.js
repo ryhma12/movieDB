@@ -6,6 +6,7 @@ import Dropdown from "../components/Dropdown";
 import { useState, useRef } from "react";
 import chevLeft from "../assets/chevLeft.svg";
 import chevRight from "../assets/chevRight.svg";
+import { ReactComponent as Hamburger } from "../assets/hamburger.svg";
 
 const Showtimes = ({ setSelectedMovie }) => {
   const [selectedArea, setSelectedArea] = useState([]);
@@ -64,8 +65,19 @@ const Showtimes = ({ setSelectedMovie }) => {
     }
   };
 
+  const handleMobileNav = () => {
+    document
+      .querySelector(".filter--container")
+      .classList.toggle("mobile--menu__open");
+
+    document
+      .querySelector(".mobile--nav__btn")
+      .classList.toggle("mobile--menu__open");
+  };
+
   return (
     <div className="showtimes">
+      <Hamburger onClick={handleMobileNav} className="mobile--nav__btn" />
       <div className="filter--container">
         <Dropdown
           className="Dropdown"
