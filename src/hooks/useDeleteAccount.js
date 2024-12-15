@@ -27,7 +27,8 @@ export const useDeleteAccount = () => {
 
       const data = await res.json();
       if (data.error) throw new Error(data.error);
-
+      
+      sessionStorage.removeItem("user");
       dispatch({ type: "LOGOUT", payload: data });
       setError(null);
     } catch (err) {

@@ -25,6 +25,7 @@
 @import "./components/filter/RangeSlider";
 @import "./pages/login/LoginWindow";
 @import "./pages/Favourites";
+@import "./pages/PublicFavourites";
 @import "./components/Favourite";
 @import "./pages/UserSettings/UserSettings";
 @import "./pages/UserSettings/GeneralSettings";
@@ -40,6 +41,7 @@
 @import "./components/groups/MessageArea";
 @import "./components/groups/ShareInGroup";
 @import "./components/groups/LinkMessage";
+@import "./pages/UserSettings/FavouriteSettings";
 
 * {
   padding: 0;

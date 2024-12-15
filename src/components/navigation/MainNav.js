@@ -57,6 +57,7 @@ const MainNav = ({ setSelectedMovie }) => {
   };
 
   const handleLogOut = () => {
+    sessionStorage.removeItem("user");
     dispatch({ type: "LOGOUT" });
   };
 
