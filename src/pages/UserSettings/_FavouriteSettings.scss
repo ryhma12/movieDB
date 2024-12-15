@@ -1,6 +1,6 @@
 .favourite-settings {
   .submit-btn {
-    width: 10%;
+    width: 10rem;
     margin-left: $space2;
     padding: 0.5rem 1rem;
     background-color: $color4;
@@ -15,5 +15,19 @@
   }
   .check-btn {
     margin-right: 1rem;
+  }
+  .copy {
+    width: 25rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: $color4;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #313131;
+    }
   }
 }
