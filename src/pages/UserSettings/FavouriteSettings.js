@@ -71,15 +71,37 @@ const FavouriteSettings = () => {
     }
   };
 
+  const copyToClipboard = async () => {
+    const link = `http://localhost:3000/favourites/public/?user=${user.Name}`;
+    try {
+      await navigator.clipboard.writeText(link);
+      alert("Link copied!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="favourite-settings">
       <form onSubmit={(e) => handleSubmit(e)}>
         <label>
-          <input className="check-btn" type="checkbox" checked={isChecked} onChange={handleToggle} />
+          <input
+            className="check-btn"
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleToggle}
+          />
           {isChecked ? "Public favourites On" : "Public favourites Off"}
         </label>
-        <button className="submit-btn" type="submit">Submit</button>
+        <button className="submit-btn" type="submit">
+          Submit
+        </button>
       </form>
+      {isPublic && user && (
+        <button className="copy" onClick={copyToClipboard}>
+          Copy link to your public favourites
+        </button>
+      )}
     </div>
   );
 };
