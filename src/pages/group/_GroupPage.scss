@@ -97,6 +97,9 @@
 }
 @media (max-width: 1200px) {
   .GroupPage {
+    .main--container {
+      padding: 2.4rem 4.8rem;
+    }
     .header {
       .btn--container {
         width: 60% !important;
