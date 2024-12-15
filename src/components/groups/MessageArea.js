@@ -52,10 +52,20 @@ const MessageArea = ({ user, selectedGroup, setSelectedMovie }) => {
                 </div>
                 <span className="message--content">
                   {isLink(message.message_content) ? (
-                    <LinkMessage
-                      link={message.message_content}
-                      setSelectedMovie={setSelectedMovie}
-                    />
+                    message.message_content.includes("themoviedb.org") ? (
+                      <LinkMessage
+                        link={message.message_content}
+                        setSelectedMovie={setSelectedMovie}
+                      />
+                    ) : (
+                      <a
+                        href={message.message_content}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {message.message_content}
+                      </a>
+                    )
                   ) : (
                     message.message_content
                   )}
