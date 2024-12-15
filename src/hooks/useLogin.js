@@ -22,6 +22,8 @@ export const useLogin = () => {
       const data = await res.json();
       if (data.error) throw new Error(data.error);
 
+      sessionStorage.setItem("user", JSON.stringify(data));
+
       dispatch({ type: "LOGIN", payload: data });
       setError(null);
     } catch (err) {

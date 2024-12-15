@@ -11,6 +11,16 @@
     position: absolute;
     bottom: 1rem;
     right: 1rem;
+    padding: 0.5rem 1rem; 
+    background-color: #8f0c0c; 
+    color: white; 
+    border: none; 
+    border-radius: 0.25rem; 
+    cursor: pointer; 
+
+    &:hover {
+      background-color: #770505;
+    }
   }
   .product--card__text {
     display: flex;

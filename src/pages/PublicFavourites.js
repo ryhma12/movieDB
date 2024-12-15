@@ -37,27 +37,29 @@ const Favourites = () => {
   }, [publicUser]);
 
   return (
-    <div className="favourites-container">
+    <div className="publicFavourites-page">
       <h2>{publicUser}'s favourites</h2>
-      {publicIsLoading ? (
-        <Loading />
-      ) : (
-        <ul>
-          {publicUser ? (
-            publicFavourites.map((item) => (
-              <Favourite
-                key={item.id}
-                data={{
-                  movieName: item.movieName || null,
-                  date: item.date || null,
-                }}
-              />
-            ))
-          ) : (
-            <div>404</div>
-          )}
-        </ul>
-      )}
+      <div className="favourites-container">
+        {publicIsLoading ? (
+          <Loading />
+        ) : (
+          <ul>
+            {publicUser ? (
+              publicFavourites.map((item) => (
+                <Favourite
+                  key={item.id}
+                  data={{
+                    movieName: item.movieName || null,
+                    date: item.date || null,
+                  }}
+                />
+              ))
+            ) : (
+              <div>404</div>
+            )}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

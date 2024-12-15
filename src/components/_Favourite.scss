@@ -1,11 +1,12 @@
 .Favourite {
-    display: flex;
-    gap: $space2;
-    color: $color5;
+  display: flex;
+  gap: $space2;
+  color: $color5;
+  justify-content: space-between;
 
-    &:not(:last-child) {
-        border-bottom: 2px solid #1a1a1a;
-        margin-bottom: $space2;
-        padding-bottom: $space2;
-    }
+  &:not(:last-child) {
+    border-bottom: 2px solid #1a1a1a;
+    margin-bottom: $space2;
+    padding-bottom: $space2;
+  }
 }

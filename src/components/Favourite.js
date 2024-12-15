@@ -1,5 +1,5 @@
 const Favourite = ({ data: {movieName = "", date = ""} }) => {
-    /*const date = new Date(time);
+    const time = new Date(date);
     const formattedDate = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "long",
@@ -7,12 +7,12 @@ const Favourite = ({ data: {movieName = "", date = ""} }) => {
       hour: "numeric",
       minute: "numeric",
       hour12: true,
-    }).format(date);*/
+    }).format(time);
   
     return (
         <div className="Favourite">
             <p className="movie">{movieName}</p>
-            <p className="time">{date}</p>
+            <p className="time">{formattedDate}</p>
         </div>
     );
   };

@@ -7,7 +7,9 @@ const FavouriteSettings = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    fetchPublicStatus();
+    if (user) {
+      fetchPublicStatus();
+    }
   }, [user]);
 
   useEffect(() => {
@@ -70,13 +72,13 @@ const FavouriteSettings = () => {
   };
 
   return (
-    <div className="FavouriteSettings">
-      <form onSubmit={e => handleSubmit(e)}>
+    <div className="favourite-settings">
+      <form onSubmit={(e) => handleSubmit(e)}>
         <label>
-          <input type="checkbox" checked={isChecked} onChange={handleToggle} />
+          <input className="check-btn" type="checkbox" checked={isChecked} onChange={handleToggle} />
           {isChecked ? "Public favourites On" : "Public favourites Off"}
         </label>
-        <button type="submit">Submit</button>
+        <button className="submit-btn" type="submit">Submit</button>
       </form>
     </div>
   );
