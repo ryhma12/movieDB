@@ -4,6 +4,17 @@
   width: 100%;
 }
 
+@media (max-height: 600px) {
+  .MainNav {
+    height: 10vh !important;
+  }
+  .showtimes {
+    height: 90vh !important;
+  }
+  .GroupPage {
+    height: 90vh !important;
+  }
+}
 .SingleView {
   width: 80%;
   height: 90%;
@@ -513,6 +524,30 @@
   width: 35%;
 }
 
+@media (max-width: 1200px) {
+  .MainNav ul {
+    width: 90% !important;
+  }
+}
+@media (max-width: 1000px) {
+  .MainNav ul .user--name {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  .MainNav ul .nav__btn {
+    padding: 0.6rem 1.2rem;
+  }
+}
+@media (max-width: 650px) {
+  .MainNav ul .nav__logo--container {
+    display: none;
+  }
+  .MainNav ul .menu .dropdown {
+    left: 0 !important;
+    transform: translate(0, 105%);
+  }
+}
 .BestMatch {
   display: flex;
   flex-direction: column;

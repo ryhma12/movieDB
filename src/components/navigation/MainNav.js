@@ -125,7 +125,7 @@ const MainNav = ({ setSelectedMovie }) => {
           )}
           {user && (
             <li className="user" ref={userMenuRef}>
-              <span>{user.Name}</span>
+              <span className="user--name">{user.Name}</span>
               <div
                 className="photo--container"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}

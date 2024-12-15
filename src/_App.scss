@@ -3,3 +3,15 @@
   min-height: 100vh;
   width: 100%;
 }
+
+@media (max-height: 600px) {
+  .MainNav {
+    height: 10vh !important;
+  }
+  .showtimes {
+    height: 90vh !important;
+  }
+  .GroupPage {
+    height: 90vh !important;
+  }
+}
