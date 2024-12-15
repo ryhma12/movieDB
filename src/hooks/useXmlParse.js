@@ -26,7 +26,6 @@ const useXmlParse = (xml, path, options) => {
         setData(parsedData);
       } catch (error) {
         setError(error);
-        console.log(error);
       } finally {
         setIsParsing(false);
       }

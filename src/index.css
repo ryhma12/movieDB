@@ -38,11 +38,28 @@
   justify-content: center;
 }
 .SingleView .Showtimes {
-  width: 100%;
+  width: 70%;
   color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.SingleView .Showtimes .ShowtimesSection {
+  width: 100%;
+}
+.SingleView .Showtimes .movie--poster {
+  display: none;
+}
+.SingleView .Showtimes .time--container {
+  width: 15%;
+  background-color: #121212;
+}
+.SingleView .Showtimes .movie--texts {
+  width: 85%;
 }
 .SingleView .Showtimes .Dropdown {
   margin-bottom: 2.4rem;
+  align-self: flex-start;
 }
 
 .ProductSlide {
@@ -592,6 +609,7 @@
   justify-content: center;
   background-color: black;
   padding: 1.2rem;
+  width: 15%;
 }
 .Showtime .time--container .time {
   color: #4f87d4;
@@ -913,8 +931,8 @@
   color: #ffffff;
 }
 .Dropdown .dropdown--content.active {
-  max-height: -moz-fit-content;
-  max-height: fit-content;
+  max-height: 70vh;
+  overflow-y: auto;
   transform: translateY(100%) scaleY(1);
   background-color: #ffffff;
 }
@@ -1907,7 +1925,7 @@
   padding-bottom: 2.4rem;
 }
 
-.homepage {
+.homepage .homepage-content {
   display: flex;
   flex-direction: column;
   align-items: center;

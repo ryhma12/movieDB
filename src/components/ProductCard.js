@@ -4,7 +4,9 @@ import { useUser } from "../hooks/useUser";
 const ProductCard = ({ item, interActive, setSelectedMovie }) => {
   const { favourites, addUserFavourite, removeUserFavourite } = useFavourites();
   const { user } = useUser();
-  const favourited = favourites.some((favourite) => favourite.movieId === item.id);
+  const favourited = favourites.some(
+    (favourite) => favourite.movieId === item.id
+  );
 
   const favouritePress = async (e) => {
     e.preventDefault();

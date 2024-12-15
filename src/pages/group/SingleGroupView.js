@@ -27,7 +27,6 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
 
         const data = await res.json();
         if (data.error) throw new Error(data.error);
-        console.log(data);
         setUsers(data.result);
         data.result.forEach((item) => {
           if (item.Email === user.Email) {

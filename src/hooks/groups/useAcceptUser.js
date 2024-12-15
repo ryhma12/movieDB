@@ -10,7 +10,6 @@ export const useAcceptUser = () => {
     setIsLoading(true);
 
     try {
-      console.log(userName, groupName, token);
       const res = await fetch("http://localhost:3001/group/acceptuser", {
         method: "PATCH",
         headers: {
@@ -26,7 +25,6 @@ export const useAcceptUser = () => {
         setError("createGroup failed");
       }
       const data = await res.json();
-      console.log(data);
 
       if (!data || data.error) throw new Error(data.error);
 

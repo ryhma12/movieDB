@@ -26,7 +26,7 @@ export const useSendMessage = () => {
         setError("createGroup failed");
       }
       const data = await res.json();
-      console.log(data);
+
       if (!data || data.error) throw new Error(data.error);
 
       setData(data);

@@ -19,16 +19,18 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [selectedAreaName, setSelectedAreaName] = useState("");
 
   const handleTheatreArea = (index) => {
-    if (theatreAreaFetchData &&
+    if (
+      theatreAreaFetchData &&
       !theatreAreaFetchError &&
       theatreAreaParseData &&
-      !theatreAreaParseError) {
+      !theatreAreaParseError
+    ) {
       const currentArea = theatreAreaParseData[index + 1];
       if (currentArea) {
         setSelectedArea(currentArea.ID);
         setSelectedAreaName(currentArea.Name);
-      };
-    };
+      }
+    }
   };
 
   const { data: creditsData, error: creditsError } = useFetch(
@@ -50,18 +52,13 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     isParsing: showtimeIsParsing,
   } = useXmlParse(showtimeFetchData, "Schedule.Shows.Show");
 
-  const {
-    data: theatreAreaFetchData,
-    error: theatreAreaFetchError,
-  } = useFetch(
+  const { data: theatreAreaFetchData, error: theatreAreaFetchError } = useFetch(
     `https://www.finnkino.fi/xml/TheatreAreas/`,
     "finnkino"
   );
 
-  const {
-    data: theatreAreaParseData = [],
-    error: theatreAreaParseError,
-  } = useXmlParse(theatreAreaFetchData, "TheatreAreas.TheatreArea");
+  const { data: theatreAreaParseData = [], error: theatreAreaParseError } =
+    useXmlParse(theatreAreaFetchData, "TheatreAreas.TheatreArea");
 
   const handleNav = (page) => {
     setPage(page);
@@ -116,6 +113,8 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     selectedMovie.original_title,
   ]);
 
+  console.log(selectedMovie);
+
   return (
     <div className="SingleView" ref={singleViewRef}>
       <div className="inner--container">
@@ -132,11 +131,13 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
           {page === "Cast" && <CastSection cast={cast} />}
           {page === "Showtimes" && (
             <div className="Showtimes">
-              <Dropdown 
+              <Dropdown
                 className="Dropdown"
-                options={theatreAreaParseData.slice(1).map((area) => (area.Name))}
+                options={theatreAreaParseData.slice(1).map((area) => area.Name)}
                 handleSort={handleTheatreArea}
-                dropdownName={selectedAreaName ? `${selectedAreaName}` : "Filter by area"}
+                dropdownName={
+                  selectedAreaName ? `${selectedAreaName}` : "Filter by area"
+                }
               />
               <ShowtimesSection
                 showtimes={showtimes}

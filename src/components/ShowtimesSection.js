@@ -15,9 +15,9 @@ const ShowtimesSection = ({ showtimes, isLoading, isParsing }) => {
                 data={{
                   time: show.dttmShowStart,
                   place: show.Theatre,
-                  spokenLang: show.SpokenLanguage.ISOTwoLetterCode,
-                  subLang1: show.SubtitleLanguage1.ISOTwoLetterCode,
-                  subLang2: show.SubtitleLanguage2.ISOTwoLetterCode,
+                  spokenLang: show.SpokenLanguage?.ISOTwoLetterCode || null,
+                  subLang1: show.SubtitleLanguage1?.ISOTwoLetterCode || null,
+                  subLang2: show.SubtitleLanguage2?.ISOTwoLetterCode || null,
                 }}
               />
             ))

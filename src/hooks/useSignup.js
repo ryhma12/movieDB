@@ -11,8 +11,6 @@ export const useSignup = () => {
     setIsLoading(true);
 
     try {
-      console.log(name, email, password);
-
       const res = await fetch("http://localhost:3001/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
