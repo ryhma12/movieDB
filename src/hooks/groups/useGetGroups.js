@@ -27,7 +27,6 @@ export const useGetGroups = () => {
         throw new Error(
           data.error || "No groups found, considering creating one!"
         );
-      console.log(data);
       setData(data.result);
 
       setError(null);

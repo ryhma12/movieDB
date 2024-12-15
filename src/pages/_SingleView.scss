@@ -30,10 +30,27 @@
     }
   }
   .Showtimes {
-    width: 100%;
+    width: 70%;
     color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .ShowtimesSection {
+      width: 100%;
+    }
+    .movie--poster {
+      display: none;
+    }
+    .time--container {
+      width: 15%;
+      background-color: $color2;
+    }
+    .movie--texts {
+      width: 85%;
+    }
     .Dropdown {
       margin-bottom: $space2;
+      align-self: flex-start;
     }
   }
 }

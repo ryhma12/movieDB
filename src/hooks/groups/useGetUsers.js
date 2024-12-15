@@ -21,7 +21,6 @@ export const useGetUsers = () => {
         throw new Error(
           data.error || "No groups found, considering creating one!"
         );
-      console.log(data);
 
       setData(data);
 

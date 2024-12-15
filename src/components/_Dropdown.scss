@@ -42,7 +42,9 @@
       }
     }
     &.active {
-      max-height: fit-content;
+      max-height: 70vh;
+      overflow-y: auto;
+
       transform: translateY(100%) scaleY(1);
       background-color: $color5;
     }

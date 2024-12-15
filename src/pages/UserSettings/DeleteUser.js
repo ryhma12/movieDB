@@ -9,8 +9,6 @@ const DeleteUser = () => {
   const { deleteAccount, error, isLoading } = useDeleteAccount();
 
   const handleDelete = () => {
-    console.log("deleting");
-    console.log(password && email);
     deleteAccount(user.Email, password, user.id);
   };
   return (
