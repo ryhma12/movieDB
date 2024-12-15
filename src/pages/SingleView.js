@@ -8,6 +8,7 @@ import CastSection from "../components/CastSection";
 import ShowtimesSection from "../components/ShowtimesSection";
 import closeIcon from "../assets/close.svg";
 import Dropdown from "../components/Dropdown";
+import ShareInGroup from "../components/groups/ShareInGroup";
 
 const SingleView = ({ setSelectedMovie, selectedMovie }) => {
   const [page, setPage] = useState("Reviews");
@@ -113,8 +114,6 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
     selectedMovie.original_title,
   ]);
 
-  console.log(selectedMovie);
-
   return (
     <div className="SingleView" ref={singleViewRef}>
       <div className="inner--container">
@@ -146,6 +145,7 @@ const SingleView = ({ setSelectedMovie, selectedMovie }) => {
               />
             </div>
           )}
+          {page === "Share" && <ShareInGroup selectedMovie={selectedMovie} />}
         </div>
       </div>
     </div>

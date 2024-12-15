@@ -7,7 +7,13 @@ import AddUserMenu from "../../components/groups/AddUserMenu";
 import MessageArea from "../../components/groups/MessageArea";
 import { ReactComponent as Hamburger } from "../../assets/hamburger.svg";
 
-const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
+const SingleGroupView = ({
+  selectedGroup,
+  setSelectedGroup,
+  data,
+  user,
+  setSelectedMovie,
+}) => {
   const [addUserMenuOpen, setAddUserMenuOpen] = useState(false);
   const [currentUserIsAdmin, setCurrentUserIsAdmin] = useState(false);
   const [acceptTrigger, setAcceptTrigger] = useState(false);
@@ -115,7 +121,11 @@ const SingleGroupView = ({ selectedGroup, setSelectedGroup, data, user }) => {
               <span>Back to group lobby</span>
             </div>
           </div>
-          <MessageArea user={user} selectedGroup={selectedGroup} />
+          <MessageArea
+            user={user}
+            selectedGroup={selectedGroup}
+            setSelectedMovie={setSelectedMovie}
+          />
         </div>
       </div>
     </div>

@@ -2202,6 +2202,77 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.ShareInGroup {
+  width: 100%;
+  color: #ffffff;
+}
+.ShareInGroup h2 {
+  padding: 0 2.4rem;
+}
+.ShareInGroup .list--of__groups {
+  padding: 2.4rem;
+  overflow-y: auto;
+  height: 90%;
+}
+.ShareInGroup .list--of__groups .list--item {
+  padding: 2.4rem;
+  caret-color: transparent;
+  transition: all 0.15s ease;
+  border-bottom: 1px solid #1f1f1f;
+}
+.ShareInGroup .list--of__groups .list--item.normal {
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #1f1f1f;
+}
+.ShareInGroup .list--of__groups .list--item.normal:hover {
+  background-color: #121212;
+}
+.ShareInGroup .list--of__groups .list--item .requestable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.ShareInGroup .list--of__groups .list--item .requestable .request--btn {
+  padding: 0.6rem 1.8rem;
+  border-radius: 0.6rem;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #121212;
+  transition: all 0.15s ease-in-out;
+}
+.ShareInGroup .list--of__groups .list--item .requestable .request--btn:hover {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+.LinkMessage {
+  background-color: #121212;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  caret-color: transparent;
+}
+.LinkMessage .container {
+  display: flex;
+  gap: 1.2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.LinkMessage .container .text {
+  display: flex;
+  gap: 1.2rem;
+  flex-direction: column;
+}
+.LinkMessage .container .poster {
+  width: 10%;
+}
+
 * {
   padding: 0;
   margin: 0;

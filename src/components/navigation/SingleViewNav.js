@@ -1,4 +1,8 @@
+import { useUser } from "../../hooks/useUser";
+
 const SingleViewNav = ({ handleNav }) => {
+  const { user } = useUser();
+
   const handleActive = (e) => {
     document.querySelectorAll(".nav--btn__container").forEach((el) => {
       el.classList.remove("active");
@@ -33,6 +37,16 @@ const SingleViewNav = ({ handleNav }) => {
         <span>Cast</span>
         <span className="active--underline"></span>
       </div>
+      {user && (
+        <div
+          className="nav--btn__container"
+          onClick={(e) => handleActive(e)}
+          data--page="Share"
+        >
+          <span>Share</span>
+          <span className="active--underline"></span>
+        </div>
+      )}
     </div>
   );
 };
